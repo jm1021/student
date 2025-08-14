@@ -20,7 +20,11 @@ My name is Evan Svetina! Welcome to my personal blog and documentation of my cod
         <img src="https://img.shields.io/badge/VSCode-007ACC?style=for-the-badge&logo=visual-studio-code&logoColor=white" alt="VSCode">
     </a>
     <a href="https://www.javascript.com/">
-        <img src="https://img.shields.io/badge/VSCode-007ACC?style=for-the-badge&logo=visual-studio-code&logoColor=white" alt="JavaScript">
+        <img src="https://shields.io/badge/JavaScript-F7DF1E?logo=JavaScript&logoColor=000&style=flat-square" alt="JavaScript">
+    </a>
+    <a href="https://www.python.org/">
+        <img src="    https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54
+        " alt="Python">
     </a>
 </div>
 
