@@ -36,13 +36,18 @@ My name is Evan Svetina! Welcome to my personal blog and documentation of my cod
 
 <div style="display: flex; flex-wrap: wrap; gap: 10px;">
     <a href="{{site.baseurl}}/snake" style="text-decoration: none;">
-        <div style="background-color: #00FF00; color: black; padding: 10px 20px; border-radius: 5px; font-weight: bold;">
-            Snake Game
+        <div style="background-color: #96f16eff; color: black; padding: 10px 20px; border-radius: 5px; font-weight: bold;">
+            Snake Game Revamp
         </div>
     </a>
-    <a href="{{site.baseurl}}/turtle" style="text-decoration: none;">
-        <div style="background-color: #FF0000; color: white; padding: 10px 20px; border-radius: 5px; font-weight: bold;">
-            Turtle
+    <a href="https://github.com/Nikhile22427/ISEF" style="text-decoration: none;">
+        <div style="background-color: #b8dedcff; color: Black; padding: 10px 20px; border-radius: 5px; font-weight: bold;">
+            Computer Vision Project (with friend)
+        </div>
+    </a>
+    <a href="https://github.com/xinjiav2/Bias-Surf" style="text-decoration: none;">
+        <div style="background-color: #8866b1ff; color: Black; padding: 10px 20px; border-radius: 5px; font-weight: bold;">
+            BiasSurf (WIP)
         </div>
     </a>
 </div>
@@ -54,3 +59,5 @@ My name is Evan Svetina! Welcome to my personal blog and documentation of my cod
 
 > Here are some easy ways to reach me:
 
+- **Email:** [evanthehedgehog43@gmail.com](mailto:evanthehedgehog43@gmail.com)
+- **Discord:** pika43
