@@ -1,14 +1,13 @@
 ---
 layout: base
-title: I'm [Your Full Name]
+title: Evan Svetina - Personal
 hide: true
 ---
-
-Hi! My name is 🐤 John C Mortensen
+My name is Evan Svetina! Welcome to my personal blog and documentation of my coding journey.
 
 ### Development Environment
 
-> Coding starts with tools, explore these tools and procedures with a click.
+> Tools I Use:
 
 <div style="display: flex; flex-wrap: wrap; gap: 10px;">
     <a href="https://github.com/Open-Coding-Society/student">
@@ -17,11 +16,11 @@ Hi! My name is 🐤 John C Mortensen
     <a href="https://open-coding-society.github.io/student">
         <img src="https://img.shields.io/badge/GitHub%20Pages-327FC7?style=for-the-badge&logo=github&logoColor=white" alt="GitHub Pages">
     </a>
-    <a href="https://kasm.nighthawkcodingsociety.com/">
-        <img src="https://img.shields.io/badge/KASM-0078D4?style=for-the-badge&logo=kasm&logoColor=white" alt="KASM">
-    </a>
     <a href="https://vscode.dev/">
         <img src="https://img.shields.io/badge/VSCode-007ACC?style=for-the-badge&logo=visual-studio-code&logoColor=white" alt="VSCode">
+    </a>
+    <a href="https://www.javascript.com/">
+        <img src="https://img.shields.io/badge/VSCode-007ACC?style=for-the-badge&logo=visual-studio-code&logoColor=white" alt="JavaScript">
     </a>
 </div>
 
@@ -29,7 +28,7 @@ Hi! My name is 🐤 John C Mortensen
 
 ### Class Progress
 
-> Here is my progress through coding, click to see these online
+> Some cool stuff I am making and have made:
 
 <div style="display: flex; flex-wrap: wrap; gap: 10px;">
     <a href="{{site.baseurl}}/snake" style="text-decoration: none;">
@@ -47,8 +46,7 @@ Hi! My name is 🐤 John C Mortensen
 <br>
 
 <!-- Contact Section -->
-### Get in Touch
+### My Contacts
 
-> Feel free to reach out if you'd like to collaborate or learn more about our work.
+> Here are some easy ways to reach me:
 
-<p style="color: #2A7DB1;">Open Coding Society: <a href="https://opencodingsociety.com" style="color: #2A7DB1; text-decoration: underline;">Socials</a></p>
