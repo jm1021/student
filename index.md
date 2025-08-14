@@ -3,6 +3,7 @@ layout: base
 title: Evan Svetina - Personal
 hide: true
 ---
+🦔 
 My name is Evan Svetina! Welcome to my personal blog and documentation of my coding journey.
 
 ### Development Environment
