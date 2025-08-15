@@ -5,7 +5,7 @@ permalink: /about/
 comments: true
 ---
 
-<img src="/mchopie/images/about/hope.png" alt="hope" width="300">
+<img src="https://mchopiee.github.io/mchopie/images/about/hope.png" alt="hope" width="300">
 
 
 > ## Info 
