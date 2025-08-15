@@ -9,45 +9,27 @@ Good morning, evening, or night!
 
 <br>
 
-> ## Github Links
+> ## EZ Links
 
-Here are some link to find my Github thingys 
+Links to easily navigate!
 
 <div style="display: flex; flex-wrap: wrap; gap: 10px;">
     <a href="https://github.com/McHopiee/mchopie">
-        <img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white" alt="GitHub">
+        <img src="https://img.shields.io/badge/%EF%BC%A7%EF%BC%A9%EF%BC%B4%EF%BC%A8%EF%BC%B5%EF%BC%A2-2a2361?style=for-the-badge&logo=github&logoColor=255%2C%20255%2C%20255
+        " alt="GitHub">
     </a>
     <a href="https://mchopiee.github.io/mchopie/">
-        <img src="https://img.shields.io/badge/GitHub%20Pages-327FC7?style=for-the-badge&logo=github&logoColor=white" alt="GitHub Pages">
+        <img src="https://img.shields.io/badge/%EF%BC%A7%EF%BC%A9%EF%BC%B4%EF%BC%A8%EF%BC%B5%EF%BC%A2%20%EF%BC%B0%EF%BC%A1%EF%BC%A7%EF%BC%A5%EF%BC%B3-4d2f75?style=for-the-badge&logo=refinedgithub&logoColor=255%2C%20255%2C%20255
+        " alt="GitHub Pages">
+    </a>
+    <a href="https://mchopiee.github.io/mchopie/about/">
+        <img src="https://img.shields.io/badge/%EF%BC%A1%EF%BC%A2%EF%BC%AF%EF%BC%B5%EF%BC%B4-734373?style=for-the-badge&logo=anki&logoColor=473247
+        " alt="GitHub Pages">
     </a>
 </div>
 
 <br>
 
-> ## Info 
-
-As you're reading this, I'm currently a Junior enrolled at Del Norte Highschool! 
-
-<br>
-
-> ## Social Media
-
-<div class="button">
-  <a href="https://www.instagram.com/hopefunee_?igsh=MTE4dDE3eTR6eTZpdg%3D%3D&utm_source=qr" class="button-link">
-    <button>Instagram</button>
-  </a>
-</div>
-
-<br>
-### Other contact info: 
-Discord : `.hyperfixations.`
-<br>
-Slack : `Hope` 
-<br>
-Gmail : `mchopie.soba@gmail.com` 
-<br>
-Yahoo : `hopebfune@yahoo.com`
-<br>
 
 <!-- Google Fonts -->
 <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;700&display=swap&family=Quicksand:wght@400;500&display=swap" rel="stylesheet">
