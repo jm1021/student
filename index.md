@@ -6,12 +6,27 @@ hide: true
 <style>
 
 body {
-    background: linear-gradient(90deg, #21003bff 0%, #000000ff 100%);
+    background: #2c2c2cff
     font-family: 'Segoe UI', 'Roboto', 'Arial', sans-serif;
     color: #e0e0e0;
     margin: 0;
     padding: 0;
 }
+
+.cool {
+    background: linear-gradient(0deg, #ffbf00ff 0%, #000000ff 100%);
+    color: #ffffffff;
+    margin: 4px;
+    padding: 8px 8px;
+    border: 4px solid #2e2e2eff;
+    border-radius: 4px;
+    transition: transform 0.2s, box-shadow 0.2s, background 0.3s ease;
+}
+.cool:hover {
+    transform: scale(1.08);
+    cursor: pointer;
+}
+
 
 .glow-button {
     background-color: #111;
@@ -33,7 +48,7 @@ body {
 }
 </style>
 
-### Me and Team
+## Me and Team
 
 Hi! My name is Evan.
 
@@ -74,7 +89,7 @@ Hi! My name is Evan.
 
 ### Class Progress
 
-<button href="youtube.com">button testing</button><br>
+<button class="cool" href="https://evansvetina.github.io/blog2.1/">Old Blog</button><br>
 <a href="{{site.baseurl}}/hacks/snake" class="button glow-button" style="background-color: #111; color: #00ff00; border: 2px solid #00ff00; box-shadow: 0 0 12px #00ff00, 0 0 24px #00ff00; transition: transform 0.2s, box-shadow 0.2s;">
     Snake Game
 </a>
@@ -86,7 +101,7 @@ Hi! My name is Evan.
 <br>
 
 ### Personal Projects
-
+dw ill put smthn here
 
 
 <!-- Contact Section -->
