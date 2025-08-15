@@ -15,16 +15,20 @@ body {
 
 .cool {
     background: linear-gradient(0deg, #ffbf00ff 0%, #000000ff 100%);
-    color: #ffffffff;
-    margin: 4px;
-    padding: 8px 8px;
+    color: rgba(126, 126, 126, 1);
+    margin: 8px 4px; 
+    padding: 8px 16px; 
     border: 4px solid #2e2e2eff;
     border-radius: 4px;
-    transition: transform 0.2s, box-shadow 0.2s, background 0.3s ease;
+    transition: transform 0.2s, box-shadow 0.2s;
+    display: inline-block; 
+    text-decoration: none;
 }
 .cool:hover {
+    color: rgba(126, 126, 126, 1);
     transform: scale(1.08);
     cursor: pointer;
+    text-decoration: none;
 }
 
 
@@ -89,12 +93,15 @@ Hi! My name is Evan.
 
 ### Class Progress
 
-<button class="cool" href="https://evansvetina.github.io/blog2.1/">Old Blog</button><br>
-<a href="{{site.baseurl}}/hacks/snake" class="button glow-button" style="background-color: #111; color: #00ff00; border: 2px solid #00ff00; box-shadow: 0 0 12px #00ff00, 0 0 24px #00ff00; transition: transform 0.2s, box-shadow 0.2s;">
+<a href="https://evansvetina.github.io/blog2.1" class="button cool">
+    Old Blog
+</a>
+
+<a href="{{site.baseurl}}/hacks/snake" class="button cool">
     Snake Game
 </a>
 
-<a href="{{site.baseurl}}/turtle" class="button glow-button" style="background-color: #111; color: #00b3ffff; border: 2px solid #00b3ffff; box-shadow: 0 0 12px #00b3ffff, 0 0 24px #00b3ffff; transition: transform 0.2s, box-shadow 0.2s;">
+<a href="{{site.baseurl}}/turtle" class="button cool">
     Turtle
 </a>
 
