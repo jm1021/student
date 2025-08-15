@@ -5,6 +5,9 @@ permalink: /about/
 comments: true
 ---
 
+<img src="/images/about/hope.png" alt="hope" width="300">
+
+
 > ## Info 
 
 As you're reading this, I'm currently a Junior enrolled at Del Norte Highschool! 
@@ -34,6 +37,8 @@ Gmail : `mchopie.soba@gmail.com`
 <br>
 Yahoo : `hopebfune@yahoo.com`
 <br>
+
+
 
 <!-- Google Fonts -->
 <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;700&display=swap&family=Quicksand:wght@400;500&display=swap" rel="stylesheet">

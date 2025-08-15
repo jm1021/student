@@ -24,7 +24,11 @@ Links to easily navigate!
     </a>
     <a href="https://mchopiee.github.io/mchopie/about/">
         <img src="https://img.shields.io/badge/%EF%BC%A1%EF%BC%A2%EF%BC%AF%EF%BC%B5%EF%BC%B4-734373?style=for-the-badge&logo=anki&logoColor=473247
-        " alt="GitHub Pages">
+        " alt="About">
+    </a>
+    <a href="https://mchopiee.github.io/mchopie/search/">
+        <img src="https://img.shields.io/badge/%EF%BC%B3%EF%BD%85%EF%BD%81%EF%BD%92%EF%BD%83%EF%BD%88-2a3659?style=for-the-badge&logo=searxng
+        " alt="Search">
     </a>
 </div>
 
