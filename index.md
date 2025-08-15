@@ -1,6 +1,6 @@
 ---
 layout: base
-title: I'm [Anika Seksaria]
+title: I'm Anika Seksaria
 hide: true
 ---
 
