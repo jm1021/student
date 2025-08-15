@@ -49,7 +49,7 @@ Hi! My name is Evan.
 
 ### Development Environment
 
-> Tools I Use:
+#### Tools I Use:
 
 <a href="https://github.com/Open-Coding-Society/student" style="margin-right: 12px;">
     <img src="https://img.shields.io/badge/GitHub-181717?logo=github&logoColor=white&style=for-the-badge" alt="GitHub" height="40">
@@ -74,6 +74,7 @@ Hi! My name is Evan.
 
 ### Class Progress
 
+<button href="youtube.com">button testing</button><br>
 <a href="{{site.baseurl}}/hacks/snake" class="button glow-button" style="background-color: #111; color: #00ff00; border: 2px solid #00ff00; box-shadow: 0 0 12px #00ff00, 0 0 24px #00ff00; transition: transform 0.2s, box-shadow 0.2s;">
     Snake Game
 </a>
