@@ -9,14 +9,19 @@ comments: true
 
 As you're reading this, I'm currently a Junior enrolled at Del Norte Highschool! 
 
+I play the string bass in Del Norte's Orchestra, and I also know how to play piano pretty well.
+
+I adore animals, I have one cat and a whole bunch of fish.
+
 <br>
 
 > ## Social Media
 
-<div class="button">
-  <a href="https://www.instagram.com/hopefunee_?igsh=MTE4dDE3eTR6eTZpdg%3D%3D&utm_source=qr" class="button-link">
-    <button>Instagram</button>
-  </a>
+<div style="display: flex; flex-wrap: wrap; gap: 10px;">
+    <a href="https://www.instagram.com/hopefunee_?igsh=MTE4dDE3eTR6eTZpdg%3D%3D&utm_source=qr">
+        <img src="https://img.shields.io/badge/%EF%BC%A9%EF%BD%8E%EF%BD%93%EF%BD%94%EF%BD%81%EF%BD%87%EF%BD%92%EF%BD%81%EF%BD%8D-912a7e?style=for-the-badge&logo=instagram
+        " alt="insta">
+    </a>
 </div>
 
 <br>
