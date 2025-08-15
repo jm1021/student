@@ -31,7 +31,7 @@ Hi! My name is Anika Seksaria.
 <a href="https://kasm.opencodingsociety.com/" class="button small" style="background-color: #6b4bd3ff">
     KASM
 </a>
-<a href="https://vscode.dev/" class="button small" style="background-color: #d38a4bff">
+<a href="https://vscode.dev/" class="button small" style="background-color: #4bb8d3ff">
     <span style="color: #FFFFFF">VSCODE</span>
 </a>
 
