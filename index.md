@@ -31,6 +31,9 @@ Hi! My name is Ishan.
 <a href="https://kasm.opencodingsociety.com/" class="button small" style="background-color: #6b4bd3ff">
     KASM
 </a>
+<a href="https://www.markdownguide.org/cheat-sheet/" class="button small" style="background-color: #F54927">
+    Markdown Cheat Sheet
+</a>
 <a href="https://vscode.dev/" class="button small" style="background-color: #d38a4bff">
     <span style="color: #FFFFFF">VSCODE</span>
 </a>
