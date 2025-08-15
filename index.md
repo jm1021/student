@@ -3,55 +3,48 @@ layout: base
 title: Evan Svetina - Personal
 hide: true
 ---
-🦔 
-My name is Evan Svetina! Welcome to my personal blog and documentation of my coding journey.
+
+### Me and Team
+
+Hi! My name is [Your Full Name].
+
+| Role         | Name     | Repo Location                       | Stream                | Repo Name |
+|--------------|----------|-------------------------------------|-----------------------|-----------|
+| Scrum Master | John     | github.com/jm1021/student           | upstream (OCS fork)   | student   |
+| Scrummer     | Torin    | github.com/torin/student            | downstream (fork)     | student   |
+| Scrummer     | Avantika | github.com/avantika/student         | downstream (fork)     | student   |
+| Scrummer     | Aadit    | github.com/aaadit/student           | downstream (fork)     | student   |
+
+
+## Links to Learning
 
 ### Development Environment
 
 > Tools I Use:
 
-<div style="display: flex; flex-wrap: wrap; gap: 10px;">
-    <a href="https://github.com/Open-Coding-Society/student">
-        <img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white" alt="GitHub">
-    </a>
-    <a href="https://open-coding-society.github.io/student">
-        <img src="https://img.shields.io/badge/GitHub%20Pages-327FC7?style=for-the-badge&logo=github&logoColor=white" alt="GitHub Pages">
-    </a>
-    <a href="https://vscode.dev/">
-        <img src="https://img.shields.io/badge/VSCode-007ACC?style=for-the-badge&logo=visual-studio-code&logoColor=white" alt="VSCode">
-    </a>
-    <a href="https://www.javascript.com/">
-        <img src="https://shields.io/badge/JavaScript-F7DF1E?logo=JavaScript&logoColor=000&style=flat-square" alt="JavaScript">
-    </a>
-    <a href="https://www.python.org/">
-        <img src="    https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54
-        " alt="Python">
-    </a>
-</div>
+<a href="https://github.com/Open-Coding-Society/student">
+    <img src="https://img.shields.io/badge/GitHub-181717?logo=github&logoColor=white" alt="GitHub">
+</a>
+<a href="https://open-coding-society.github.io/student">
+    <img src="https://img.shields.io/badge/GitHub%20Pages-327FC7?logo=github&logoColor=white" alt="GitHub Pages">
+</a>
+<a href="https://kasm.opencodingsociety.com/" class="button small" style="background-color: #6b4bd3ff">
+    KASM
+</a>
+<a href="https://vscode.dev/" class="button small" style="background-color: #d38a4bff">
+    <span style="color: #FFFFFF">VSCODE</span>
+</a>
 
 <br>
 
 ### Class Progress
 
-> Some cool stuff I am making and have made:
-
-<div style="display: flex; flex-wrap: wrap; gap: 10px;">
-    <a href="{{site.baseurl}}/snake" style="text-decoration: none;">
-        <div style="background-color: #96f16eff; color: black; padding: 10px 20px; border-radius: 5px; font-weight: bold;">
-            Snake Game Revamp
-        </div>
-    </a>
-    <a href="https://github.com/Nikhile22427/ISEF" style="text-decoration: none;">
-        <div style="background-color: #b8dedcff; color: Black; padding: 10px 20px; border-radius: 5px; font-weight: bold;">
-            Computer Vision Project (with friend)
-        </div>
-    </a>
-    <a href="https://github.com/xinjiav2/Bias-Surf" style="text-decoration: none;">
-        <div style="background-color: #8866b1ff; color: Black; padding: 10px 20px; border-radius: 5px; font-weight: bold;">
-            BiasSurf (WIP)
-        </div>
-    </a>
-</div>
+<a href="{{site.baseurl}}/snake" class="button small" style="background-color: #6b4bd3ff">
+    Snake Game
+</a>
+<a href="{{site.baseurl}}/turtle" class="button small" style="background-color: #2A7DB1">
+    <span style="color: #000000">Turtle</span>
+</a>
 
 <br>
 
