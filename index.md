@@ -1,19 +1,23 @@
 ---
 layout: base
-title: I'm [Your Full Name]
+title: I'm Aashray
 hide: true
 ---
 
 ### Me and Team
 
-Hi! My name is [Your Full Name].
+Hi! My name is Aashray Rajagopalan.
+
+We are the Applicator group.
 
 | Role         | Name     | Repo Location                       | Stream                | Repo Name |
 |--------------|----------|-------------------------------------|-----------------------|-----------|
-| Scrum Master | John     | github.com/jm1021/student           | upstream (OCS fork)   | student   |
-| Scrummer     | Torin    | github.com/torin/student            | downstream (fork)     | student   |
-| Scrummer     | Avantika | github.com/avantika/student         | downstream (fork)     | student   |
-| Scrummer     | Aadit    | github.com/aaadit/student           | downstream (fork)     | student   |
+| Scrum Master | Aashray  | github.com/aashrayr/studentCSA      | downstream (fork)     | student1  |
+| Scrummer     | Akshay   | github.com/jm1021/student           | upstream (OCS fork)   | student1  |
+| Scrummer     | Sai      | github.com/saiseahawks/studentCSA   | downstream (fork)     | student1  |
+| Scrummer     | Anvay    | github.com/AnvayYadav/CSA           | downstream (fork)     | student1  |
+| Scrummer     | Manas    | github.com/manas12709/student       | downstream (fork)     | student1  |
+| Scrummer     | Gurshawn | github.com/Gurbop/CSA_student       | downstream (fork)     | student1  |
 
 
 ## Links to Learning
