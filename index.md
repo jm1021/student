@@ -1,6 +1,6 @@
 ---
 layout: base
-title: I'm Aashray
+title: ApplicatorsCSA
 hide: true
 ---
 
@@ -17,7 +17,7 @@ We are the Applicator group.
 | Scrummer     | Sai      | github.com/saiseahawks/studentCSA   | downstream (fork)     | student1  |
 | Scrummer     | Anvay    | github.com/AnvayYadav/CSA           | downstream (fork)     | student1  |
 | Scrummer     | Manas    | github.com/manas12709/student       | downstream (fork)     | student1  |
-| Scrummer     | Gurshawn | github.com/Gurbop/CSA_student       | downstream (fork)     | student1  |
+| Scrummer     | Gurshawn | github.com/Gurbop/CSA_student       | downstream (fork)     | CSA_student  |
 
 
 ## Links to Learning
