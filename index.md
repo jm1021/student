@@ -15,7 +15,7 @@ body {
 
 .cool {
     background: linear-gradient(0deg, #ffbf00ff 0%, #000000ff 100%);
-    color: rgba(126, 126, 126, 1);
+    color: #e0e0e0;
     margin: 8px 4px; 
     padding: 8px 16px; 
     border: 4px solid #2e2e2eff;
@@ -25,7 +25,7 @@ body {
     text-decoration: none;
 }
 .cool:hover {
-    color: rgba(126, 126, 126, 1);
+    color: #e0e0e0;
     transform: scale(1.08);
     cursor: pointer;
     text-decoration: none;
@@ -97,7 +97,7 @@ Hi! My name is Evan.
     Old Blog
 </a>
 
-<a href="{{site.baseurl}}/hacks/snake" class="button cool">
+<a href="{{site.baseurl}}/snake" class="button cool">
     Snake Game
 </a>
 
@@ -109,6 +109,9 @@ Hi! My name is Evan.
 
 ### Personal Projects
 dw ill put smthn here
+- biasSurf
+- fighter game
+- ISEF collab with nikhil
 
 
 <!-- Contact Section -->

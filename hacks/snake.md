@@ -6,12 +6,16 @@ permalink: /snake/
 <head></head>
 <body>
 <audio id="backgroundMusic" preload="auto" loop>
+    <!--
     <source src="{{ site.baseurl }}/navigation/bgm.mp3" type="audio/mpeg">
     Your browser does not support the audio tag.
+    -->
 </audio>
 <audio id="eatFoodSFX" preload="auto">
+    <!--
     <source src="{{ site.baseurl }}/navigation/eatFoodSFX.mp3" type="audio/mpeg">
     Your browser does not support the audio tag.
+    -->
 </audio>
 </body>
 <style>
@@ -203,9 +207,11 @@ permalink: /snake/
     <p>Game Over - Restart by <span style="color: rgb(214, 20, 15)">clicking below</span> or pressing <span style="color: rgb(214, 20, 15)">r</span></p>
     <a id="new_game1" class="link-alert">We Go Again!</a>
     <a id="setting_menu1" class="link-alert">Difficulty Select/Settings</a><br>
+    <!--
     <p class="music-credit" style="margin-top: 20px; font-size: 16px;">
         Song: <a href="https://open.spotify.com/track/7l4Tixfyj0npY9ElYTd1e8?si=1f372c21c8f14c2f" target="_blank" class="music-link">Feeling - TURQUOISEDEATH, Dreamstation</a>
     </p>
+    -->
 </div>
         <!-- Play Screen -->
         <canvas id="snake" class="wrap" width="720" height="720" tabindex="1"></canvas>
