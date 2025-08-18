@@ -22,12 +22,43 @@ I adore animals, I have one cat and a whole bunch of fish.
 
 > ## Social Media
 
-<div style="display: flex; flex-wrap: wrap; gap: 10px;">
-    <a href="https://www.instagram.com/hopefunee_?igsh=MTE4dDE3eTR6eTZpdg%3D%3D&utm_source=qr">
-        <img src="https://img.shields.io/badge/%EF%BC%A9%EF%BD%8E%EF%BD%93%EF%BD%94%EF%BD%81%EF%BD%87%EF%BD%92%EF%BD%81%EF%BD%8D-912a7e?style=for-the-badge&logo=instagram
-        " alt="insta">
-    </a>
-</div>
+<button class="btn-md btn-rounded btn-instagram" onclick="window.location.href='https://www.instagram.com/hopefunee_?igsh=MTE4dDE3eTR6eTZpdg%3D%3D&utm_source=qr'">
+      ＩＮＳＴＡＧＲＡＭ
+  </button>
+
+<style>
+/* size */
+.btn-md {
+  padding: 5px 18px;
+  font-size: 0.7rem;
+  font-weight: bold;
+  text-decoration: none; /* remove underline */
+  display: inline-block; /* makes <a> act like button */
+  text-align: center;
+}
+
+/* style */
+.btn-rounded {
+  border-radius: 2rem;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* insta colors */
+.btn-instagram {
+  background: linear-gradient(135deg, #f58529, #dd2a7b, #8134af, #515bd4);
+  color: white;
+  box-shadow: 0 6px 12px rgba(221, 42, 123, 0.4);
+}
+
+/* hover */
+.btn-instagram:hover {
+  transform: scale(1.07);
+  box-shadow: 0 8px 18px rgba(221, 42, 123, 0.55);
+}
+</style>
+
 
 <br>
 ### Other contact info: 
@@ -39,8 +70,6 @@ Gmail : `mchopie.soba@gmail.com`
 <br>
 Yahoo : `hopebfune@yahoo.com`
 <br>
-
-
 
 <!-- Google Fonts -->
 <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;700&display=swap&family=Quicksand:wght@400;500&display=swap" rel="stylesheet">

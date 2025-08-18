@@ -14,28 +14,81 @@ Good morning, evening, or night!
 Links to easily navigate!
 
 <div style="display: flex; flex-wrap: wrap; gap: 10px;">
-    <a href="https://github.com/McHopiee/mchopie">
-        <img src="https://img.shields.io/badge/%EF%BC%A7%EF%BC%A9%EF%BC%B4%EF%BC%A8%EF%BC%B5%EF%BC%A2-2a2361?style=for-the-badge&logo=github&logoColor=255%2C%20255%2C%20255
-        " alt="GitHub">
-    </a>
-    <a href="https://mchopiee.github.io/mchopie/">
-        <img src="https://img.shields.io/badge/%EF%BC%A7%EF%BC%A9%EF%BC%B4%EF%BC%A8%EF%BC%B5%EF%BC%A2%20%EF%BC%B0%EF%BC%A1%EF%BC%A7%EF%BC%A5%EF%BC%B3-4d2f75?style=for-the-badge&logo=refinedgithub&logoColor=255%2C%20255%2C%20255
-        " alt="GitHub Pages">
-    </a>
-    <a href="https://mchopiee.github.io/mchopie/about/">
-        <img src="https://img.shields.io/badge/%EF%BC%A1%EF%BC%A2%EF%BC%AF%EF%BC%B5%EF%BC%B4-734373?style=for-the-badge&logo=anki&logoColor=473247
-        " alt="About">
-    </a>
-    <a href="https://mchopiee.github.io/mchopie/search/">
-        <img src="https://img.shields.io/badge/%EF%BC%B3%EF%BD%85%EF%BD%81%EF%BD%92%EF%BD%83%EF%BD%88-2a3659?style=for-the-badge&logo=searxng
-        " alt="Search">
-    </a>
+  <button class="btn-md btn-rounded btn-darkblue" onclick="window.location.href='https://github.com/McHopiee/mchopie'">
+      ＧＩＴＨＵＢ
+  </button>
+  <button class="btn-md btn-rounded btn-darkpurple" onclick="window.location.href='https://mchopiee.github.io/mchopie/'">
+      ＧＩＴＨＵＢ　ＰＡＧＥＳ
+  </button>
+  <button class="btn-md btn-rounded btn-darkpink" onclick="window.location.href='https://mchopiee.github.io/mchopie/about/'">
+      ＡＢＯＵＴ
+  </button>
+  <button class="btn-md btn-rounded btn-darkcyan" onclick="window.location.href='https://mchopiee.github.io/mchopie/search/'">
+      ＳＥＡＲＣＨ
+  </button>
 </div>
 
 <br>
 
+<style>
+/* size */
+.btn-md {
+  padding: 5px 18px;
+  font-size: 0.7rem;
+  font-weight: bold;
+}
 
-<!-- Google Fonts -->
+/* style */
+.btn-rounded {
+  border-radius: 2.5rem;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* backgrounds */
+.btn-darkblue {
+  background: linear-gradient(135deg, #242847ff, #362a6dff);
+  color: white;
+  box-shadow: 0 6px 12px rgba(41, 47, 76, 0.5);
+}
+.btn-darkpurple {
+  background: linear-gradient(135deg, #4c3164ff, #5e2b6dff);
+  color: white;
+  box-shadow: 0 6px 12px rgba(62, 32, 81, 0.5);
+}
+.btn-darkpink {
+  background: linear-gradient(135deg, #682d68ff, #74286cff);
+  color: white;
+  box-shadow: 0 6px 12px rgba(62, 32, 81, 0.5);
+}
+.btn-darkcyan {
+  background: linear-gradient(135deg, #303c5cff, #3e5b79ff);
+  color: white;
+  box-shadow: 0 6px 12px rgba(62, 32, 81, 0.5);
+}
+
+/* hovers */
+.btn-darkblue:hover {
+  transform: scale(1.07);
+  box-shadow: 0 8px 18px rgba(30, 35, 63, 0.65);
+}
+.btn-darkpurple:hover {
+  transform: scale(1.07);
+  box-shadow: 0 8px 18px rgba(46, 18, 75, 0.65);
+}
+.btn-darkpink:hover {
+  transform: scale(1.07);
+  box-shadow: 0 8px 18px rgba(85, 25, 92, 0.65);
+}
+.btn-darkcyan:hover {
+  transform: scale(1.07);
+  box-shadow: 0 8px 18px rgba(33, 73, 99, 0.65);
+}
+</style>
+
+
+<!-- style stuff -->
 <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;700&display=swap&family=Quicksand:wght@400;500&display=swap" rel="stylesheet">
 
 <style>
@@ -43,7 +96,7 @@ Links to easily navigate!
   body {
     font-family: 'Quicksand', sans-serif !important;
     font-size: 1em;
-    color: white; /* keep theme text color or change if needed */
+    color: white;
   }
 
   /* headings */
