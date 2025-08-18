@@ -1,0 +1,94 @@
+---
+layout: base 
+title: Pong Game
+search_exclude: true
+description: Pong game
+hide: true
+permalink: /pong game
+---
+
+
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Pong Game</title>
+  <style>
+    body {
+      margin: 0;
+      background: black;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    canvas {
+      background: #000;
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="pongCanvas" width="800" height="500"></canvas>
+
+  <script>
+    const canvas = document.getElementById("pongCanvas");
+    const ctx = canvas.getContext("2d");
+
+    // Game objects
+    const paddleWidth = 10, paddleHeight = 100;
+    const ballSize = 15;
+
+    let leftPaddle = { x: 20, y: canvas.height/2 - paddleHeight/2, dy: 0 };
+    let rightPaddle = { x: canvas.width - 30, y: canvas.height/2 - paddleHeight/2, dy: 0 };
+    let ball = { 
+      x: canvas.width/2, 
+      y: canvas.height/2, 
+      dx: 5 * (Math.random() > 0.5 ? 1 : -1), 
+      dy: 5 * (Math.random() > 0.5 ? 1 : -1) 
+    };
+
+    let leftScore = 0, rightScore = 0;
+
+    // Draw functions
+    function drawRect(x, y, w, h, color) {
+      ctx.fillStyle = color;
+      ctx.fillRect(x, y, w, h);
+    }
+
+    function drawBall(x, y, size, color) {
+      ctx.fillStyle = color;
+      ctx.beginPath();
+      ctx.arc(x, y, size, 0, Math.PI*2);
+      ctx.fill();
+    }
+
+    function drawText(text, x, y) {
+      ctx.fillStyle = "white";
+      ctx.font = "30px Arial";
+      ctx.fillText(text, x, y);
+    }
+
+    // Update game state
+    function update() {
+      // Move paddles
+      leftPaddle.y += leftPaddle.dy;
+      rightPaddle.y += rightPaddle.dy;
+
+      // Keep paddles inside canvas
+      leftPaddle.y = Math.max(0, Math.min(canvas.height - paddleHeight, leftPaddle.y));
+      rightPaddle.y = Math.max(0, Math.min(canvas.height - paddleHeight, rightPaddle.y));
+
+      // Move ball
+      ball.x += ball.dx;
+      ball.y += ball.dy;
+
+      // Bounce top/bottom
+      if (ball.y - ballSize < 0 || ball.y + ballSize > canvas.height) {
+        ball.dy *= -1;
+      }
+
+      // Bounce on paddles
+      if (ball.x - ballSize < leftPaddle.x + paddleWidth &&
+          ball.y > leftPaddle.y &&
+          ball.y < leftPaddle.y + paddleHeig
