@@ -10,14 +10,26 @@ Hi! My name is Aashray Rajagopalan.
 
 We are the Applicator group.
 
+
 | Role         | Name     | Repo Location                       | Stream                | Repo Name |
 |--------------|----------|-------------------------------------|-----------------------|-----------|
+<<<<<<< HEAD
 | Scrum Master | Aashray  | github.com/aashrayr/studentCSA      | downstream (fork)     | student1  |
 | Scrummer     | Akshay   | github.com/jm1021/student           | upstream (OCS fork)   | student1  |
 | Scrummer     | Sai      | github.com/saiseahawks/studentCSA   | downstream (fork)     | student1  |
 | Scrummer     | Anvay    | github.com/AnvayYadav/CSA           | downstream (fork)     | student1  |
 | Scrummer     | Manas    | github.com/manas12709/student       | downstream (fork)     | student1  |
 | Scrummer     | Gurshawn | github.com/Gurbop/CSA_student       | downstream (fork)     | CSA_student  |
+=======
+| Scrum Master | Aashray  | github.com/aashrayr/studentCSA      | upstream (OCS fork)     | student1  |
+| Scrummer     | Akshay   | github.com/jm1021/student           | downstream (fork)   | student1  |
+| Scrummer     | Sai      | github.com/saiseahawks/studentCSA   | downstream (fork)     | student1  |
+| Scrummer     | Anvay    | github.com/AnvayYadav/CSA           | downstream (fork)     | student1  |
+| Scrummer     | Manas    | github.com/manas12709/student       | downstream (fork)     | student1  |
+| Scrummer     | Gurshawn | github.com/Gurbop/CSA_student       | downstream (fork)     | student1  |
+
+
+>>>>>>> 1e2c20dc74c6e4e1949d2bf631ecdd62edf93251
 
 
 ## Links to Learning

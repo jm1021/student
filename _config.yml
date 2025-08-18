@@ -1,7 +1,12 @@
 title: Open Coding 
 description: "Class of 2026"
+<<<<<<< HEAD
 owner_name: ApplicatorsCSA
 github_username: jm1021 
+=======
+owner_name: John Mortensen
+github_username: ApplicatorsCSA 
+>>>>>>> 1e2c20dc74c6e4e1949d2bf631ecdd62edf93251
 github_repo: "T1studentGroup" 
 baseurl: "/T1studentGroup" 
 future: true
