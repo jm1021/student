@@ -6,8 +6,6 @@ hide: true
 
 ### Me and Team
 
-Hi! My name is Aashray Rajagopalan.
-
 We are the Applicator group.
 
 
