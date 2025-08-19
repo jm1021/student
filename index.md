@@ -6,7 +6,7 @@ hide: true
 <style>
 
 body {
-    background: #2c2c2cff
+    background: #2c2c2cff;
     font-family: 'Segoe UI', 'Roboto', 'Arial', sans-serif;
     color: #e0e0e0;
     margin: 0;
