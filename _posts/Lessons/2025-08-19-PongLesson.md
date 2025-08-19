@@ -189,20 +189,21 @@ Your mission: identify, document, and fix these issues in pairs or trios using A
 ## Demonstration - Workflow with Mermaid Diagram
 Here’s the **debugging workflow** your team should follow:
 
-```mermaid
-flowchart TD
-    A[🏓 Play Pong Game] --> B{Bug Found?}
-    B -->|Yes| C[📝 Create GitHub Issue]
-    B -->|No| D[✅ Game Working]
-    C --> E[🏷️ Add to Kanban Board]
-    E --> F[🎯 Set Breakpoints]
-    F --> G[👥 Live Share Debug Session]
-    G --> H[🔍 Step Through Code]
-    H --> I[🛠️ Implement Fix]
-    I --> J[🧪 Pair Test Solution]
-    J --> K{Fix Works?}
-    K -->|Yes| L[📤 Commit & Push]
-    K -->|No| F
-    L --> M[📋 Update Burndown]
-    M --> N[🔄 Code Review]
-    N --> O[✅ Close Issue]
+
+| Step | Action                          | Outcome                  |
+|------|---------------------------------|--------------------------|
+| 1    | 🏓 Play Pong Game               | Begin testing the game   |
+| 2    | ❓ Bug Found?                   | Branch decision point    |
+| 3    | 📝 Create GitHub Issue         | Track the bug formally   |
+| 4    | 🏷️ Add to Kanban Board         | Visible in project board |
+| 5    | 🎯 Set Breakpoints              | Prepare for debugging    |
+| 6    | 👥 Live Share Debug Session     | Collaborate with team    |
+| 7    | 🔍 Step Through Code            | Inspect program flow     |
+| 8    | 🛠️ Implement Fix               | Apply a code change      |
+| 9    | 🧪 Pair Test Solution           | Validate the fix         |
+| 10   | ✅ Fix Works?                   | If yes → continue; if no → return to step 5 |
+| 11   | 📤 Commit & Push                | Save and sync changes    |
+| 12   | 📋 Update Burndown              | Track project progress   |
+| 13   | 🔄 Code Review                  | Peer review the changes  |
+| 14   | ✅ Close Issue                  | Finalize the workflow    |
+
