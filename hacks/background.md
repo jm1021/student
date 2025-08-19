@@ -2,8 +2,8 @@
 layout: base
 title: Background with Object
 description: Use JavaScript to have an in motion background.
-sprite: /images/platformer/sprites/flying-ufo.png
-background: /images/platformer/backgrounds/alien_planet1.jpg
+sprite: https://mchopiee.github.io/mchopie/images/lessons/pidgeot.jpg
+background: https://mchopiee.github.io/mchopie/images/lessons/bg.png
 permalink: /background
 ---
 
