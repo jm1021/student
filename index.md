@@ -26,6 +26,9 @@ Links to easily navigate!
   <button class="btn-md btn-rounded btn-darkcyan" onclick="window.location.href='https://mchopiee.github.io/mchopie/search/'">
       ＳＥＡＲＣＨ
   </button>
+  <button class="btn-md btn-rounded btn-otherpink" onclick="window.location.href='https://mchopiee.github.io/mchopie/background/'">
+      ＢＡＣＫＧＲＯＵＮＤ
+  </button>
 </div>
 
 <br>
@@ -65,7 +68,12 @@ Links to easily navigate!
 .btn-darkcyan {
   background: linear-gradient(135deg, #303c5cff, #3e5b79ff);
   color: white;
-  box-shadow: 0 6px 12px rgba(62, 32, 81, 0.5);
+  box-shadow: 0 6px 12px rgba(31, 59, 75, 0.5);
+}
+.btn-otherpink {
+  background: linear-gradient(135deg, #73436aff, #913c84ff);
+  color: white;
+  box-shadow: 0 6px 12px rgba(81, 32, 68, 0.5);
 }
 
 /* hovers */
@@ -84,6 +92,10 @@ Links to easily navigate!
 .btn-darkcyan:hover {
   transform: scale(1.07);
   box-shadow: 0 8px 18px rgba(33, 73, 99, 0.65);
+}
+.btn-otherpink:hover {
+  transform: scale(1.07);
+  box-shadow: 0 8px 18px rgba(94, 24, 76, 0.65);
 }
 </style>
 
