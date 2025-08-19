@@ -2,7 +2,7 @@
 layout: base
 title: Background with Object
 description: Use JavaScript to have an in motion background.
-sprite: https://mchopiee.github.io/mchopie/images/lessons/pidgeot.jpg
+sprite: https://mchopiee.github.io/mchopie/images/lessons/download.png
 background: https://mchopiee.github.io/mchopie/images/lessons/bg.png
 permalink: /background
 ---
