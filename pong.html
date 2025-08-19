@@ -138,12 +138,12 @@ permalink: /ponggame
     document.addEventListener("keydown", event => {
       if (event.key === "w") leftPaddle.dy = -7;
       if (event.key === "s") leftPaddle.dy = 7;
-      if (event.key === "ArrowUp") rightPaddle.dy = -7;
-      if (event.key === "ArrowDown") rightPaddle.dy = 7;
+      //if (event.key === "ArrowUp") rightPaddle.dy = -7;
+      //if (event.key === "ArrowDown") rightPaddle.dy = 7;
     });
     document.addEventListener("keyup", event => {
       if (event.key === "w" || event.key === "s") leftPaddle.dy = 0;
-      if (event.key === "ArrowUp" || event.key === "ArrowDown") rightPaddle.dy = 0;
+      //if (event.key === "ArrowUp" || event.key === "ArrowDown") rightPaddle.dy = 0;
     });
   </script>
 </body>
