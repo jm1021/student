@@ -57,6 +57,132 @@ Your mission: identify, document, and fix these issues in pairs or trios using A
 
 ---
 
+## ▶ Play the Pong Game (Inline)
+
+<div id="pong-wrapper" style="display:flex;justify-content:center;align-items:center;min-height:60vh;background:#000;border-radius:12px;padding:16px;">
+  <canvas id="pongCanvas" width="800" height="500" style="display:block;background:#000;max-width:100%;height:auto;border:1px solid #222;border-radius:8px;"></canvas>
+</div>
+
+<script>
+  (function(){
+    const canvas = document.getElementById("pongCanvas");
+    if (!canvas) return; // fail-safe if this section is hidden
+    const ctx = canvas.getContext("2d");
+
+    // Game objects
+    const paddleWidth = 10, paddleHeight = 100;
+    const ballSize = 15;
+
+    let leftPaddle = { x: 20, y: canvas.height/2 - paddleHeight/2, dy: 0 };
+    let rightPaddle = { x: canvas.width - 30, y: canvas.height/2 - paddleHeight/2, dy: 0 };
+    let ball = { 
+      x: canvas.width/2, 
+      y: canvas.height/2, 
+      dx: 5 * (Math.random() > 0.5 ? 1 : -1), 
+      dy: 5 * (Math.random() > 0.5 ? 1 : -1) 
+    };
+
+    let leftScore = 0, rightScore = 0;
+
+    function drawRect(x, y, w, h, color) {
+      ctx.fillStyle = color;
+      ctx.fillRect(x, y, w, h);
+    }
+
+    function drawBall(x, y, size, color) {
+      ctx.fillStyle = color;
+      ctx.beginPath();
+      ctx.arc(x, y, size, 0, Math.PI*2);
+      ctx.fill();
+    }
+
+    function drawText(text, x, y) {
+      ctx.fillStyle = "white";
+      ctx.font = "30px Arial, sans-serif";
+      ctx.fillText(text, x, y);
+    }
+
+    function update() {
+      // Move paddles
+      leftPaddle.y += leftPaddle.dy;
+      rightPaddle.y += rightPaddle.dy;
+
+      // Keep paddles inside canvas
+      leftPaddle.y = Math.max(0, Math.min(canvas.height - paddleHeight, leftPaddle.y));
+      rightPaddle.y = Math.max(0, Math.min(canvas.height - paddleHeight, rightPaddle.y));
+
+      // Move ball
+      ball.x += ball.dx;
+      ball.y += ball.dy;
+
+      // Bounce top/bottom
+      if (ball.y - ballSize < 0 || ball.y + ballSize > canvas.height) {
+        ball.dy *= -1;
+      }
+
+      // Bounce on paddles
+      if (ball.x - ballSize < leftPaddle.x + paddleWidth &&
+          ball.y > leftPaddle.y &&
+          ball.y < leftPaddle.y + paddleHeight) {
+        ball.dx *= -1;
+      }
+
+      if (ball.x + ballSize > rightPaddle.x &&
+          ball.y > rightPaddle.y &&
+          ball.y < rightPaddle.y + paddleHeight) {
+        ball.dx *= -1;
+      }
+
+      // Score
+      if (ball.x - ballSize < 0) {
+        rightScore++;
+        resetBall();
+      }
+      if (ball.x + ballSize > canvas.width) {
+        leftScore++;
+        resetBall();
+      }
+    }
+
+    function resetBall() {
+      ball.x = canvas.width/2;
+      ball.y = canvas.height/2;
+      ball.dx = 5 * (Math.random() > 0.5 ? 1 : -1);
+      ball.dy = 5 * (Math.random() > 0.5 ? 1 : -1);
+    }
+
+    function draw() {
+      drawRect(0, 0, canvas.width, canvas.height, "black"); // background
+      drawRect(leftPaddle.x, leftPaddle.y, paddleWidth, paddleHeight, "white");
+      drawRect(rightPaddle.x, rightPaddle.y, paddleWidth, paddleHeight, "white");
+      drawBall(ball.x, ball.y, ballSize, "white");
+      drawText(leftScore, canvas.width/4, 40);
+      drawText(rightScore, 3*canvas.width/4, 40);
+    }
+
+    function loop() {
+      update();
+      draw();
+    }
+    const intervalId = setInterval(loop, 1000/60);
+
+    // Controls
+    document.addEventListener("keydown", event => {
+      if (event.key === "w") leftPaddle.dy = -7;
+      if (event.key === "s") leftPaddle.dy = 7;
+      // If you want right paddle on arrows, uncomment these:
+      // if (event.key === "ArrowUp") rightPaddle.dy = -7;
+      // if (event.key === "ArrowDown") rightPaddle.dy = 7;
+    });
+    document.addEventListener("keyup", event => {
+      if (event.key === "w" || event.key === "s") leftPaddle.dy = 0;
+      // if (event.key === "ArrowUp" || event.key === "ArrowDown") rightPaddle.dy = 0;
+    });
+  })();
+</script>
+
+---
+
 ## Demonstration - Workflow with Mermaid Diagram
 Here’s the **debugging workflow** your team should follow:
 
