@@ -26,7 +26,7 @@ Links to easily navigate!
   <button class="btn-md btn-rounded btn-darkcyan" onclick="window.location.href='https://mchopiee.github.io/mchopie/search/'">
       ＳＥＡＲＣＨ
   </button>
-  <button class="btn-md btn-rounded btn-otherpink" onclick="window.location.href='https://mchopiee.github.io/mchopie/background/'">
+  <button class="btn-md btn-rounded btn-otherpink" onclick="window.location.href='https://mchopiee.github.io/mchopie/background'">
       ＢＡＣＫＧＲＯＵＮＤ
   </button>
 </div>
