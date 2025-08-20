@@ -208,8 +208,7 @@ Here’s the **debugging workflow** your team should follow:
 | 14   | ✅ Close Issue                  | Finalize the workflow    |
 
 
-```mermaid
-
+<div class="mermaid">
 flowchart TD
     A[🏓 Start Pong Lesson] --> B[👨‍💻 Build Pong Game]
     B --> C{🐞 Bug Found?}
@@ -219,3 +218,4 @@ flowchart TD
     C -->|No| F[✅ Working Game]
     F --> G[📊 Reflect & Blog]
     G --> H[🚀 Share with Class]
+</div>
