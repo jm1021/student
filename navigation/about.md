@@ -4,6 +4,7 @@ title: About
 permalink: /about/
 comments: true
 ---
+<h1>I'm Hope!!</h1>
 
 <img src="https://mchopiee.github.io/mchopie/images/about/hope.png" alt="hope" width="250">
 <img src="https://mchopiee.github.io/mchopie/images/about/friends.png" alt="friends" width="250">
@@ -17,6 +18,8 @@ As you're reading this, I'm currently a Junior enrolled at Del Norte Highschool!
 I play the string bass in Del Norte's Orchestra, and I also know how to play piano pretty well.
 
 I adore animals, I have one cat and a whole bunch of fish.
+
+I would like to major in computer science, and my goal college is UCSD. Ideally, I would want to specialize in making games. 
 
 <br>
 
