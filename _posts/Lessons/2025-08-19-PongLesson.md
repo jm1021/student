@@ -207,6 +207,9 @@ Here’s the **debugging workflow** your team should follow:
 | 13   | 🔄 Code Review                  | Peer review the changes  |
 | 14   | ✅ Close Issue                  | Finalize the workflow    |
 
+
+```mermaid
+
 flowchart TD
     A[🏓 Start Pong Lesson] --> B[👨‍💻 Build Pong Game]
     B --> C{🐞 Bug Found?}
