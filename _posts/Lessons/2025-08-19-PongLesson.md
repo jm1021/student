@@ -14,6 +14,21 @@ Welcome to the **Pair/Trio Debugging Challenge** using the Pong Game.
 Work in teams to debug, document, and improve Pong while practicing collaboration and Agile workflows.
 
 ---
+## Key Concepts From This Lesson
+Canvas API:	How to draw shapes, text, and manage 2D graphics in JavaScript.
+
+Game Loop:	The core update-draw cycle in real-time games.
+
+Collision Detection:	Checking if the ball hits a paddle or wall.
+
+Keyboard Input:	Handling user input for interactive games.
+
+Game State Management:	Tracking scores, resetting the ball, ending the game.
+
+## Goal For This Lesson
+In this lesson you will learn how to how to code the pong game by using CSS styling, applying game logic, and identifying game objects. After the lesson, you will be tasked with creaating a game rule that counts the score until 11, and then resets.
+
+---
 
 ## 📑 Navigation
 - [Pair/Trio Programming Overview](#pairtrio-programming-overview)  
