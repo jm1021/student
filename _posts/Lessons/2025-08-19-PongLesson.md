@@ -207,3 +207,12 @@ Here’s the **debugging workflow** your team should follow:
 | 13   | 🔄 Code Review                  | Peer review the changes  |
 | 14   | ✅ Close Issue                  | Finalize the workflow    |
 
+flowchart TD
+    A[🏓 Start Pong Lesson] --> B[👨‍💻 Build Pong Game]
+    B --> C{🐞 Bug Found?}
+    C -->|Yes| D[📝 Document Issue]
+    D --> E[🔧 Debug & Fix]
+    E --> B
+    C -->|No| F[✅ Working Game]
+    F --> G[📊 Reflect & Blog]
+    G --> H[🚀 Share with Class]
