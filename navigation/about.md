@@ -118,6 +118,5 @@ Everything for me, as for many others, revolves around family and faith.
 Gallery of Pics, scroll to the right for more ...
 </comment>
 <div class="image-gallery">
-  <img src="{{site.baseurl}}/images/about/Headshot.JPG" alt="Image 1">
-  <img src="{{site.baseurl}}/images/about/CyberAegis-Stardust.JPG" alt="Image 2">
-  <figcaption>My CyberPatriot Team<figcaption>
+  <img src="{{site.baseurl}}/images/about/Headshot.JPG" alt="Image 1" title="Me">
+  <img src="{{site.baseurl}}/images/about/CyberAegis-Stardust.JPG" alt="Image 2" title="My CyberPatriot team">
