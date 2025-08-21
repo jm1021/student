@@ -82,122 +82,163 @@ Your mission: identify, document, and fix these issues in pairs or trios using A
 </div>
 
 <script>
-  (function(){
-    const canvas = document.getElementById("pongCanvas");
-    if (!canvas) return; // fail-safe if this section is hidden
-    const ctx = canvas.getContext("2d");
+class Paddle {
+  constructor(x, y, width, height, upKey, downKey) {
+    this.x = x;
+    this.y = y;
+    this.width = width;
+    this.height = height;
+    this.dy = 0;
+    this.speed = 7;
+    this.upKey = upKey;
+    this.downKey = downKey;
+  }
 
-    // Game objects
-    const paddleWidth = 10, paddleHeight = 100;
-    const ballSize = 15;
+  draw(ctx) {
+    ctx.fillStyle = "white";
+    ctx.fillRect(this.x, this.y, this.width, this.height);
+  }
 
-    let leftPaddle = { x: 20, y: canvas.height/2 - paddleHeight/2, dy: 0 };
-    let rightPaddle = { x: canvas.width - 30, y: canvas.height/2 - paddleHeight/2, dy: 0 };
-    let ball = { 
-      x: canvas.width/2, 
-      y: canvas.height/2, 
-      dx: 5 * (Math.random() > 0.5 ? 1 : -1), 
-      dy: 5 * (Math.random() > 0.5 ? 1 : -1) 
-    };
+  move(canvasHeight) {
+    this.y += this.dy;
+    this.y = Math.max(0, Math.min(canvasHeight - this.height, this.y));
+  }
 
-    let leftScore = 0, rightScore = 0;
+  handleKeyDown(key) {
+    if (key === this.upKey) this.dy = -this.speed;
+    if (key === this.downKey) this.dy = this.speed;
+  }
 
-    function drawRect(x, y, w, h, color) {
-      ctx.fillStyle = color;
-      ctx.fillRect(x, y, w, h);
+  handleKeyUp(key) {
+    if (key === this.upKey || key === this.downKey) this.dy = 0;
+  }
+}
+
+class Ball {
+  constructor(x, y, size) {
+    this.x = x;
+    this.y = y;
+    this.size = size;
+    this.reset(x, y);
+  }
+
+  reset(x, y) {
+    this.x = x;
+    this.y = y;
+    this.dx = 5 * (Math.random() > 0.5 ? 1 : -1);
+    this.dy = 5 * (Math.random() > 0.5 ? 1 : -1);
+  }
+
+  draw(ctx) {
+    ctx.fillStyle = "white";
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+    ctx.fill();
+  }
+
+  move(canvas, leftPaddle, rightPaddle, onScore) {
+    this.x += this.dx;
+    this.y += this.dy;
+
+    // Bounce top/bottom
+    if (this.y - this.size < 0 || this.y + this.size > canvas.height) {
+      this.dy *= -1;
     }
 
-    function drawBall(x, y, size, color) {
-      ctx.fillStyle = color;
-      ctx.beginPath();
-      ctx.arc(x, y, size, 0, Math.PI*2);
-      ctx.fill();
+    // Bounce left paddle
+    if (this.x - this.size < leftPaddle.x + leftPaddle.width &&
+        this.y > leftPaddle.y &&
+        this.y < leftPaddle.y + leftPaddle.height) {
+      this.dx *= -1;
     }
 
-    function drawText(text, x, y) {
-      ctx.fillStyle = "white";
-      ctx.font = "30px Arial, sans-serif";
-      ctx.fillText(text, x, y);
+    // Bounce right paddle
+    if (this.x + this.size > rightPaddle.x &&
+        this.y > rightPaddle.y &&
+        this.y < rightPaddle.y + rightPaddle.height) {
+      this.dx *= -1;
     }
 
-    function update() {
-      // Move paddles
-      leftPaddle.y += leftPaddle.dy;
-      rightPaddle.y += rightPaddle.dy;
-
-      // Keep paddles inside canvas
-      leftPaddle.y = Math.max(0, Math.min(canvas.height - paddleHeight, leftPaddle.y));
-      rightPaddle.y = Math.max(0, Math.min(canvas.height - paddleHeight, rightPaddle.y));
-
-      // Move ball
-      ball.x += ball.dx;
-      ball.y += ball.dy;
-
-      // Bounce top/bottom
-      if (ball.y - ballSize < 0 || ball.y + ballSize > canvas.height) {
-        ball.dy *= -1;
-      }
-
-      // Bounce on paddles
-      if (ball.x - ballSize < leftPaddle.x + paddleWidth &&
-          ball.y > leftPaddle.y &&
-          ball.y < leftPaddle.y + paddleHeight) {
-        ball.dx *= -1;
-      }
-
-      if (ball.x + ballSize > rightPaddle.x &&
-          ball.y > rightPaddle.y &&
-          ball.y < rightPaddle.y + paddleHeight) {
-        ball.dx *= -1;
-      }
-
-      // Score
-      if (ball.x - ballSize < 0) {
-        rightScore++;
-        resetBall();
-      }
-      if (ball.x + ballSize > canvas.width) {
-        leftScore++;
-        resetBall();
-      }
+    // Score
+    if (this.x - this.size < 0) {
+      onScore("right");
+      this.reset(canvas.width / 2, canvas.height / 2);
     }
-
-    function resetBall() {
-      ball.x = canvas.width/2;
-      ball.y = canvas.height/2;
-      ball.dx = 5 * (Math.random() > 0.5 ? 1 : -1);
-      ball.dy = 5 * (Math.random() > 0.5 ? 1 : -1);
+    if (this.x + this.size > canvas.width) {
+      onScore("left");
+      this.reset(canvas.width / 2, canvas.height / 2);
     }
+  }
+}
 
-    function draw() {
-      drawRect(0, 0, canvas.width, canvas.height, "black"); // background
-      drawRect(leftPaddle.x, leftPaddle.y, paddleWidth, paddleHeight, "white");
-      drawRect(rightPaddle.x, rightPaddle.y, paddleWidth, paddleHeight, "white");
-      drawBall(ball.x, ball.y, ballSize, "white");
-      drawText(leftScore, canvas.width/4, 40);
-      drawText(rightScore, 3*canvas.width/4, 40);
-    }
+class Game {
+  constructor(canvasId) {
+    this.canvas = document.getElementById(canvasId);
+    this.ctx = this.canvas.getContext("2d");
 
-    function loop() {
-      update();
-      draw();
-    }
-    const intervalId = setInterval(loop, 1000/60);
+    this.paddleWidth = 10;
+    this.paddleHeight = 100;
+    this.ballSize = 15;
 
-    // Controls
-    document.addEventListener("keydown", event => {
-      if (event.key === "w") leftPaddle.dy = -7;
-      if (event.key === "s") leftPaddle.dy = 7;
-      // If you want right paddle on arrows, uncomment these:
-      // if (event.key === "ArrowUp") rightPaddle.dy = -7;
-      // if (event.key === "ArrowDown") rightPaddle.dy = 7;
+    this.leftPaddle = new Paddle(20, this.canvas.height / 2 - 50, this.paddleWidth, this.paddleHeight, "w", "s");
+    this.rightPaddle = new Paddle(this.canvas.width - 30, this.canvas.height / 2 - 50, this.paddleWidth, this.paddleHeight, "ArrowUp", "ArrowDown");
+    this.ball = new Ball(this.canvas.width / 2, this.canvas.height / 2, this.ballSize);
+
+    this.leftScore = 0;
+    this.rightScore = 0;
+
+    this.loop = this.loop.bind(this);
+    this.setupControls();
+  }
+
+  setupControls() {
+    document.addEventListener("keydown", (e) => {
+      this.leftPaddle.handleKeyDown(e.key);
+      this.rightPaddle.handleKeyDown(e.key);
     });
-    document.addEventListener("keyup", event => {
-      if (event.key === "w" || event.key === "s") leftPaddle.dy = 0;
-      // if (event.key === "ArrowUp" || event.key === "ArrowDown") rightPaddle.dy = 0;
+    document.addEventListener("keyup", (e) => {
+      this.leftPaddle.handleKeyUp(e.key);
+      this.rightPaddle.handleKeyUp(e.key);
     });
-  })();
+  }
+
+  update() {
+    this.leftPaddle.move(this.canvas.height);
+    this.rightPaddle.move(this.canvas.height);
+    this.ball.move(this.canvas, this.leftPaddle, this.rightPaddle, (side) => {
+      if (side === "left") this.leftScore++;
+      if (side === "right") this.rightScore++;
+    });
+  }
+
+  draw() {
+    this.ctx.fillStyle = "black";
+    this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+
+    this.leftPaddle.draw(this.ctx);
+    this.rightPaddle.draw(this.ctx);
+    this.ball.draw(this.ctx);
+
+    this.ctx.fillStyle = "white";
+    this.ctx.font = "30px Arial, sans-serif";
+    this.ctx.fillText(this.leftScore, this.canvas.width / 4, 40);
+    this.ctx.fillText(this.rightScore, (3 * this.canvas.width) / 4, 40);
+  }
+
+  loop() {
+    this.update();
+    this.draw();
+  }
+
+  start() {
+    setInterval(this.loop, 1000 / 60);
+  }
+}
+
+const pong = new Game("pongCanvas");
+pong.start();
 </script>
+
 
 ---
 
