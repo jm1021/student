@@ -100,7 +100,7 @@ Here is what I did at those places
 
 - 🏫 Born and raised in San Diego, CA
 - 🏫 Completed Elementary and middle school at Design39, 2014-25
-- 🇮🇳 Son of immigrants from india
+- 🇮🇳 Son of immigrants from India
 - 🎾 Got introduced to tennis at the age of 5 - avid tennis fan and player
 - 💼 1x CyberPatriot National Finalist (My team placed 2nd out of 700+ teams) in 2025
 - 🎓 Placed Top 5% nationally in AMC 8 2024
@@ -112,7 +112,7 @@ Everything for me, as for many others, revolves around family and faith.
 
 - My family is from Bihar, India. I actively follow visit India, speak Hindi, and practice Hinduism.
 - I have a large extended family. In addition to my parents and sister, I have 11 first cousins and 3 second cousins - all of whom I meet often.
-- The gallery of pics has some of my family, fun, culture and faith memories.
+- The gallery of pics has some of me and my CyberPatriot team last year.
 
 <comment>
 Gallery of Pics, scroll to the right for more ...
