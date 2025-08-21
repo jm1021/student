@@ -339,175 +339,78 @@ this.rightPaddle.moveAI(this.ball, this.canvas.height);
 ---
 
 ## 🎮 Full Pong Game (Spoiler Reveal & Play)
+## 🎮 Full Pong Game (Click to Play)
 
-<details>
-  <summary>⚠️ Click to Reveal & Play Pong (Only if you’re stuck!)</summary>
+<details id="pong-details">
+  <summary>⚠️ Click to Reveal & Play Pong</summary>
 
-<div id="pong-container">
-  <canvas id="pongCanvas" width="600" height="400" style="background:black; display:block; margin:auto;"></canvas>
-</div>
-
-<script>
-// --- PONG GAME CODE ---
-
-const canvas = document.getElementById("pongCanvas");
-const ctx = canvas.getContext("2d");
-
-class Paddle {
-  constructor(x, y, width, height, speed) {
-    this.x = x;
-    this.y = y;
-    this.width = width;
-    this.height = height;
-    this.speed = speed;
-    this.dy = 0;
-  }
-  draw(ctx) {
-    ctx.fillStyle = "white";
-    ctx.fillRect(this.x, this.y, this.width, this.height);
-  }
-  move(canvasHeight) {
-    this.y += this.dy;
-    if (this.y < 0) this.y = 0;
-    if (this.y + this.height > canvasHeight) {
-      this.y = canvasHeight - this.height;
-    }
-  }
-  moveAI(ball, canvasHeight) {
-    if (ball.y < this.y + this.height / 2) {
-      this.y -= this.speed * 0.7;
-    } else if (ball.y > this.y + this.height / 2) {
-      this.y += this.speed * 0.7;
-    }
-    this.y = Math.max(0, Math.min(canvasHeight - this.height, this.y));
-  }
-}
-
-class Ball {
-  constructor(x, y, radius, speedX, speedY) {
-    this.x = x;
-    this.y = y;
-    this.radius = radius;
-    this.speedX = speedX;
-    this.speedY = speedY;
-  }
-  draw(ctx) {
-    ctx.beginPath();
-    ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-    ctx.fillStyle = "white";
-    ctx.fill();
-    ctx.closePath();
-  }
-  move(canvas, leftPaddle, rightPaddle) {
-    this.x += this.speedX;
-    this.y += this.speedY;
-
-    if (this.y - this.radius < 0 || this.y + this.radius > canvas.height) {
-      this.speedY = -this.speedY;
-    }
-
-    if (
-      this.x - this.radius < leftPaddle.x + leftPaddle.width &&
-      this.y > leftPaddle.y &&
-      this.y < leftPaddle.y + leftPaddle.height
-    ) {
-      this.speedX = -this.speedX;
-    }
-
-    if (
-      this.x + this.radius > rightPaddle.x &&
-      this.y > rightPaddle.y &&
-      this.y < rightPaddle.y + rightPaddle.height
-    ) {
-      this.speedX = -this.speedX;
-    }
-
-    if (this.x - this.radius < 0) return "right";
-    if (this.x + this.radius > canvas.width) return "left";
-
-    return null;
-  }
-  reset(x, y) {
-    this.x = x;
-    this.y = y;
-    this.speedX = -this.speedX;
-  }
-}
-
-class Game {
-  constructor(canvas, ctx) {
-    this.canvas = canvas;
-    this.ctx = ctx;
-    this.leftPaddle = new Paddle(10, canvas.height / 2 - 40, 10, 80, 8);
-    this.rightPaddle = new Paddle(canvas.width - 20, canvas.height / 2 - 40, 10, 80, 8);
-    this.ball = new Ball(canvas.width / 2, canvas.height / 2, 10, 4, 4);
-    this.leftScore = 0;
-    this.rightScore = 0;
-    this.isGameOver = false;
-    this.setupControls();
-  }
-  setupControls() {
-    document.addEventListener("keydown", (e) => {
-      if (e.key === "w") this.leftPaddle.dy = -this.leftPaddle.speed;
-      if (e.key === "s") this.leftPaddle.dy = this.leftPaddle.speed;
-      if (e.key === "r") this.resetGame();
-    });
-    document.addEventListener("keyup", (e) => {
-      if (e.key === "w" || e.key === "s") this.leftPaddle.dy = 0;
-    });
-  }
-  resetGame() {
-    this.leftScore = 0;
-    this.rightScore = 0;
-    this.isGameOver = false;
-    this.ball.reset(this.canvas.width / 2, this.canvas.height / 2);
-  }
-  update() {
-    if (this.isGameOver) return;
-    this.leftPaddle.move(this.canvas.height);
-    this.rightPaddle.moveAI(this.ball, this.canvas.height);
-    let scorer = this.ball.move(this.canvas, this.leftPaddle, this.rightPaddle);
-    if (scorer === "left") {
-      this.leftScore++;
-      this.ball.reset(this.canvas.width / 2, this.canvas.height / 2);
-    } else if (scorer === "right") {
-      this.rightScore++;
-      this.ball.reset(this.canvas.width / 2, this.canvas.height / 2);
-    }
-    if (this.leftScore >= 10 || this.rightScore >= 10) {
-      this.isGameOver = true;
-    }
-  }
-  draw() {
-    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-    this.leftPaddle.draw(this.ctx);
-    this.rightPaddle.draw(this.ctx);
-    this.ball.draw(this.ctx);
-
-    this.ctx.fillStyle = "white";
-    this.ctx.font = "24px Arial";
-    this.ctx.fillText(this.leftScore, this.canvas.width / 4, 30);
-    this.ctx.fillText(this.rightScore, (this.canvas.width * 3) / 4, 30);
-
-    if (this.isGameOver) {
-      this.ctx.fillText("Game Over!", this.canvas.width / 2 - 80, this.canvas.height / 2);
-      this.ctx.fillText("Press R to Restart", this.canvas.width / 2 - 120, this.canvas.height / 2 + 40);
-    }
-  }
-}
-
-const game = new Game(canvas, ctx);
-
-function loop() {
-  game.update();
-  game.draw();
-  requestAnimationFrame(loop);
-}
-
-loop();
-</script>
+  <div id="pong-container">
+    <canvas id="pongCanvas" width="600" height="400" style="background:black; display:block; margin:auto;"></canvas>
+  </div>
 
 </details>
+
+<script>
+// Wait for the user to click the details
+document.getElementById("pong-details").addEventListener("toggle", function(e) {
+  if (this.open) {
+    // Only initialize once
+    if (!this.dataset.loaded) {
+      this.dataset.loaded = true;
+      const canvas = document.getElementById("pongCanvas");
+      const ctx = canvas.getContext("2d");
+
+      // --- Sample Minimal Pong Game ---
+      let leftY = canvas.height / 2 - 40;
+      let rightY = canvas.height / 2 - 40;
+      let leftDy = 0;
+      let ballX = canvas.width/2, ballY = canvas.height/2;
+      let ballDx = 4, ballDy = 4;
+      let leftScore = 0, rightScore = 0;
+
+      document.addEventListener("keydown", e => {
+        if (e.key === "w") leftDy = -7;
+        if (e.key === "s") leftDy = 7;
+      });
+      document.addEventListener("keyup", e => {
+        if (e.key === "w" || e.key === "s") leftDy = 0;
+      });
+
+      function loop() {
+        // Move paddles
+        leftY += leftDy;
+        leftY = Math.max(0, Math.min(canvas.height - 80, leftY));
+        // Simple AI for right paddle
+        if (ballY < rightY+40) rightY -= 5; else rightY += 5;
+        rightY = Math.max(0, Math.min(canvas.height - 80, rightY));
+
+        // Move ball
+        ballX += ballDx; ballY += ballDy;
+        if (ballY < 0 || ballY > canvas.height) ballDy *= -1;
+        // Bounce paddles
+        if (ballX < 20 && ballY > leftY && ballY < leftY+80) ballDx *= -1;
+        if (ballX > canvas.width-20 && ballY > rightY && ballY < rightY+80) ballDx *= -1;
+        // Score
+        if (ballX < 0) { rightScore++; ballX=canvas.width/2; ballY=canvas.height/2; }
+        if (ballX > canvas.width) { leftScore++; ballX=canvas.width/2; ballY=canvas.height/2; }
+
+        // Draw
+        ctx.fillStyle = "black"; ctx.fillRect(0,0,canvas.width,canvas.height);
+        ctx.fillStyle = "white";
+        ctx.fillRect(10,leftY,10,80);
+        ctx.fillRect(canvas.width-20,rightY,10,80);
+        ctx.beginPath(); ctx.arc(ballX,ballY,10,0,Math.PI*2); ctx.fill();
+        ctx.font = "24px Arial"; ctx.fillText(leftScore,canvas.width/4,30);
+        ctx.fillText(rightScore,3*canvas.width/4,30);
+
+        requestAnimationFrame(loop);
+      }
+
+      loop();
+    }
+  }
+});
+</script>
 
 ---
 
