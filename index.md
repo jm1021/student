@@ -3,58 +3,85 @@ layout: base
 title: Evan Svetina - Personal
 hide: true
 ---
-<style>
-
-body {
-    background: #2c2c2cff;
-    font-family: 'Segoe UI', 'Roboto', 'Arial', sans-serif;
-    color: #e0e0e0;
-    margin: 0;
-    padding: 0;
-}
-
-.cool {
-    background: linear-gradient(0deg, #ffbf00ff 0%, #000000ff 100%);
-    color: #e0e0e0;
-    margin: 8px 4px; 
-    padding: 8px 16px; 
-    border: 4px solid #2e2e2eff;
-    border-radius: 4px;
-    transition: transform 0.2s, box-shadow 0.2s;
-    display: inline-block; 
-    text-decoration: none;
-}
-.cool:hover {
-    color: #e0e0e0;
-    transform: scale(1.08);
-    cursor: pointer;
-    text-decoration: none;
-}
-
-
-.glow-button {
-    background-color: #111;
-    color: #00ff00;
-    border: 2px solid #00ff00;
-    box-shadow: 0 0 12px #00ff00, 0 0 24px #00ff00;
-    transition: transform 0.2s, box-shadow 0.2s;
-    font-size: 1.25rem;
-    padding: 16px 32px;
-    border-radius: 16px;
-    margin: 12px 8px;
-    display: inline-block;
-}
-.glow-button:hover {
-    transform: scale(1.08);
-    box-shadow: 0 0 24px #00ff00, 0 0 48px #00ff00;
-    background-color: #222;
-    color: #00ff00;
-}
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Index</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #2b2b2b; 
+      color: #e0e0e0;
+      line-height: 1.6;
+    }
+    header {
+      text-align: center;
+      padding: 2rem;
+      background-color: black;
+      color: yellow;
+    }
+    section {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 1.5rem;
+      background-color: #3a3a3a; /* lighter gray */
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.4);
+    }
+    h2 {
+      color: yellow;
+      border-bottom: 2px solid yellow;
+      padding-bottom: 0.5rem;
+      margin-bottom: 1rem;
+    }
+    ul {
+      list-style-type: square;
+      padding-left: 1.5rem;
+    }
+    .flags span {
+      font-size: 2rem;
+      margin-right: 1rem;
+    }
+    .cool {
+        background: linear-gradient(0deg, #ffbf00ff 0%, #000000ff 100%);
+        color: #e0e0e0;
+        margin: 8px 4px; 
+        padding: 8px 16px; 
+        border: 4px solid #111111ff;
+        border-radius: 4px;
+        transition: transform 0.2s, box-shadow 0.2s;
+        display: inline-block; 
+        text-decoration: none;
+    }
+    .cool:hover {
+        color: #e0e0e0;
+        transform: scale(1.08);
+        cursor: pointer;
+        text-decoration: none;
+    }
+    .glow-button {
+        background-color: #111;
+        color: #00ff00;
+        border: 2px solid #00ff00;
+        box-shadow: 0 0 12px #00ff00, 0 0 24px #00ff00;
+        transition: transform 0.2s, box-shadow 0.2s;
+        font-size: 1.25rem;
+        padding: 16px 32px;
+        border-radius: 16px;
+        margin: 12px 8px;
+        display: inline-block;
+    }
+    .glow-button:hover {
+        transform: scale(1.08);
+        box-shadow: 0 0 24px #00ff00, 0 0 48px #00ff00;
+        background-color: #222;
+        color: #00ff00;
+    }
 </style>
+</head>
 
-## Me and Team
-
-Hi! My name is Evan.
+## Hi! My name is Evan.
 
 | Role         | Name     | Repo Location                       | Stream                | Repo Name |
 |--------------|----------|-------------------------------------|-----------------------|-----------|
