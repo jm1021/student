@@ -33,7 +33,7 @@ Links to easily navigate!
 
 <br>
 
-<img src="https://mchopiee.github.io/mchopie/images/about/pikachulol.jpg" alt="pikachulol" width="250">
+<img src="https://mchopiee.github.io/mchopie/images/about/pikachulol.jpg" alt="pikachulol" width="500">
 
 <style>
 /* size */
