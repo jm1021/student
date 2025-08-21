@@ -242,6 +242,276 @@ pong.start();
 
 ---
 
+## 🎯 Pong Game Challenge Tasks
+
+Below are the challenges you will implement in your Pong game.  
+Each challenge includes a description, a sample code snippet, and a skeleton starter code block for practice.  
+
+---
+
+### 1. Restart System  
+Add a key (e.g., `r`) to reset the game state.  
+
+**✅ Sample Code:**
+<pre><code>
+// Inside Game class
+resetGame() {
+  this.leftScore = 0;
+  this.rightScore = 0;
+  this.isGameOver = false;
+  this.ball.reset(this.canvas.width / 2, this.canvas.height / 2);
+}
+
+// In setupControls()
+document.addEventListener("keydown", (e) => {
+  if (e.key === "r") {
+    this.resetGame();
+  }
+});
+</code></pre>
+
+**📝 Skeleton Code:**
+<pre><code>
+// TODO: Create resetGame() function
+// TODO: Set scores back to 0
+// TODO: Reset ball position
+// TODO: Add key listener for "r" to restart
+</code></pre>
+
+---
+
+### 2. First to 10 Wins  
+End the game when one player reaches **10 points**.  
+
+**✅ Sample Code:**
+<pre><code>
+// Inside scoring logic
+if (this.leftScore >= 10 || this.rightScore >= 10) {
+  this.isGameOver = true;
+}
+
+// In draw()
+if (this.isGameOver) {
+  this.ctx.fillText("Game Over!", this.canvas.width / 2 - 80, this.canvas.height / 2);
+  this.ctx.fillText("Press R to Restart", this.canvas.width / 2 - 120, this.canvas.height / 2 + 40);
+}
+</code></pre>
+
+**📝 Skeleton Code:**
+<pre><code>
+// TODO: Add win condition (score >= 10)
+// TODO: Stop game when someone wins
+// TODO: Display "Game Over" message
+// TODO: Tell player how to restart
+</code></pre>
+
+---
+
+### 3. AI Paddle (Optional)  
+Make the right paddle follow the ball automatically.  
+
+**✅ Sample Code:**
+<pre><code>
+// In Paddle class
+moveAI(ball, canvasHeight) {
+  if (ball.y < this.y + this.height / 2) {
+    this.y -= this.speed * 0.7; // slower reaction
+  } else if (ball.y > this.y + this.height / 2) {
+    this.y += this.speed * 0.7;
+  }
+  this.y = Math.max(0, Math.min(canvasHeight - this.height, this.y));
+}
+
+// In Game update()
+this.rightPaddle.moveAI(this.ball, this.canvas.height);
+</code></pre>
+
+**📝 Skeleton Code:**
+<pre><code>
+// TODO: Create moveAI() function in Paddle
+// TODO: If ball is above paddle, move up
+// TODO: If ball is below paddle, move down
+// TODO: Prevent paddle from leaving screen
+</code></pre>
+
+---
+
+---
+
+## 🎮 Full Pong Game (Spoiler Reveal & Play)
+
+<details>
+  <summary>⚠️ Click to Reveal & Play Pong (Only if you’re stuck!)</summary>
+
+<div id="pong-container">
+  <canvas id="pongCanvas" width="600" height="400" style="background:black; display:block; margin:auto;"></canvas>
+</div>
+
+<script>
+// --- PONG GAME CODE ---
+
+const canvas = document.getElementById("pongCanvas");
+const ctx = canvas.getContext("2d");
+
+class Paddle {
+  constructor(x, y, width, height, speed) {
+    this.x = x;
+    this.y = y;
+    this.width = width;
+    this.height = height;
+    this.speed = speed;
+    this.dy = 0;
+  }
+  draw(ctx) {
+    ctx.fillStyle = "white";
+    ctx.fillRect(this.x, this.y, this.width, this.height);
+  }
+  move(canvasHeight) {
+    this.y += this.dy;
+    if (this.y < 0) this.y = 0;
+    if (this.y + this.height > canvasHeight) {
+      this.y = canvasHeight - this.height;
+    }
+  }
+  moveAI(ball, canvasHeight) {
+    if (ball.y < this.y + this.height / 2) {
+      this.y -= this.speed * 0.7;
+    } else if (ball.y > this.y + this.height / 2) {
+      this.y += this.speed * 0.7;
+    }
+    this.y = Math.max(0, Math.min(canvasHeight - this.height, this.y));
+  }
+}
+
+class Ball {
+  constructor(x, y, radius, speedX, speedY) {
+    this.x = x;
+    this.y = y;
+    this.radius = radius;
+    this.speedX = speedX;
+    this.speedY = speedY;
+  }
+  draw(ctx) {
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+    ctx.fillStyle = "white";
+    ctx.fill();
+    ctx.closePath();
+  }
+  move(canvas, leftPaddle, rightPaddle) {
+    this.x += this.speedX;
+    this.y += this.speedY;
+
+    if (this.y - this.radius < 0 || this.y + this.radius > canvas.height) {
+      this.speedY = -this.speedY;
+    }
+
+    if (
+      this.x - this.radius < leftPaddle.x + leftPaddle.width &&
+      this.y > leftPaddle.y &&
+      this.y < leftPaddle.y + leftPaddle.height
+    ) {
+      this.speedX = -this.speedX;
+    }
+
+    if (
+      this.x + this.radius > rightPaddle.x &&
+      this.y > rightPaddle.y &&
+      this.y < rightPaddle.y + rightPaddle.height
+    ) {
+      this.speedX = -this.speedX;
+    }
+
+    if (this.x - this.radius < 0) return "right";
+    if (this.x + this.radius > canvas.width) return "left";
+
+    return null;
+  }
+  reset(x, y) {
+    this.x = x;
+    this.y = y;
+    this.speedX = -this.speedX;
+  }
+}
+
+class Game {
+  constructor(canvas, ctx) {
+    this.canvas = canvas;
+    this.ctx = ctx;
+    this.leftPaddle = new Paddle(10, canvas.height / 2 - 40, 10, 80, 8);
+    this.rightPaddle = new Paddle(canvas.width - 20, canvas.height / 2 - 40, 10, 80, 8);
+    this.ball = new Ball(canvas.width / 2, canvas.height / 2, 10, 4, 4);
+    this.leftScore = 0;
+    this.rightScore = 0;
+    this.isGameOver = false;
+    this.setupControls();
+  }
+  setupControls() {
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "w") this.leftPaddle.dy = -this.leftPaddle.speed;
+      if (e.key === "s") this.leftPaddle.dy = this.leftPaddle.speed;
+      if (e.key === "r") this.resetGame();
+    });
+    document.addEventListener("keyup", (e) => {
+      if (e.key === "w" || e.key === "s") this.leftPaddle.dy = 0;
+    });
+  }
+  resetGame() {
+    this.leftScore = 0;
+    this.rightScore = 0;
+    this.isGameOver = false;
+    this.ball.reset(this.canvas.width / 2, this.canvas.height / 2);
+  }
+  update() {
+    if (this.isGameOver) return;
+    this.leftPaddle.move(this.canvas.height);
+    this.rightPaddle.moveAI(this.ball, this.canvas.height);
+    let scorer = this.ball.move(this.canvas, this.leftPaddle, this.rightPaddle);
+    if (scorer === "left") {
+      this.leftScore++;
+      this.ball.reset(this.canvas.width / 2, this.canvas.height / 2);
+    } else if (scorer === "right") {
+      this.rightScore++;
+      this.ball.reset(this.canvas.width / 2, this.canvas.height / 2);
+    }
+    if (this.leftScore >= 10 || this.rightScore >= 10) {
+      this.isGameOver = true;
+    }
+  }
+  draw() {
+    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    this.leftPaddle.draw(this.ctx);
+    this.rightPaddle.draw(this.ctx);
+    this.ball.draw(this.ctx);
+
+    this.ctx.fillStyle = "white";
+    this.ctx.font = "24px Arial";
+    this.ctx.fillText(this.leftScore, this.canvas.width / 4, 30);
+    this.ctx.fillText(this.rightScore, (this.canvas.width * 3) / 4, 30);
+
+    if (this.isGameOver) {
+      this.ctx.fillText("Game Over!", this.canvas.width / 2 - 80, this.canvas.height / 2);
+      this.ctx.fillText("Press R to Restart", this.canvas.width / 2 - 120, this.canvas.height / 2 + 40);
+    }
+  }
+}
+
+const game = new Game(canvas, ctx);
+
+function loop() {
+  game.update();
+  game.draw();
+  requestAnimationFrame(loop);
+}
+
+loop();
+</script>
+
+</details>
+
+---
+
+
 ## Demonstration - Workflow with Mermaid Diagram
 Here’s the **debugging workflow** your team should follow:
 
