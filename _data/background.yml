@@ -1,0 +1,58 @@
+# moving bacground lesson infograph 
+Title: "Moving Background Fundamentals"
+Description: "JavaScript items you must know before beginning this project."
+Topics:
+  - title: <span style="color:#a81b11"><strong>Canvas</strong></span>
+    subtitle: "Your drawing board"
+    description: "A canvas is an HTML element that acts as a drawing board for your website. Most projects need a canvas in order for the items coded in it to actually appear. Otherwise, you'll just have an empty page."
+    keyPoints:
+      - "Draw shapes, text, images, and animations"
+      - "Use a canvas in JavaScript by using the id that you've given it"
+    code: |
+      const canvasWidth = window.innerWidth;
+      const canvasHeight = window.innerHeight;
+
+      canvas.width = canvasWidth;
+      canvas.height = canvasHeight;
+      canvas.style.width = `${canvasWidth}px`;
+      canvas.style.height = `${canvasHeight}px`;
+  - title: <span style="color:#43539c"><strong>CSS</strong></span>
+    subtitle: "Cascading Style Sheets"
+    image: /lessons/cssexample.png
+    description: "CSS is a languagsed used to style HTML. So, if your website is looking a little ugly, it's probably because you aren't using enough CSS!"
+    keyPoints:
+      - "Making cute buttons"
+      - "Changing the font of your webpages"
+      - "Having colored text"
+    code: |
+          /* all normal text */
+          body {
+          font-family: 'Quicksand', sans-serif !important;
+          font-size: 1em;
+          color: white;
+          }
+  - title: <span style="color:#763a9c"><strong>Constant Variables</strong></span>
+    subtitle: "Const"
+    description: "Constant Variables (commonly just called a 'constant') are variables whose value cannot be changed once it's assigned."
+    code: |
+          const spriteWidth = spriteImg.naturalWidth / 2;
+          const spriteHeight = spriteImg.naturalHeight / 2;
+          const spriteX = (canvasWidth - spriteWidth) / 2;
+          const spriteY = (canvasHeight - spriteHeight) / 2;
+          const spriteObj = new GameObject(spriteImg, spriteWidth, spriteHeight, spriteX, spriteY);
+  - title: <span style="color:#b846ae"><strong>JavaScript Classes</strong></span>
+    subtitle: "Class"
+    description: "A class in JavaScript is like a blueprint for creating objects. Instead of writing object structures repeatedly, you can define a class once and then create multiple objects (called instances) from it."
+    code: |
+        class GameObject {
+          constructor(image, width, height, x = 0, y = 0, speedRatio = 0) {
+            this.image = image;
+            this.width = width;
+            this.height = height;
+            this.x = x;
+            this.y = y;
+            this.speedRatio = speedRatio;
+            this.speed = gameSpeed * this.speedRatio;
+
+        
+      
