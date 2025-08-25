@@ -147,12 +147,12 @@ header {
   border-radius: 0 !important;
 }
 
-td > img[src*="logo.png"] {
+td > img[src*="bulba.jpg"] {
   display: none !important;
 }
-td > img[src*="logo.png"] {
+td > img[src*="bulba.jpg"] {
   display: none !important;
 }
-td:has(> img[src*="logo.png"]) {
+td:has(> img[src*="bulba.jpg"]) {
   display: none !important;
 }
