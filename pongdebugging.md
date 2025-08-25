@@ -35,7 +35,26 @@ Your team will **transform pair/trio programming from theory to practice** by fi
 Through this, you’ll follow a **full debugging workflow** while collaborating effectively.
 
 ---
+## Object Oriented Programming(OOP)
+Object-Oriented Programming (OOP) is a programming style based on the concept of "objects"—which bundle together data (properties) and behavior (methods). The main principles of OOP are:
 
+Encapsulation – Keeping related data and functions together inside objects or classes.
+
+Abstraction – Hiding internal complexity and exposing only necessary details.
+
+Inheritance – Reusing code by creating new classes based on existing ones.
+
+Polymorphism – Allowing different objects to be used through a common interface.
+
+In the Pong game code, OOP is used in a very basic form:
+
+It uses object literals like leftPaddle, rightPaddle, and ball to group related data together (e.g., position and velocity). This shows basic encapsulation.
+
+However, there are no classes or methods, and the behavior (movement, drawing, collision) is handled through standalone functions (update, draw, etc.), not inside the objects themselves. This means abstraction, inheritance, and polymorphism are not applied.
+
+The overall structure is more procedural than truly object-oriented, with logic split into functions operating on raw objects.
+
+To make the code fully object-oriented, each game entity (like paddles and ball) could be turned into a class with methods for moving, drawing, and checking collisions. That would improve organization, readability, and maintainability.
 ## Problem - Debug Pong Game
 You’ve inherited a Pong Game with opportunities for improvements.  
 Your mission: identify, document, and fix these issues in pairs or trios using Agile methodologies.  
