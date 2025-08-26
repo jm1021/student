@@ -147,12 +147,12 @@ header {
   border-radius: 0 !important;
 }
 
-td > img[src*="bulba.jpg"] {
+td > img[src*="usagi.jpg"] {
   display: none !important;
 }
-td > img[src*="bulba.jpg"] {
+td > img[src*="usagi.jpg"] {
   display: none !important;
 }
-td:has(> img[src*="bulba.jpg"]) {
+td:has(> img[src*="usagi.jpg"]) {
   display: none !important;
 }
