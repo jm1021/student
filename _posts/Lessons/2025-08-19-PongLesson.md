@@ -926,12 +926,22 @@ function updateProgress() {
 }
 
 function addAchievement(icon, title, description) {
+  // Generate a unique class based on the title (or description)
+  let className = '';
+  if (description.includes('25%')) className = 'achievement-25';
+  else if (description.includes('50%')) className = 'achievement-50';
+  else if (description.includes('75%')) className = 'achievement-75';
+  else if (description.includes('100%')) className = 'achievement-100';
+
+  // Prevent duplicate badges
+  if (document.querySelector('.' + className)) return;
+
   const achievement = document.createElement('div');
-  achievement.className = 'achievement-badge';
+  achievement.className = 'achievement-badge ' + className;
   achievement.style.animation = 'bounce 1s ease-in-out';
   achievement.innerHTML = `${icon} ${title}`;
   achievement.title = description;
-  
+
   const hero = document.querySelector('.pong-hero');
   if (hero) {
     hero.appendChild(achievement);
