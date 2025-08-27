@@ -54,7 +54,7 @@ Hi! My name is Ishan.
 ### Personal Portfolio
 
 <a href="https://github.com/Jupiterian/ATP-Singles-Rankings-Data-Collection/" class="button small" style="background-color: #0Eb4">
-    ATP Singles Rankings Data Collection
+    ATP Rankings Data Visulization
 </a>
 
 <br>
@@ -62,6 +62,7 @@ Hi! My name is Ishan.
 <!-- Contact Section -->
 ### Get in Touch
 
-> Feel free to reach out if you'd like to collaborate or learn more about our work.
+> Feel free to reach out if you'd like to collaborate or learn more about my work.
 
-<p style="color: #2A7DB1;">Open Coding Society: <a href="https://opencodingsociety.com" style="color: #2A7DB1; text-decoration: underline;">Socials</a></p>
+<p style="color: #2A7DB1;">Ishan Jha: <a href="https://github.com/Jupiterian" style="color: #2A7DB1; text-decoration: underline;">GitHub</a></p>
+<p style="color: #2A7DB1;">Ishan Jha: <a href="https://open.spotify.com/user/31spiranssqszaomtf3pyo3j6zbm style="color: #2A7DB1; text-decoration: underline;">Spotify</a></p>

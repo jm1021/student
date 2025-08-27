@@ -366,4 +366,4 @@ permalink: /snake/
             if(wall === 1){screen_snake.style.borderColor = "#FFFFFF";}
         }
     })();
-</script>
+</script
