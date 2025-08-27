@@ -1,50 +1,667 @@
 ---
 layout: post
-title: Pong Lesson
-description: Learn How to Code Games with Pong
-categories: ['DevOps', 'Python']
+title: 🚀 Ultimate Pong Game Development Masterclass
+description: Master Game Development with Interactive Pong - Learn Canvas API, Game Loops, and Advanced JavaScript
+categories: ['Game Development', 'JavaScript', 'Canvas API', 'Interactive Learning']
 permalink: /jupyter/notebook/python
 menu: nav/tools_setup.html
 toc: True
 comments: True
 ---
-# 🏓 Pong Game Debugging Lesson
 
-Welcome to the **Pair/Trio Debugging Challenge** using the Pong Game.  
-Work in teams to debug, document, and improve Pong while practicing collaboration and Agile workflows.
+<style>
+/* 🎨 Fancy CSS Animations and Styling */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&display=swap');
+
+/* 🛠️ Fix Container Breaking Issues */
+body {
+  overflow-x: hidden;
+  max-width: 100%;
+}
+
+.pong-hero,
+.feature-grid,
+.feature-card,
+.timeline,
+.timeline-content {
+  overflow-x: hidden;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.pong-hero {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 3rem 2rem;
+  border-radius: 20px;
+  margin: 2rem 0;
+  text-align: center;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  z-index: 1;
+}
+
+.pong-hero::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.1) 50%, transparent 70%);
+  animation: shine 3s infinite;
+}
+
+@keyframes shine {
+  0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+  100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+}
+
+.hero-title {
+  font-family: 'Orbitron', monospace;
+  font-size: 3.5rem;
+  font-weight: 900;
+  margin-bottom: 1rem;
+  text-shadow: 0 0 30px rgba(255,255,255,0.5);
+  animation: glow 2s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+  from { text-shadow: 0 0 30px rgba(255,255,255,0.5); }
+  to { text-shadow: 0 0 40px rgba(255,255,255,0.8), 0 0 60px rgba(255,255,255,0.3); }
+}
+
+.hero-subtitle {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 300;
+  opacity: 0.9;
+  margin-bottom: 2rem;
+}
+
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin: 3rem 0;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  position: relative;
+  z-index: 1;
+}
+
+.feature-card {
+  background: linear-gradient(145deg, #ffffff, #f0f0f0);
+  border-radius: 20px;
+  padding: 2rem;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+  color: #000000;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.feature-card h3 {
+  color: #000000;
+}
+
+.feature-card p {
+  color: #333333;
+}
+
+.feature-card ul {
+  color: #333333;
+}
+
+.feature-card li {
+  color: #333333;
+}
+
+.feature-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+  border-color: #667eea;
+}
+
+.feature-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  display: block;
+}
+
+.challenge-section {
+  background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+  color: white;
+  padding: 2rem;
+  border-radius: 20px;
+  margin: 2rem 0;
+  box-shadow: 0 15px 35px rgba(238, 90, 36, 0.3);
+}
+
+.code-block {
+  background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+  color: #000000;
+  padding: 1.5rem;
+  border-radius: 15px;
+  border-left: 5px solid #e74c3c;
+  margin: 1rem 0;
+  font-family: 'Fira Code', monospace;
+  position: relative;
+  overflow: hidden;
+}
+
+.code-block pre {
+  color: #000000;
+}
+
+.code-block code {
+  color: #000000;
+}
+
+.code-block::before {
+  content: '💻';
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 1.2rem;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 20px;
+  background: linear-gradient(90deg, #e74c3c, #f39c12, #27ae60);
+  border-radius: 10px;
+  overflow: hidden;
+  margin: 1rem 0;
+  position: relative;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #2ecc71, #3498db);
+  width: 0%;
+  transition: width 0.5s ease;
+  border-radius: 10px;
+}
+
+.interactive-demo {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  padding: 2rem;
+  border-radius: 20px;
+  margin: 2rem 0;
+  text-align: center;
+  color: white;
+}
+
+.game-canvas-container {
+  background: #000;
+  border-radius: 15px;
+  padding: 20px;
+  margin: 20px 0;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+.achievement-badge {
+  display: inline-block;
+  background: linear-gradient(45deg, #f1c40f, #f39c12);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 25px;
+  font-weight: bold;
+  margin: 0.5rem;
+  animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+  40% { transform: translateY(-10px); }
+  60% { transform: translateY(-5px); }
+}
+
+.timeline {
+  position: relative;
+  margin: 3rem 0;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: linear-gradient(to bottom, #667eea, #764ba2);
+  transform: translateX(-50%);
+}
+
+.timeline-item {
+  position: relative;
+  margin: 2rem 0;
+  width: 45%;
+  max-width: 45%;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.timeline-item:nth-child(odd) {
+  left: 0;
+  text-align: right;
+}
+
+.timeline-item:nth-child(even) {
+  left: 55%;
+  text-align: left;
+}
+
+.timeline-content {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  position: relative;
+  color: #000000;
+}
+
+.timeline-content h3 {
+  color: #000000;
+}
+
+.timeline-content p {
+  color: #333333;
+}
+
+.timeline-item:nth-child(odd) .timeline-content::after {
+  content: '';
+  position: absolute;
+  right: -15px;
+  top: 50%;
+  width: 0;
+  height: 0;
+  border: 15px solid transparent;
+  border-left-color: white;
+  transform: translateY(-50%);
+}
+
+.timeline-item:nth-child(even) .timeline-content::after {
+  content: '';
+  position: absolute;
+  left: -15px;
+  top: 50%;
+  width: 0;
+  height: 0;
+  border: 15px solid transparent;
+  border-right-color: white;
+  transform: translateY(-50%);
+}
+
+.timeline-dot {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 20px;
+  height: 20px;
+  background: linear-gradient(45deg, #667eea, #764ba2);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 20px rgba(102, 126, 234, 0.5);
+}
+
+.floating-elements {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+}
+
+.floating-element {
+  position: absolute;
+  opacity: 0.1;
+  animation: float 6s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-20px) rotate(180deg); }
+}
+
+.floating-element:nth-child(1) { top: 10%; left: 10%; animation-delay: 0s; }
+.floating-element:nth-child(2) { top: 20%; right: 15%; animation-delay: 2s; }
+.floating-element:nth-child(3) { bottom: 30%; left: 20%; animation-delay: 4s; }
+
+/* 🎨 Force Black Text in All White Containers */
+.feature-card,
+.feature-card *,
+.feature-card h1,
+.feature-card h2,
+.feature-card h3,
+.feature-card h4,
+.feature-card h5,
+.feature-card h6,
+.feature-card p,
+.feature-card span,
+.feature-card div,
+.feature-card li,
+.feature-card ul {
+  color: #000000 !important;
+}
+
+.feature-card p,
+.feature-card span,
+.feature-card div,
+.feature-card li {
+  color: #333333 !important;
+}
+
+.feature-card a {
+  color: #667eea !important;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.feature-card a:hover {
+  color: #5a6fd8 !important;
+  text-decoration: underline;
+}
+
+/* Timeline text contrast - Force Black */
+.timeline-content,
+.timeline-content *,
+.timeline-content h1,
+.timeline-content h2,
+.timeline-content h3,
+.timeline-content h4,
+.timeline-content h5,
+.timeline-content h6,
+.timeline-content p,
+.timeline-content span,
+.timeline-content div {
+  color: #000000 !important;
+}
+
+.timeline-content p,
+.timeline-content span,
+.timeline-content div {
+  color: #333333 !important;
+}
+
+/* Force all text in white backgrounds to be dark */
+.feature-grid .feature-card *,
+.timeline .timeline-content * {
+  color: #000000 !important;
+}
+
+.feature-grid .feature-card p,
+.feature-grid .feature-card span,
+.feature-grid .feature-card div,
+.timeline .timeline-content p,
+.timeline .timeline-content span,
+.timeline .timeline-content div {
+  color: #333333 !important;
+}
+</style>
+
+<div class="pong-hero floating-elements">
+  <div class="floating-element">🏓</div>
+  <div class="floating-element">⚡</div>
+  <div class="floating-element">🎮</div>
+  <div class="floating-element">🚀</div>
+  
+  <h1 class="hero-title">🚀 Ultimate Pong Game Development Masterclass</h1>
+  <p class="hero-subtitle">Transform from Beginner to Game Development Pro with Interactive Learning & Advanced Features</p>
+  
+  <div class="progress-bar">
+    <div class="progress-fill" id="lessonProgress"></div>
+  </div>
+  
+  <div style="margin-top: 2rem;">
+    <span class="achievement-badge">🏆 Master Level</span>
+    <span class="achievement-badge">⚡ Interactive</span>
+    <span class="achievement-badge">🎯 Project-Based</span>
+    <span class="achievement-badge">🚀 Advanced Features</span>
+  </div>
+</div>
 
 ---
-## Key Concepts From This Lesson
-Canvas API:	How to draw shapes, text, and manage 2D graphics in JavaScript.
 
-Game Loop:	The core update-draw cycle in real-time games.
+## 🧠 Core Concepts You'll Master
 
-Collision Detection:	Checking if the ball hits a paddle or wall.
+<div class="feature-grid">
+  <div class="feature-card" style="color: #000000;">
+    <span class="feature-icon">🎨</span>
+    <h3 style="color: #000000;">Canvas API Mastery</h3>
+    <p style="color: #333333;">Learn to draw shapes, text, and manage 2D graphics in JavaScript with professional techniques</p>
+    <div class="skill-level">
+      <span class="achievement-badge">Beginner → Expert</span>
+    </div>
+  </div>
+  
+  <div class="feature-card" style="color: #000000;">
+    <span class="feature-icon">🔄</span>
+    <h3 style="color: #000000;">Game Loop Architecture</h3>
+    <p style="color: #333333;">Master the core update-draw cycle that powers all real-time games and animations</p>
+    <div class="skill-level">
+      <span class="achievement-badge">Core Concept</span>
+    </div>
+  </div>
+  
+  <div class="feature-card" style="color: #000000;">
+    <span class="feature-icon">💥</span>
+    <h3 style="color: #000000;">Collision Detection</h3>
+    <p style="color: #333333;">Implement precise collision systems for smooth gameplay and realistic physics</p>
+    <div class="skill-level">
+      <span class="achievement-badge">Advanced</span>
+    </div>
+  </div>
+  
+  <div class="feature-card" style="color: #000000;">
+    <span class="feature-icon">⌨️</span>
+    <h3 style="color: #000000;">Input Management</h3>
+    <p style="color: #333333;">Handle keyboard, mouse, and touch input for responsive and intuitive controls</p>
+    <div class="skill-level">
+      <span class="achievement-badge">Essential</span>
+    </div>
+  </div>
+  
+  <div class="feature-card" style="color: #000000;">
+    <span class="feature-icon">🏆</span>
+    <h3 style="color: #000000;">Game State Management</h3>
+    <p style="color: #333333;">Track scores, manage game flow, and implement complex game mechanics</p>
+    <div class="skill-level">
+      <span class="achievement-badge">Professional</span>
+    </div>
+  </div>
+  
+  <div class="feature-card" style="color: #000000;">
+    <span class="feature-icon">🚀</span>
+    <h3 style="color: #000000;">Performance Optimization</h3>
+    <p style="color: #333333;">Optimize your games for smooth 60fps gameplay and mobile compatibility</p>
+    <div class="skill-level">
+      <span class="achievement-badge">Expert Level</span>
+    </div>
+  </div>
+</div>
 
-Keyboard Input:	Handling user input for interactive games.
+## 🎯 Your Learning Mission
 
-Game State Management:	Tracking scores, resetting the ball, ending the game.
+<div class="challenge-section">
+  <h2>🚀 Mission Objective</h2>
+  <p>Transform from a coding novice to a <strong>Game Development Master</strong> by building, debugging, and enhancing the legendary Pong game!</p>
+  
+  <div style="margin: 2rem 0;">
+    <h3>🎮 What You'll Accomplish:</h3>
+    <ul style="text-align: left; margin: 1rem 0;">
+      <li>✅ Build a fully functional Pong game from scratch</li>
+      <li>✅ Implement advanced collision detection and physics</li>
+      <li>✅ Add professional game features (scoring, AI, power-ups)</li>
+      <li>✅ Debug and optimize for smooth 60fps gameplay</li>
+      <li>✅ Create custom game rules and mechanics</li>
+    </ul>
+  </div>
+  
+  <div style="background: rgba(255,255,255,0.1); padding: 1rem; border-radius: 10px; margin: 1rem 0;">
+    <h4>🏆 Final Challenge:</h4>
+    <p>Implement a <strong>Tournament Mode</strong> where players compete until 11 points, with automatic game reset and winner celebration!</p>
+  </div>
+</div>
 
-## Goal For This Lesson
-In this lesson you will learn how to how to code the pong game by using CSS styling, applying game logic, and identifying game objects. After the lesson, you will be tasked with creaating a game rule that counts the score until 11, and then resets.
+## 🗺️ Learning Path
+
+<div class="timeline">
+  <div class="timeline-item">
+    <div class="timeline-dot"></div>
+    <div class="timeline-content" style="color: #000000;">
+      <h3 style="color: #000000;">Phase 1: Foundation</h3>
+      <p style="color: #333333;">Learn Canvas API basics and game loop fundamentals</p>
+      <span class="achievement-badge">Beginner</span>
+    </div>
+  </div>
+  
+  <div class="timeline-item">
+    <div class="timeline-dot"></div>
+    <div class="timeline-content" style="color: #000000;">
+      <h3 style="color: #000000;">Phase 2: Gameplay</h3>
+      <p style="color: #333333;">Implement paddles, ball physics, and collision detection</p>
+      <span class="achievement-badge">Intermediate</span>
+    </div>
+  </div>
+  
+  <div class="timeline-item">
+    <div class="timeline-dot"></div>
+    <div class="timeline-content" style="color: #000000;">
+      <h3 style="color: #000000;">Phase 3: Enhancement</h3>
+      <p style="color: #333333;">Add scoring, AI opponents, and advanced features</p>
+      <span class="achievement-badge">Advanced</span>
+    </div>
+  </div>
+  
+  <div class="timeline-item">
+    <div class="timeline-dot"></div>
+    <div class="timeline-content" style="color: #000000;">
+      <h3 style="color: #000000;">Phase 4: Mastery</h3>
+      <p style="color: #333333;">Debug, optimize, and create custom game modes</p>
+      <span class="achievement-badge">Expert</span>
+    </div>
+  </div>
+</div>
 
 ---
 
-## 📑 Navigation
-- [Pair/Trio Programming Overview](#pairtrio-programming-overview)  
-- [🏓 Pong Debugging Session](#-pong-debugging-session)  
-- [Problem - Debug Pong Game](#problem---debug-pong-game)  
-- [Activation - Learn How to Play Pong](#activation---learn-how-to-play-pong)  
-- [Demonstration - Workflow with Mermaid Diagram](#demonstration---workflow-with-mermaid-diagram)  
-- [Application - Debugging Practice Session](#application---debugging-practice-session)  
-- [Snake (Pong) Debugging Evaluation Table](#pong-debugging-evaluation-table)  
-- [Reflection Questions](#reflection-questions)  
+## 🧭 Interactive Navigation
+
+<div class="feature-grid" style="grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));">
+  <a href="#pairtrio-programming-overview" style="text-decoration: none;">
+    <div class="feature-card" style="cursor: pointer;">
+      <span class="feature-icon">👥</span>
+      <h3>Team Programming</h3>
+      <p>Master pair/trio programming techniques</p>
+    </div>
+  </a>
+  
+  <a href="#pong-debugging-session" style="text-decoration: none;">
+    <div class="feature-card" style="cursor: pointer;">
+      <span class="feature-icon">🏓</span>
+      <h3>Pong Session</h3>
+      <p>Interactive debugging workshop</p>
+    </div>
+  </a>
+  
+  <a href="#problem---debug-pong-game" style="text-decoration: none;">
+    <div class="feature-card" style="cursor: pointer;">
+      <span class="feature-icon">🐞</span>
+      <h3>Debug Challenge</h3>
+      <p>Identify and fix game issues</p>
+    </div>
+  </a>
+  
+  <a href="#activation---learn-how-to-play-pong" style="text-decoration: none;">
+    <div class="feature-card" style="cursor: pointer;">
+      <span class="feature-icon">🎮</span>
+      <h3>Play & Learn</h3>
+      <p>Hands-on game experience</p>
+    </div>
+  </a>
+  
+  <a href="#demonstration---workflow-with-mermaid-diagram" style="text-decoration: none;">
+    <div class="feature-card" style="cursor: pointer;">
+      <span class="feature-icon">📊</span>
+      <h3>Workflow Guide</h3>
+      <p>Visual debugging process</p>
+    </div>
+  </a>
+  
+  <a href="#application---debugging-practice-session" style="text-decoration: none;">
+    <div class="feature-card" style="cursor: pointer;">
+      <span class="feature-icon">💻</span>
+      <h3>Practice Session</h3>
+      <p>Apply your debugging skills</p>
+    </div>
+  </a>
+</div>  
 
 ---
 
-## Pair/Trio Programming Overview
-This activity evaluates collaboration, debugging, and planning skills in a **Computer Science Project-based learning course**.  
-You will practice **driver/navigator/observer roles**, GitHub Issues, burndown tracking, and pair code reviews.  
+## 👥 Pair/Trio Programming Masterclass
+
+<div class="interactive-demo">
+  <h2>🚀 Collaborative Development Excellence</h2>
+  <p>Master the art of team programming in this <strong>Computer Science Project-based learning course</strong></p>
+</div>
+
+<div class="feature-grid">
+  <div class="feature-card">
+    <span class="feature-icon">👨‍💻</span>
+    <h3>Driver Role</h3>
+    <p>Write code while communicating your thought process</p>
+    <ul style="text-align: left; margin: 1rem 0;">
+      <li>Type and implement code</li>
+      <li>Explain your decisions</li>
+      <li>Ask for guidance when stuck</li>
+    </ul>
+  </div>
+  
+  <div class="feature-card">
+    <span class="feature-icon">🧭</span>
+    <h3>Navigator Role</h3>
+    <p>Guide the development process and catch errors</p>
+    <ul style="text-align: left; margin: 1rem 0;">
+      <li>Review code as it's written</li>
+      <li>Suggest improvements</li>
+      <li>Keep track of the big picture</li>
+    </ul>
+  </div>
+  
+  <div class="feature-card">
+    <span class="feature-icon">👁️</span>
+    <h3>Observer Role</h3>
+    <p>Learn from the process and provide feedback</p>
+    <ul style="text-align: left; margin: 1rem 0;">
+      <li>Take notes and learn</li>
+      <li>Identify patterns</li>
+      <li>Contribute insights</li>
+    </ul>
+  </div>
+</div>
+
+<div style="background: linear-gradient(135deg, #2ecc71, #27ae60); color: white; padding: 2rem; border-radius: 20px; margin: 2rem 0; text-align: center;">
+  <h3>🔄 Agile Workflow Integration</h3>
+  <p>Practice <strong>GitHub Issues</strong>, <strong>Burndown Tracking</strong>, and <strong>Pair Code Reviews</strong> in a real development environment</p>
+</div>  
 
 ---
 
@@ -68,17 +685,57 @@ Your mission: identify, document, and fix these issues in pairs or trios using A
 
 ---
 
-## Activation - Learn How to Play Pong
-1. Open the [Pong Game](/ponggame).  
-2. Play and observe behaviors.  
-3. Take notes on bugs, confusing features, or areas for improvement.  
+## 🎮 Activation - Learn How to Play Pong
+
+<div class="interactive-demo">
+  <h2>🚀 Ready to Play & Learn?</h2>
+  <p>Get hands-on experience with the game before diving into development!</p>
+</div>
+
+<div class="feature-grid">
+  <div class="feature-card">
+    <span class="feature-icon">🎯</span>
+    <h3>Step 1: Game Exploration</h3>
+    <p>Open the <a href="/ponggame" style="color: #667eea; text-decoration: none; font-weight: bold;">Pong Game</a> and start playing</p>
+  </div>
+  
+  <div class="feature-card">
+    <span class="feature-icon">🔍</span>
+    <h3>Step 2: Behavior Analysis</h3>
+    <p>Play and carefully observe all game behaviors and mechanics</p>
+  </div>
+  
+  <div class="feature-card">
+    <span class="feature-icon">📝</span>
+    <h3>Step 3: Documentation</h3>
+    <p>Take detailed notes on bugs, confusing features, or areas for improvement</p>
+  </div>
+</div>
+
+<div style="background: linear-gradient(135deg, #e74c3c, #c0392b); color: white; padding: 2rem; border-radius: 20px; margin: 2rem 0; text-align: center;">
+  <h3>💡 Pro Tip</h3>
+  <p>Play multiple rounds and try different strategies to discover all potential issues!</p>
+</div>  
 
 ---
 
-## ▶ Play the Pong Game (Inline)
+## 🎮 Interactive Pong Game Experience
 
-<div id="pong-wrapper" style="display:flex;justify-content:center;align-items:center;min-height:60vh;background:#000;border-radius:12px;padding:16px;">
-  <canvas id="pongCanvas" width="800" height="500" style="display:block;background:#000;max-width:100%;height:auto;border:1px solid #222;border-radius:8px;"></canvas>
+<div class="game-canvas-container">
+  <div style="text-align: center; margin-bottom: 20px;">
+    <h3 style="color: white; margin: 0;">🏓 Play the Legendary Pong Game</h3>
+    <p style="color: #ccc; margin: 10px 0;">Use <strong>W/S</strong> for left paddle, <strong>↑/↓</strong> for right paddle</p>
+  </div>
+  
+  <div id="pong-wrapper" style="display:flex;justify-content:center;align-items:center;min-height:60vh;background:linear-gradient(135deg, #1a1a1a, #000);border-radius:12px;padding:16px;position:relative;">
+    <canvas id="pongCanvas" width="800" height="500" style="display:block;background:#000;max-width:100%;height:auto;border:2px solid #667eea;border-radius:8px;box-shadow: 0 0 30px rgba(102, 126, 234, 0.3);"></canvas>
+    
+    <div style="position: absolute; top: 20px; left: 20px; background: rgba(0,0,0,0.8); color: white; padding: 10px; border-radius: 8px; font-size: 12px;">
+      <div>🎮 <strong>Controls:</strong></div>
+      <div>Left: W (up) / S (down)</div>
+      <div>Right: ↑ (up) / ↓ (down)</div>
+    </div>
+  </div>
 </div>
 
 <script>
@@ -237,24 +894,109 @@ class Game {
 
 const pong = new Game("pongCanvas");
 pong.start();
+
+// 🚀 Progress Tracking System
+function updateProgress() {
+  const progressBar = document.getElementById('lessonProgress');
+  if (progressBar) {
+    let progress = 0;
+    const sections = document.querySelectorAll('h2, h3');
+    const totalSections = sections.length;
+    
+    // Simulate progress based on scroll position
+    const scrollPercent = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
+    progress = Math.min(scrollPercent, 100);
+    
+    progressBar.style.width = progress + '%';
+    
+    // Add achievement badges based on progress
+    if (progress > 25 && !document.querySelector('.achievement-25')) {
+      addAchievement('📚', 'Lesson Explorer', '25% Complete');
+    }
+    if (progress > 50 && !document.querySelector('.achievement-50')) {
+      addAchievement('🎯', 'Halfway Hero', '50% Complete');
+    }
+    if (progress > 75 && !document.querySelector('.achievement-75')) {
+      addAchievement('🚀', 'Almost There', '75% Complete');
+    }
+    if (progress > 95 && !document.querySelector('.achievement-100')) {
+      addAchievement('🏆', 'Lesson Master', '100% Complete');
+    }
+  }
+}
+
+function addAchievement(icon, title, description) {
+  const achievement = document.createElement('div');
+  achievement.className = 'achievement-badge';
+  achievement.style.animation = 'bounce 1s ease-in-out';
+  achievement.innerHTML = `${icon} ${title}`;
+  achievement.title = description;
+  
+  const hero = document.querySelector('.pong-hero');
+  if (hero) {
+    hero.appendChild(achievement);
+  }
+}
+
+// Update progress on scroll
+window.addEventListener('scroll', updateProgress);
+window.addEventListener('load', updateProgress);
+
+// 🎮 Interactive Features
+document.addEventListener('DOMContentLoaded', function() {
+  // Add floating particles effect
+  const wrapper = document.getElementById('pong-wrapper');
+  if (wrapper) {
+    for (let i = 0; i < 20; i++) {
+      const particle = document.createElement('div');
+      particle.style.cssText = `
+        position: absolute;
+        width: 2px;
+        height: 2px;
+        background: rgba(102, 126, 234, 0.3);
+        border-radius: 50%;
+        pointer-events: none;
+        animation: float ${3 + Math.random() * 4}s ease-in-out infinite;
+        animation-delay: ${Math.random() * 2}s;
+        left: ${Math.random() * 100}%;
+        top: ${Math.random() * 100}%;
+      `;
+      wrapper.appendChild(particle);
+    }
+  }
+});
 </script>
 
 
 ---
 
-## 🎯 Pong Game Challenge Tasks
+## 🎯 Advanced Pong Game Challenges
 
-Below are the challenges you will implement in your Pong game.  
-Each challenge includes a description, a sample code snippet, and a skeleton starter code block for practice.  
+<div class="challenge-section">
+  <h2>🚀 Level Up Your Game Development Skills</h2>
+  <p>Below are the <strong>advanced challenges</strong> you will implement in your Pong game. Each challenge includes a description, sample code, and skeleton starter code for practice.</p>
+</div>
+
+<div style="background: linear-gradient(135deg, #9b59b6, #8e44ad); color: white; padding: 2rem; border-radius: 20px; margin: 2rem 0; text-align: center;">
+  <h3>🏆 Challenge Difficulty Levels</h3>
+  <div style="display: flex; justify-content: center; gap: 2rem; margin-top: 1rem;">
+    <span class="achievement-badge">🟢 Beginner</span>
+    <span class="achievement-badge">🟡 Intermediate</span>
+    <span class="achievement-badge">🔴 Advanced</span>
+  </div>
+</div>  
 
 ---
 
-### 1. Restart System  
-Add a key (e.g., `r`) to reset the game state.  
+### 1. 🟢 Restart System  
+<div style="background: linear-gradient(135deg, #2ecc71, #27ae60); color: white; padding: 1rem; border-radius: 10px; margin: 1rem 0;">
+  <h4>🎯 Challenge: Add a key (e.g., `r`) to reset the game state</h4>
+  <p>Implement a complete game reset system that allows players to start fresh at any time.</p>
+</div>
 
 **✅ Sample Code:**
-<pre><code>
-// Inside Game class
+<div class="code-block">
+<pre><code>// Inside Game class
 resetGame() {
   this.leftScore = 0;
   this.rightScore = 0;
@@ -267,25 +1009,37 @@ document.addEventListener("keydown", (e) => {
   if (e.key === "r") {
     this.resetGame();
   }
-});
-</code></pre>
+});</code></pre>
+</div>
 
 **📝 Skeleton Code:**
-<pre><code>
-// TODO: Create resetGame() function
+<div class="code-block">
+<pre><code>// TODO: Create resetGame() function
 // TODO: Set scores back to 0
 // TODO: Reset ball position
-// TODO: Add key listener for "r" to restart
-</code></pre>
+// TODO: Add key listener for "r" to restart</code></pre>
+</div>
+
+<div style="background: rgba(46, 204, 113, 0.1); padding: 1rem; border-radius: 10px; margin: 1rem 0; border-left: 4px solid #2ecc71;">
+  <h5>💡 Learning Points:</h5>
+  <ul style="margin: 0.5rem 0;">
+    <li>Game state management</li>
+    <li>Event handling</li>
+    <li>Function organization</li>
+  </ul>
+</div>
 
 ---
 
-### 2. First to 10 Wins  
-End the game when one player reaches **10 points**.  
+### 2. 🟡 First to 10 Wins  
+<div style="background: linear-gradient(135deg, #f39c12, #e67e22); color: white; padding: 1rem; border-radius: 10px; margin: 1rem 0;">
+  <h4>🎯 Challenge: End the game when one player reaches 10 points</h4>
+  <p>Implement a complete win condition system with game over state and restart functionality.</p>
+</div>
 
 **✅ Sample Code:**
-<pre><code>
-// Inside scoring logic
+<div class="code-block">
+<pre><code>// Inside scoring logic
 if (this.leftScore >= 10 || this.rightScore >= 10) {
   this.isGameOver = true;
 }
@@ -294,25 +1048,37 @@ if (this.leftScore >= 10 || this.rightScore >= 10) {
 if (this.isGameOver) {
   this.ctx.fillText("Game Over!", this.canvas.width / 2 - 80, this.canvas.height / 2);
   this.ctx.fillText("Press R to Restart", this.canvas.width / 2 - 120, this.canvas.height / 2 + 40);
-}
-</code></pre>
+}</code></pre>
+</div>
 
 **📝 Skeleton Code:**
-<pre><code>
-// TODO: Add win condition (score >= 10)
+<div class="code-block">
+<pre><code>// TODO: Add win condition (score >= 10)
 // TODO: Stop game when someone wins
 // TODO: Display "Game Over" message
-// TODO: Tell player how to restart
-</code></pre>
+// TODO: Tell player how to restart</code></pre>
+</div>
+
+<div style="background: rgba(243, 156, 18, 0.1); padding: 1rem; border-radius: 10px; margin: 1rem 0; border-left: 4px solid #f39c12;">
+  <h5>💡 Learning Points:</h5>
+  <ul style="margin: 0.5rem 0;">
+    <li>Conditional logic</li>
+    <li>Game state management</li>
+    <li>User interface design</li>
+  </ul>
+</div>
 
 ---
 
-### 3. AI Paddle (Optional)  
-Make the right paddle follow the ball automatically.  
+### 3. 🔴 AI Paddle (Advanced)  
+<div style="background: linear-gradient(135deg, #e74c3c, #c0392b); color: white; padding: 1rem; border-radius: 10px; margin: 1rem 0;">
+  <h4>🎯 Challenge: Make the right paddle follow the ball automatically</h4>
+  <p>Implement intelligent AI behavior that creates a challenging single-player experience.</p>
+</div>
 
 **✅ Sample Code:**
-<pre><code>
-// In Paddle class
+<div class="code-block">
+<pre><code>// In Paddle class
 moveAI(ball, canvasHeight) {
   if (ball.y < this.y + this.height / 2) {
     this.y -= this.speed * 0.7; // slower reaction
@@ -323,32 +1089,53 @@ moveAI(ball, canvasHeight) {
 }
 
 // In Game update()
-this.rightPaddle.moveAI(this.ball, this.canvas.height);
-</code></pre>
+this.rightPaddle.moveAI(this.ball, this.canvas.height);</code></pre>
+</div>
 
 **📝 Skeleton Code:**
-<pre><code>
-// TODO: Create moveAI() function in Paddle
+<div class="code-block">
+<pre><code>// TODO: Create moveAI() function in Paddle
 // TODO: If ball is above paddle, move up
 // TODO: If ball is below paddle, move down
-// TODO: Prevent paddle from leaving screen
-</code></pre>
+// TODO: Prevent paddle from leaving screen</code></pre>
+</div>
+
+<div style="background: rgba(231, 76, 60, 0.1); padding: 1rem; border-radius: 10px; margin: 1rem 0; border-left: 4px solid #e74c3c;">
+  <h5>💡 Learning Points:</h5>
+  <ul style="margin: 0.5rem 0;">
+    <li>AI behavior programming</li>
+    <li>Predictive movement</li>
+    <li>Difficulty balancing</li>
+  </ul>
+</div>
 
 ---
 
 ---
 
-## 🎮 Full Pong Game (Spoiler Reveal & Play)
-## 🎮 Full Pong Game (Click to Play)
+## 🎮 Ultimate Pong Game Experience
 
-<details id="pong-details">
-  <summary>⚠️ Click to Reveal & Play Pong</summary>
+<div class="challenge-section">
+  <h2>🏆 Ready for the Complete Game?</h2>
+  <p>Experience the full Pong game with all the features you'll learn to implement!</p>
+</div>
 
-  <div id="pong-container">
-    <canvas id="pongCanvas" width="600" height="400" style="background:black; display:block; margin:auto;"></canvas>
+<div class="game-canvas-container">
+  <div style="text-align: center; margin-bottom: 20px;">
+    <h3 style="color: white; margin: 0;">🎮 Complete Pong Game</h3>
+    <p style="color: #ccc; margin: 10px 0;">Click below to reveal and play the enhanced version</p>
   </div>
 
-</details>
+  <details id="pong-details">
+    <summary style="background: linear-gradient(135deg, #667eea, #764ba2); color: white; padding: 1rem; border-radius: 10px; cursor: pointer; font-weight: bold; text-align: center; border: none; outline: none;">
+      🚀 Click to Reveal & Play Enhanced Pong
+    </summary>
+
+    <div id="pong-container" style="margin-top: 20px;">
+      <canvas id="pongCanvas" width="600" height="400" style="background:black; display:block; margin:auto; border: 2px solid #667eea; border-radius: 8px;"></canvas>
+    </div>
+  </details>
+</div>
 
 <script>
 // Wait for the user to click the details
@@ -415,7 +1202,7 @@ document.getElementById("pong-details").addEventListener("toggle", function(e) {
 ---
 
 
-## Demonstration - Workflow with Mermaid Diagram
+## 🔧 Professional Debugging Workflow
 Here’s the **debugging workflow** your team should follow:
 
 
@@ -447,4 +1234,70 @@ flowchart TD
     C -->|No| F[✅ Working Game]
     F --> G[📊 Reflect & Blog]
     G --> H[🚀 Share with Class]
+</div>
+
+---
+
+## 🎉 Congratulations & Next Steps
+
+<div class="challenge-section">
+  <h2>🏆 You've Completed the Ultimate Pong Masterclass!</h2>
+  <p>You've successfully learned the fundamentals of game development and debugging. Here's what to do next:</p>
+</div>
+
+<div class="feature-grid">
+  <div class="feature-card">
+    <span class="feature-icon">🚀</span>
+    <h3>Practice & Experiment</h3>
+    <p>Try implementing the challenges and experiment with new features</p>
+    <ul style="text-align: left; margin: 1rem 0;">
+      <li>Add power-ups and special effects</li>
+      <li>Implement different game modes</li>
+      <li>Create multiplayer functionality</li>
+    </ul>
+  </div>
+  
+  <div class="feature-card">
+    <span class="feature-icon">📚</span>
+    <h3>Expand Your Knowledge</h3>
+    <p>Explore advanced game development concepts</p>
+    <ul style="text-align: left; margin: 1rem 0;">
+      <li>3D graphics with WebGL</li>
+      <li>Physics engines and simulations</li>
+      <li>Sound design and audio programming</li>
+    </ul>
+  </div>
+  
+  <div class="feature-card">
+    <span class="feature-icon">🌐</span>
+    <h3>Share & Collaborate</h3>
+    <p>Join the game development community</p>
+    <ul style="text-align: left; margin: 1rem 0;">
+      <li>Share your projects on GitHub</li>
+      <li>Participate in game jams</li>
+      <li>Connect with other developers</li>
+    </ul>
+  </div>
+</div>
+
+<div style="background: linear-gradient(135deg, #667eea, #764ba2); color: white; padding: 3rem; border-radius: 20px; margin: 3rem 0; text-align: center;">
+  <h2>🚀 Ready to Build the Next Big Game?</h2>
+  <p>You now have the skills to create amazing interactive experiences. Keep coding, keep learning, and most importantly - have fun!</p>
+  
+  <div style="margin-top: 2rem;">
+    <span class="achievement-badge">🎮 Game Developer</span>
+    <span class="achievement-badge">💻 JavaScript Master</span>
+    <span class="achievement-badge">🏓 Pong Champion</span>
+    <span class="achievement-badge">🚀 Future Creator</span>
+  </div>
+</div>
+
+---
+
+<div style="text-align: center; margin: 3rem 0; padding: 2rem; background: #f8f9fa; border-radius: 20px;">
+  <h3>📊 Lesson Progress</h3>
+  <div class="progress-bar" style="width: 80%; margin: 1rem auto;">
+    <div class="progress-fill" style="width: 100%;"></div>
+  </div>
+  <p><strong>🎉 Lesson Complete!</strong> You've mastered the fundamentals of game development with Pong!</p>
 </div>
