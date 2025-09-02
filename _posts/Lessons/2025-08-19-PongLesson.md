@@ -378,11 +378,11 @@ body {
       🎯 Part 1: Debugging (Current)
     </a>
     <span style="color: rgba(255,255,255,0.6);">→</span>
-    <a href="/p2Lesson" style="background: rgba(255,255,255,0.1); color: white; padding: 0.5rem 1rem; border-radius: 20px; text-decoration: none; font-weight: bold; border: 2px solid rgba(255,255,255,0.3);">
+    <a href="/T1studentGroup/p2Lesson" style="background: rgba(255,255,255,0.1); color: white; padding: 0.5rem 1rem; border-radius: 20px; text-decoration: none; font-weight: bold; border: 2px solid rgba(255,255,255,0.3);">
       📝 Part 2: Coding
     </a>
     <span style="color: rgba(255,255,255,0.6);">→</span>
-    <a href="/lessonp3" style="background: rgba(255,255,255,0.1); color: white; padding: 0.5rem 1rem; border-radius: 20px; text-decoration: none; font-weight: bold; border: 2px solid rgba(255,255,255,0.3);">
+    <a href="/T1studentGroup/lessonp3" style="background: rgba(255,255,255,0.1); color: white; padding: 0.5rem 1rem; border-radius: 20px; text-decoration: none; font-weight: bold; border: 2px solid rgba(255,255,255,0.3);">
       🎮 Part 3: Advanced
     </a>
   </div>
