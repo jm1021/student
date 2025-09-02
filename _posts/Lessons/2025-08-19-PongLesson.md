@@ -10,7 +10,7 @@ comments: True
 ---
 
 <style>
-/* 🎨 Fancy CSS Animations and Styling */
+/* 🎨 Simplified CSS without animations */
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&display=swap');
 
 /* 🛠️ Fix Container Breaking Issues */
@@ -45,34 +45,12 @@ body {
   z-index: 1;
 }
 
-.pong-hero::before {
-  content: '';
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.1) 50%, transparent 70%);
-  animation: shine 3s infinite;
-}
-
-@keyframes shine {
-  0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
-  100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
-}
-
 .hero-title {
   font-family: 'Orbitron', monospace;
   font-size: 3.5rem;
   font-weight: 900;
   margin-bottom: 1rem;
   text-shadow: 0 0 30px rgba(255,255,255,0.5);
-  animation: glow 2s ease-in-out infinite alternate;
-}
-
-@keyframes glow {
-  from { text-shadow: 0 0 30px rgba(255,255,255,0.5); }
-  to { text-shadow: 0 0 40px rgba(255,255,255,0.8), 0 0 60px rgba(255,255,255,0.3); }
 }
 
 .hero-subtitle {
@@ -100,7 +78,6 @@ body {
   border-radius: 20px;
   padding: 2rem;
   box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-  transition: all 0.3s ease;
   border: 2px solid transparent;
   color: #000000;
   width: 100%;
@@ -125,12 +102,6 @@ body {
 
 .feature-card li {
   color: #333333;
-}
-
-.feature-card:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 20px 40px rgba(0,0,0,0.2);
-  border-color: #667eea;
 }
 
 .feature-icon {
@@ -190,7 +161,6 @@ body {
   height: 100%;
   background: linear-gradient(90deg, #2ecc71, #3498db);
   width: 0%;
-  transition: width 0.5s ease;
   border-radius: 10px;
 }
 
@@ -219,13 +189,6 @@ body {
   border-radius: 25px;
   font-weight: bold;
   margin: 0.5rem;
-  animation: bounce 2s infinite;
-}
-
-@keyframes bounce {
-  0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-  40% { transform: translateY(-10px); }
-  60% { transform: translateY(-5px); }
 }
 
 .timeline {
@@ -330,19 +293,13 @@ body {
 .floating-element {
   position: absolute;
   opacity: 0.1;
-  animation: float 6s ease-in-out infinite;
   pointer-events: none;
   z-index: 0;
 }
 
-@keyframes float {
-  0%, 100% { transform: translateY(0px) rotate(0deg); }
-  50% { transform: translateY(-20px) rotate(180deg); }
-}
-
-.floating-element:nth-child(1) { top: 10%; left: 10%; animation-delay: 0s; }
-.floating-element:nth-child(2) { top: 20%; right: 15%; animation-delay: 2s; }
-.floating-element:nth-child(3) { bottom: 30%; left: 20%; animation-delay: 4s; }
+.floating-element:nth-child(1) { top: 10%; left: 10%; }
+.floating-element:nth-child(2) { top: 20%; right: 15%; }
+.floating-element:nth-child(3) { bottom: 30%; left: 20%; }
 
 /* 🎨 Force Black Text in All White Containers */
 .feature-card,
@@ -372,11 +329,6 @@ body {
   color: #667eea !important;
   text-decoration: none;
   font-weight: bold;
-}
-
-.feature-card a:hover {
-  color: #5a6fd8 !important;
-  text-decoration: underline;
 }
 
 /* Timeline text contrast - Force Black */
@@ -415,6 +367,40 @@ body {
   color: #333333 !important;
 }
 </style>
+
+## 🔗 Quick Navigation
+
+<div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 1.5rem; border-radius: 15px; margin: 2rem 0; text-align: center;">
+  <h3 style="color: white; margin-bottom: 1rem;">🚀 Pong Mastery Series</h3>
+  
+  <div style="display: flex; justify-content: center; align-items: center; gap: 1rem; flex-wrap: wrap;">
+    <a href="/jupyter/notebook/python" style="background: rgba(255,255,255,0.3); color: white; padding: 0.5rem 1rem; border-radius: 20px; text-decoration: none; font-weight: bold; border: 2px solid rgba(255,255,255,0.5);">
+      🎯 Part 1: Debugging (Current)
+    </a>
+    <span style="color: rgba(255,255,255,0.6);">→</span>
+    <a href="/p2Lesson" style="background: rgba(255,255,255,0.1); color: white; padding: 0.5rem 1rem; border-radius: 20px; text-decoration: none; font-weight: bold; border: 2px solid rgba(255,255,255,0.3);">
+      📝 Part 2: Coding
+    </a>
+    <span style="color: rgba(255,255,255,0.6);">→</span>
+    <a href="/lessonp3" style="background: rgba(255,255,255,0.1); color: white; padding: 0.5rem 1rem; border-radius: 20px; text-decoration: none; font-weight: bold; border: 2px solid rgba(255,255,255,0.3);">
+      🎮 Part 3: Advanced
+    </a>
+  </div>
+</div>
+
+## 🚀 Quick Action Buttons
+
+<div style="text-align: center; margin: 2rem 0;">
+  <div style="display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap;">
+    <a href="/p2Lesson" style="display: inline-block; background: linear-gradient(135deg, #27ae60, #2ecc71); color: white; padding: 1rem 2rem; border-radius: 15px; text-decoration: none; font-weight: bold; font-size: 1.1rem; box-shadow: 0 8px 25px rgba(39, 174, 96, 0.3); border: 3px solid rgba(255,255,255,0.2);">
+      📝 Start Part 2: Coding
+    </a>
+    <a href="/lessonp3" style="display: inline-block; background: linear-gradient(135deg, #e74c3c, #f39c12); color: white; padding: 1rem 2rem; border-radius: 15px; text-decoration: none; font-weight: bold; font-size: 1.1rem; box-shadow: 0 8px 25px rgba(231, 76, 60, 0.3); border: 3px solid rgba(255,255,255,0.2);">
+      🎮 Start Part 3: Advanced
+    </a>
+  </div>
+  <p style="margin-top: 1rem; color: #666; font-style: italic;">Click any button above to jump directly to that lesson!</p>
+</div>
 
 <div class="pong-hero floating-elements">
   <div class="floating-element">🏓</div>
@@ -517,5 +503,44 @@ body {
   <div style="background: rgba(255,255,255,0.1); padding: 1rem; border-radius: 10px; margin: 1rem 0;">
     <h4>🏆 Final Challenge:</h4>
     <p>Implement a <strong>Tournament Mode</strong> where players compete until 11 points, with automatic game reset and winner celebration!</p>
+  </div>
+</div>
+
+---
+
+## 🔗 Continue Your Learning Journey
+
+<div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 2rem; border-radius: 15px; margin: 2rem 0; text-align: center;">
+  <h2 style="color: white; margin-bottom: 1.5rem;">🚀 Next Steps in Your Pong Mastery</h2>
+  
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-top: 2rem;">
+    
+    <div style="background: rgba(255,255,255,0.1); padding: 1.5rem; border-radius: 10px; backdrop-filter: blur(10px);">
+      <h3 style="color: white; margin-bottom: 1rem;">📝 Part 2: Coding Implementation</h3>
+      <p style="color: rgba(255,255,255,0.9); margin-bottom: 1.5rem;">Dive into the actual code implementation and build your Pong game from scratch!</p>
+      <a href="/p2Lesson" style="display: inline-block; background: rgba(255,255,255,0.2); color: white; padding: 0.75rem 1.5rem; border-radius: 8px; text-decoration: none; font-weight: bold; border: 2px solid rgba(255,255,255,0.3);">
+        🚀 Start Coding →
+      </a>
+    </div>
+    
+    <div style="background: rgba(255,255,255,0.1); padding: 1.5rem; border-radius: 10px; backdrop-filter: blur(10px);">
+      <h3 style="color: white; margin-bottom: 1rem;">🎮 Part 3: Advanced Features</h3>
+      <p style="color: rgba(255,255,255,0.9); margin-bottom: 1.5rem;">Add power-ups, AI opponents, and advanced game mechanics to your Pong game!</p>
+      <a href="/lessonp3" style="display: inline-block; background: rgba(255,255,255,0.2); color: white; padding: 0.75rem 1.5rem; border-radius: 8px; text-decoration: none; font-weight: bold; border: 2px solid rgba(255,255,255,0.3);">
+        🎯 Advanced Features →
+      </a>
+    </div>
+    
+  </div>
+  
+  <div style="margin-top: 2rem; padding: 1rem; background: rgba(255,255,255,0.1); border-radius: 10px;">
+    <h4 style="color: white; margin-bottom: 1rem;">📚 Complete Learning Path:</h4>
+    <div style="display: flex; justify-content: center; align-items: center; gap: 1rem; flex-wrap: wrap;">
+      <span style="background: rgba(255,255,255,0.2); padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.9rem;">🎯 Part 1: Debugging (Current)</span>
+      <span style="color: rgba(255,255,255,0.6);">→</span>
+      <span style="background: rgba(255,255,255,0.1); padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.9rem;">📝 Part 2: Coding</span>
+      <span style="color: rgba(255,255,255,0.6);">→</span>
+      <span style="background: rgba(255,255,255,0.1); padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.9rem;">🎮 Part 3: Advanced</span>
+    </div>
   </div>
 </div>
