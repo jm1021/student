@@ -112,11 +112,14 @@ permalink: /snake/
 
 <script>
     (function(){
-        /* Attributes of Game */
+        /* Main Game Setup and Configuration
+         * This section initializes the game canvas and sets up core game variables
+         * The game uses an Immediately Invoked Function Expression (IIFE) to avoid global scope pollution
+         */
         /////////////////////////////////////////////////////////////
-        // Canvas & Context
+        // Get the canvas element and its 2D rendering context
         const canvas = document.getElementById("snake");
-        const ctx = canvas.getContext("2d");
+        const ctx = canvas.getContext("2d");  // Used for all drawing operations
         // HTML Game IDs
         const SCREEN_SNAKE = 0;
         const screen_snake = document.getElementById("snake");
@@ -134,16 +137,16 @@ permalink: /snake/
         const button_new_game2 = document.getElementById("new_game2");
         const button_setting_menu = document.getElementById("setting_menu");
         const button_setting_menu1 = document.getElementById("setting_menu1");
-        // Game Control
-        const BLOCK = 10;   // size of block rendering
-        let SCREEN = SCREEN_MENU;
-        let snake;
-        let snake_dir;
-        let snake_next_dir;
-        let snake_speed;
-        let food = {x: 0, y: 0};
-        let score;
-        let wall;
+        // Game Control Variables
+        const BLOCK = 10;   // Size of each grid block in pixels
+        let SCREEN = SCREEN_MENU;  // Current screen state
+        let snake;          // Array to store snake body segments
+        let snake_dir;      // Current direction of snake movement
+        let snake_next_dir; // Next direction after key press
+        let snake_speed;    // Movement speed of the snake
+        let food = {x: 0, y: 0}; // Food position coordinates
+        let score;          // Current game score
+        let wall;           // Wall collision setting (0: off, 1: on)
         /* Display Control */
         /////////////////////////////////////////////////////////////
         // 0 for the game
