@@ -65,4 +65,4 @@ Hi! My name is Ishan.
 > Feel free to reach out if you'd like to collaborate or learn more about my work.
 
 <p style="color: #2A7DB1;">Ishan Jha: <a href="https://github.com/Jupiterian" style="color: #2A7DB1; text-decoration: underline;">GitHub</a></p>
-<p style="color: #2A7DB1;">Ishan Jha: <a href="https://open.spotify.com/user/31spiranssqszaomtf3pyo3j6zbm style="color: #2A7DB1; text-decoration: underline;">Spotify</a></p>
+<p style="color: #2A7DB1;">Ishan Jha: <a href="https://open.spotify.com/user/31spiranssqszaomtf3pyo3j6zbm" style="color: #2A7DB1; text-decoration: underline">Spotify</a></p>
