@@ -162,8 +162,9 @@ permalink: /snake
         let SCREEN = SCREEN_MENU;
         let snake;
         let snake_dir;
-        let snake_next_dir;
-        let snake_speed;
+    let snake_next_dir;
+    let snake_speed;
+    let DEFAULT_SNAKE_SPEED;
     let food = {x: 0, y: 0, special: false};
         let score;
         let wall;
@@ -187,6 +188,14 @@ permalink: /snake
                     screen_menu.style.display = "none";
                     screen_setting.style.display = "none";
                     screen_game_over.style.display = "block";
+                    // Reset snake speed back to the default starting speed when game ends
+                    try {
+                        if (typeof DEFAULT_SNAKE_SPEED !== 'undefined') {
+                            setSnakeSpeed(DEFAULT_SNAKE_SPEED);
+                        }
+                    } catch (e) {
+                        // safe fallback: do nothing
+                    }
                     break;
                 case SCREEN_SETTING:
                     screen_snake.style.display = "none";
@@ -207,6 +216,8 @@ permalink: /snake
             button_setting_menu1.onclick = function(){showScreen(SCREEN_SETTING);};
             // speed
             setSnakeSpeed(150); //Changed speed to 75 from 150
+            // record default starting speed so we can reset when the game ends
+            try { DEFAULT_SNAKE_SPEED = Number(snake_speed); } catch (e) {}
             for(let i = 0; i < speed_setting.length; i++){
                 speed_setting[i].addEventListener("click", function(){
                     for(let i = 0; i < speed_setting.length; i++){
@@ -334,6 +345,17 @@ permalink: /snake
             // game score to zero
             score = 0;
             altScore(score);
+            // apply currently selected speed setting when a new game starts
+            try {
+                for (let i = 0; i < speed_setting.length; i++) {
+                    if (speed_setting[i].checked) {
+                        setSnakeSpeed(Number(speed_setting[i].value));
+                        break;
+                    }
+                }
+            } catch (e) {
+                // ignore and keep existing snake_speed if any
+            }
             // initial snake
             snake = [];
             snake.push({x: 0, y: 15});
