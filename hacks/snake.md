@@ -317,8 +317,8 @@ permalink: /snake
                 ctx.fillStyle = "#FFFFFF"; // White for snake
                 ctx.fillRect(snake[i].x * BLOCK, snake[i].y * BLOCK, BLOCK, BLOCK);
             }
-            // Paint food (apple) in red
-            ctx.fillStyle = "#ff7272";
+            // Paint apple in gold if special
+            ctx.fillStyle = food.special ? "#ffd700" : "#ff7272";
             ctx.fillRect(food.x * BLOCK, food.y * BLOCK, BLOCK, BLOCK);
             // Debug
             //document.getElementById("debug").innerHTML = snake_dir + " " + snake_next_dir + " " + snake[0].x + " " + snake[0].y;
