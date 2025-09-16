@@ -88,6 +88,10 @@ permalink: /snake
         min-width: 60px;
         user-select: none;
     }
+    /* soft glow for score */
+    #score_value {
+        text-shadow: 0 0 8px rgba(114, 211, 141, 0.8);
+    }
 
     /* Speed display: centered above the score */
     #speed_display {
@@ -256,9 +260,17 @@ permalink: /snake
             }
             // activate window events
             window.addEventListener("keydown", function(evt) {
-                // spacebar detected
-                if(evt.code === "Space" && SCREEN !== SCREEN_SNAKE)
+                // spacebar detected to start
+                if(evt.code === "Space" && SCREEN !== SCREEN_SNAKE) {
                     newGame();
+                    return;
+                }
+                // allow WASD keys from anywhere to change direction during play
+                if (SCREEN === SCREEN_SNAKE) {
+                    // prefer 'key' where available
+                    const k = evt.key || evt.keyCode;
+                    changeDir(k);
+                }
             }, true);
         }
         /* Snake is on the Go (Driver Function)  */
@@ -339,14 +351,28 @@ permalink: /snake
             ctx.beginPath();
             ctx.fillStyle = "#72d38d"; // Changed background color
             ctx.fillRect(0, 0, canvas.width, canvas.height);
-            // Paint snake
+            // Paint snake with a soft glow
+            ctx.save();
+            ctx.shadowColor = "rgba(255,255,255,0.6)";
+            ctx.shadowBlur = 8;
             for(let i = 0; i < snake.length; i++){
                 ctx.fillStyle = "#FFFFFF"; // White for snake
                 ctx.fillRect(snake[i].x * BLOCK, snake[i].y * BLOCK, BLOCK, BLOCK);
             }
-            // Paint apple in gold if special
-            ctx.fillStyle = food.special ? "#ffd700" : "#ff7272";
+            ctx.restore();
+            // Paint apple in gold if special (gold gets stronger glow)
+            ctx.save();
+            if (food.special) {
+                ctx.shadowColor = "rgba(255,215,0,0.9)"; // gold glow
+                ctx.shadowBlur = 12;
+                ctx.fillStyle = "#ffd700";
+            } else {
+                ctx.shadowColor = "rgba(255,114,114,0.6)";
+                ctx.shadowBlur = 8;
+                ctx.fillStyle = "#ff7272";
+            }
             ctx.fillRect(food.x * BLOCK, food.y * BLOCK, BLOCK, BLOCK);
+            ctx.restore();
             // Debug
             //document.getElementById("debug").innerHTML = snake_dir + " " + snake_next_dir + " " + snake[0].x + " " + snake[0].y;
             // Recursive call after speed delay, déjà vu
@@ -384,30 +410,36 @@ permalink: /snake
             addFood();
             // activate canvas event
             canvas.onkeydown = function(evt) {
-                changeDir(evt.keyCode);
+                // allow both keyCode (numeric) and key (string like 'w')
+                changeDir(evt.key || evt.keyCode);
             }
             mainLoop();
         }
         /* Key Inputs and Actions */
         /////////////////////////////////////////////////////////////
         let changeDir = function(key){
-            // test key and switch direction
-            switch(key) {
-                case 37:    // left arrow
-                    if (snake_dir !== 1)    // not right
-                        snake_next_dir = 3; // then switch left
+            // accept both keyCode numbers and key strings (arrows and WASD)
+            const k = (typeof key === 'number') ? key : String(key).toLowerCase();
+            switch(k) {
+                case 37: // left arrow
+                case 'arrowleft':
+                case 'a':
+                    if (snake_dir !== 1) snake_next_dir = 3; // left
                     break;
-                case 38:    // up arrow
-                    if (snake_dir !== 2)    // not down
-                        snake_next_dir = 0; // then switch up
+                case 38: // up arrow
+                case 'arrowup':
+                case 'w':
+                    if (snake_dir !== 2) snake_next_dir = 0; // up
                     break;
-                case 39:    // right arrow
-                    if (snake_dir !== 3)    // not left
-                        snake_next_dir = 1; // then switch right
+                case 39: // right arrow
+                case 'arrowright':
+                case 'd':
+                    if (snake_dir !== 3) snake_next_dir = 1; // right
                     break;
-                case 40:    // down arrow
-                    if (snake_dir !== 0)    // not up
-                        snake_next_dir = 2; // then switch down
+                case 40: // down arrow
+                case 'arrowdown':
+                case 's':
+                    if (snake_dir !== 0) snake_next_dir = 2; // down
                     break;
             }
         }
