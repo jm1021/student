@@ -88,6 +88,19 @@ permalink: /snake
         min-width: 60px;
         user-select: none;
     }
+
+    /* Speed display in top-left */
+    #speed_display {
+        position: absolute;
+        top: 12px;
+        left: 12px;
+        background: rgba(255,255,255,0.8);
+        color: #2e6e4d;
+        padding: 4px 8px;
+        border-radius: 6px;
+        font-weight: 600;
+        user-select: none;
+    }
 </style>
 
 <h2>Snake</h2>
@@ -95,6 +108,7 @@ permalink: /snake
     <div id="score_container">
         <span id="score_value">0</span>
     </div>
+    <div id="speed_display">Speed: --</div>
     <div class="container bg-secondary" style="text-align:center;">
         <!-- Main Menu -->
         <div id="menu" class="py-4 text-light">
@@ -144,6 +158,7 @@ permalink: /snake
         const SCREEN_SNAKE = 0;
         const screen_snake = document.getElementById("snake");
         const ele_score = document.getElementById("score_value");
+    const ele_speed = document.getElementById("speed_display");
         const speed_setting = document.getElementsByName("speed");
         const wall_setting = document.getElementsByName("wall");
         // HTML Screen IDs (div)
@@ -439,7 +454,10 @@ permalink: /snake
         // 100 = normal
         // 50 = fast
         let setSnakeSpeed = function(speed_value){
-            snake_speed = speed_value;
+            snake_speed = Number(speed_value);
+            try {
+                if (ele_speed) ele_speed.innerText = "Speed: " + String(snake_speed);
+            } catch (e) {}
         }
         /////////////////////////////////////////////////////////////
         let setWall = function(wall_value){
