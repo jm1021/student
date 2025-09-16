@@ -158,13 +158,13 @@ permalink: /snake
         const button_setting_menu = document.getElementById("setting_menu");
         const button_setting_menu1 = document.getElementById("setting_menu1");
         // Game Control
-        const BLOCK = 10;   // size of block rendering
+        const BLOCK = 20;   // Changed from 10 -> 20
         let SCREEN = SCREEN_MENU;
         let snake;
         let snake_dir;
         let snake_next_dir;
         let snake_speed;
-        let food = {x: 0, y: 0};
+    let food = {x: 0, y: 0, special: false};
         let score;
         let wall;
         /* Display Control */
@@ -206,7 +206,7 @@ permalink: /snake
             button_setting_menu.onclick = function(){showScreen(SCREEN_SETTING);};
             button_setting_menu1.onclick = function(){showScreen(SCREEN_SETTING);};
             // speed
-            setSnakeSpeed(150);
+            setSnakeSpeed(75); //Changed speed to 75 from 150
             for(let i = 0; i < speed_setting.length; i++){
                 speed_setting[i].addEventListener("click", function(){
                     for(let i = 0; i < speed_setting.length; i++){
@@ -284,7 +284,27 @@ permalink: /snake
             // Snake eats food checker
             if(checkBlock(snake[0].x, snake[0].y, food.x, food.y)){
                 snake[snake.length] = {x: snake[0].x, y: snake[0].y};
-                altScore(++score);
+                // Award points: special food = +3, regular = +1
+                if (food.special) {
+                    score += 3;
+                } else {
+                    score += 1;
+                }
+                altScore(score);
+                // Bonus: speed up a little every 5 points
+                try {
+                    const MIN_SPEED = 20; // ms, fastest allowed
+                    const SPEED_DECREMENT = 10; // makes it faster every 5 points
+                    if (score % 5 === 0) {
+                        const newSpeed = Math.max(MIN_SPEED, Number(snake_speed) - SPEED_DECREMENT);
+                        setSnakeSpeed(newSpeed);
+                    }
+                } catch (e) {
+                    // if something unexpected happens, don't break the game
+                    console.error('Speed bonus error:', e);
+                }
+                // clear special flag after eating and place new food
+                food.special = false;
                 addFood();
                 activeDot(food.x, food.y);
             }
@@ -317,6 +337,10 @@ permalink: /snake
             // initial snake
             snake = [];
             snake.push({x: 0, y: 15});
+            // make the snake start a bit longer by addong two more pieces behind the head
+            for (let i = 1; i <= 2; i++) {
+                snake.push({ x: 0 - i, y: 15 });
+            }
             snake_next_dir = 1;
             // food on canvas
             addFood();
@@ -352,9 +376,9 @@ permalink: /snake
         /* Dot for Food or Snake part */
         /////////////////////////////////////////////////////////////
         let activeDot = function(x, y){
-            // Draw apple (food) in red, snake in white
+            // Draw apple (food) in red or gold if special, snake in white
             if (x === food.x && y === food.y) {
-                ctx.fillStyle = "#ff7272"; // Red for apple
+                ctx.fillStyle = food.special ? "#ffd700" : "#ff7272"; // Gold for special, red otherwise
             } else {
                 ctx.fillStyle = "#FFFFFF"; // White for snake
             }
@@ -369,6 +393,12 @@ permalink: /snake
                 if(checkBlock(food.x, food.y, snake[i].x, snake[i].y)){
                     addFood();
                 }
+            }
+            // Special mode: make the food special (gold & worth 3 points) every 7 points
+            if (score > 0 && score % 7 === 0) {
+                food.special = true;
+            } else {
+                food.special = false;
             }
         }
         /* Collision Detection */
