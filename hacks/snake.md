@@ -89,11 +89,12 @@ permalink: /snake
         user-select: none;
     }
 
-    /* Speed display in top-left */
+    /* Speed display: centered above the score */
     #speed_display {
-        position: absolute;
-        top: 12px;
-        left: 12px;
+        display: block;
+        width: 100%;
+        text-align: center;
+        margin-bottom: 8px;
         background: rgba(255,255,255,0.8);
         color: #2e6e4d;
         padding: 4px 8px;
