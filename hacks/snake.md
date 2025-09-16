@@ -105,10 +105,10 @@ permalink: /snake
 
 <h2>Snake</h2>
 <div class="container">
+    <div id="speed_display">Speed: --</div>
     <div id="score_container">
         <span id="score_value">0</span>
     </div>
-    <div id="speed_display">Speed: --</div>
     <div class="container bg-secondary" style="text-align:center;">
         <!-- Main Menu -->
         <div id="menu" class="py-4 text-light">
@@ -130,11 +130,11 @@ permalink: /snake
             <a id="new_game2" class="link-alert">new game</a>
             <br>
             <p>Speed:
-                <input id="speed1" type="radio" name="speed" value="120" checked/>
+                <input id="speed1" type="radio" name="speed" value="150" checked/>
                 <label for="speed1">Slow</label>
-                <input id="speed2" type="radio" name="speed" value="75"/>
+                <input id="speed2" type="radio" name="speed" value="100"/>
                 <label for="speed2">Normal</label>
-                <input id="speed3" type="radio" name="speed" value="35"/>
+                <input id="speed3" type="radio" name="speed" value="50"/>
                 <label for="speed3">Fast</label>
             </p>
             <p>Wall:
@@ -157,8 +157,8 @@ permalink: /snake
         // HTML Game IDs
         const SCREEN_SNAKE = 0;
         const screen_snake = document.getElementById("snake");
+        const ele_speed = document.getElementById("speed_display");
         const ele_score = document.getElementById("score_value");
-    const ele_speed = document.getElementById("speed_display");
         const speed_setting = document.getElementsByName("speed");
         const wall_setting = document.getElementsByName("wall");
         // HTML Screen IDs (div)
