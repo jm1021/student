@@ -1,7 +1,7 @@
 ---
-layout: base
+layout: opencs
 title: Snake Game
-permalink: /snake/
+permalink: /snake
 ---
 
 <style>
@@ -17,7 +17,8 @@ permalink: /snake/
         display: none;
         border-style: solid;
         border-width: 10px;
-        border-color: #FFFFFF;
+        border-color: #6c9bd0;
+        background-color: #72d38d; /* Added background color */
     }
     canvas:focus{
         outline: none;
@@ -66,12 +67,34 @@ permalink: /snake/
         background-color: #FFF;
         color: #000;
     }
+
+    /* Center and style the score */
+    #score_container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 10px;
+        width: 100%; /* Ensure full width for centering */
+    }
+    #score_value {
+        background: rgba(255,255,255,0.7);
+        color: #2e6e4d;
+        font-size: 2rem;
+        font-weight: bold;
+        border-radius: 8px;
+        padding: 4px 18px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+        text-align: center;
+        min-width: 60px;
+        user-select: none;
+    }
 </style>
 
 <h2>Snake</h2>
 <div class="container">
-    <p class="fs-4">Score: <span id="score_value">0</span></p>
-
+    <div id="score_container">
+        <span id="score_value">0</span>
+    </div>
     <div class="container bg-secondary" style="text-align:center;">
         <!-- Main Menu -->
         <div id="menu" class="py-4 text-light">
@@ -112,14 +135,11 @@ permalink: /snake/
 
 <script>
     (function(){
-        /* Main Game Setup and Configuration
-         * This section initializes the game canvas and sets up core game variables
-         * The game uses an Immediately Invoked Function Expression (IIFE) to avoid global scope pollution
-         */
+        /* Attributes of Game */
         /////////////////////////////////////////////////////////////
-        // Get the canvas element and its 2D rendering context
+        // Canvas & Context
         const canvas = document.getElementById("snake");
-        const ctx = canvas.getContext("2d");  // Used for all drawing operations
+        const ctx = canvas.getContext("2d");
         // HTML Game IDs
         const SCREEN_SNAKE = 0;
         const screen_snake = document.getElementById("snake");
@@ -137,16 +157,16 @@ permalink: /snake/
         const button_new_game2 = document.getElementById("new_game2");
         const button_setting_menu = document.getElementById("setting_menu");
         const button_setting_menu1 = document.getElementById("setting_menu1");
-        // Game Control Variables
-        const BLOCK = 10;   // Size of each grid block in pixels
-        let SCREEN = SCREEN_MENU;  // Current screen state
-        let snake;          // Array to store snake body segments
-        let snake_dir;      // Current direction of snake movement
-        let snake_next_dir; // Next direction after key press
-        let snake_speed;    // Movement speed of the snake
-        let food = {x: 0, y: 0}; // Food position coordinates
-        let score;          // Current game score
-        let wall;           // Wall collision setting (0: off, 1: on)
+        // Game Control
+        const BLOCK = 10;   // size of block rendering
+        let SCREEN = SCREEN_MENU;
+        let snake;
+        let snake_dir;
+        let snake_next_dir;
+        let snake_speed;
+        let food = {x: 0, y: 0};
+        let score;
+        let wall;
         /* Display Control */
         /////////////////////////////////////////////////////////////
         // 0 for the game
@@ -270,14 +290,16 @@ permalink: /snake/
             }
             // Repaint canvas
             ctx.beginPath();
-            ctx.fillStyle = "royalblue";
+            ctx.fillStyle = "#72d38d"; // Changed background color
             ctx.fillRect(0, 0, canvas.width, canvas.height);
             // Paint snake
             for(let i = 0; i < snake.length; i++){
-                activeDot(snake[i].x, snake[i].y);
+                ctx.fillStyle = "#FFFFFF"; // White for snake
+                ctx.fillRect(snake[i].x * BLOCK, snake[i].y * BLOCK, BLOCK, BLOCK);
             }
-            // Paint food
-            activeDot(food.x, food.y);
+            // Paint food (apple) in red
+            ctx.fillStyle = "#ff7272";
+            ctx.fillRect(food.x * BLOCK, food.y * BLOCK, BLOCK, BLOCK);
             // Debug
             //document.getElementById("debug").innerHTML = snake_dir + " " + snake_next_dir + " " + snake[0].x + " " + snake[0].y;
             // Recursive call after speed delay, déjà vu
@@ -330,7 +352,12 @@ permalink: /snake/
         /* Dot for Food or Snake part */
         /////////////////////////////////////////////////////////////
         let activeDot = function(x, y){
-            ctx.fillStyle = "#c61010ff";
+            // Draw apple (food) in red, snake in white
+            if (x === food.x && y === food.y) {
+                ctx.fillStyle = "#ff7272"; // Red for apple
+            } else {
+                ctx.fillStyle = "#FFFFFF"; // White for snake
+            }
             ctx.fillRect(x * BLOCK, y * BLOCK, BLOCK, BLOCK);
         }
         /* Random food placement */
@@ -365,8 +392,8 @@ permalink: /snake/
         /////////////////////////////////////////////////////////////
         let setWall = function(wall_value){
             wall = wall_value;
-            if(wall === 0){screen_snake.style.borderColor = "#606060";}
-            if(wall === 1){screen_snake.style.borderColor = "#FFFFFF";}
+            // Always use #6c9bd0 for border color
+            screen_snake.style.borderColor = "#6c9bd0";
         }
     })();
-</script
+</script>
