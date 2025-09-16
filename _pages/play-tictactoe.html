@@ -1,0 +1,87 @@
+---
+layout: base
+title: Tic-tac-toe Game
+permalink: /play-tictactoe/
+---
+
+<link rel="stylesheet" href="{{ site.baseurl }}/assets/css/tictactoe.css">
+
+<div class="status"></div>
+<div class="game-board">
+    <div class="cell" data-index="0"></div>
+    <div class="cell" data-index="1"></div>
+    <div class="cell" data-index="2"></div>
+    <div class="cell" data-index="3"></div>
+    <div class="cell" data-index="4"></div>
+    <div class="cell" data-index="5"></div>
+    <div class="cell" data-index="6"></div>
+    <div class="cell" data-index="7"></div>
+    <div class="cell" data-index="8"></div>
+</div>
+<div class="game-controls">
+    <button class="reset-button">New Game</button>
+</div>
+
+<script src="{{ site.baseurl }}/assets/js/tictactoe.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const game = new TicTacToe();
+    const cells = document.querySelectorAll('.cell');
+    const status = document.querySelector('.status');
+    const resetButton = document.querySelector('.reset-button');
+
+    function updateBoard() {
+        game.board.forEach((mark, index) => {
+            cells[index].textContent = mark;
+            if (mark === 'X') {
+                cells[index].classList.add('x-mark');
+            } else if (mark === 'O') {
+                cells[index].classList.add('o-mark');
+            }
+        });
+    }
+
+    function updateStatus() {
+        if (!game.gameActive) {
+            if (game.checkWinner()) {
+                status.textContent = `${game.currentPlayer} wins!`;
+            } else if (game.checkDraw()) {
+                status.textContent = "It's a draw!";
+            }
+        } else {
+            status.textContent = `${game.currentPlayer}'s turn`;
+        }
+    }
+
+    cells.forEach(cell => {
+        cell.addEventListener('click', () => {
+            const index = parseInt(cell.dataset.index);
+            if (game.currentPlayer === game.humanPlayer && game.makeMove(index)) {
+                updateBoard();
+                updateStatus();
+                
+                // AI's turn
+                if (game.gameActive) {
+                    setTimeout(() => {
+                        game.aiMove();
+                        updateBoard();
+                        updateStatus();
+                    }, 500);
+                }
+            }
+        });
+    });
+
+    resetButton.addEventListener('click', () => {
+        game.reset();
+        cells.forEach(cell => {
+            cell.textContent = '';
+            cell.classList.remove('x-mark', 'o-mark');
+        });
+        status.textContent = `${game.currentPlayer}'s turn`;
+    });
+
+    // Initial status
+    status.textContent = `${game.currentPlayer}'s turn`;
+});
+</script>
