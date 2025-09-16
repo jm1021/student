@@ -1,6 +1,6 @@
 ---
 layout: base
-title: I'm Ishan Jha
+title: This is our team!
 hide: true
 ---
 
@@ -10,10 +10,10 @@ Hi! My name is Ishan.
 
 | Role         | Name     | Repo Location                       | Stream                | Repo Name |
 |--------------|----------|-------------------------------------|-----------------------|-----------|
-| Scrum Master | John     | github.com/jm1021/student           | upstream (OCS fork)   | student   |
-| Scrummer     | Ishan    | github.com/Jupiterian/student       | downstream (fork)     | student   |
-| Scrummer     | Siddarth | github.com/SidH011/student          | downstream (fork)     | student   |
-| Scrummer     | Dhruv    | github.com/dhruvA207/student        | downstream (fork)     | student   |
+| Scrum Master | Ishan    | github.com/Jupiterian/student           | upstream   (OCS fork)    | student   |
+| Scrummer     | Lance    | github.com/Jupiterian/student       | downstream (fork)        | student   |
+| Scrummer     | Siddarth | github.com/SidH011/student          | downstream (fork)        | student   |
+| Scrummer     | Dhruv    | github.com/dhruvA207/student        | downstream (fork)        | student   |
 
 
 ## Links to Learning
