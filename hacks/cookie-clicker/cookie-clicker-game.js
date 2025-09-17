@@ -237,6 +237,8 @@ const gameLoop = {
     if (upgradeData) {
       this.upgrades = JSON.parse(upgradeData);
       cookie.cookieMulti += this.upgrades["2X Clicks"];
+      cookie.cookieMulti += this.upgrades["5X Clicks"];
+      cookie.cookieMulti += this.upgrades["10X Clicks"];
     }
   },
   getAmount(cookieName) {
@@ -457,6 +459,14 @@ const aiRobot = {
   priceIncrementer: 1.05,
   cookiesPerSecond: 100,
 };
+
+const Alien = {
+  name: "Alien",
+  emoji: "👽",
+  price: 50000,
+  priceIncrementer: 1.3,
+  cookiesPerSecond: 500,
+};
 const shopItems = [];
 
 shopItems.push(grandma);
@@ -465,6 +475,7 @@ shopItems.push(kitchen);
 shopItems.push(factory);
 shopItems.push(bank);
 shopItems.push(aiRobot);
+shopItems.push(Alien);
 
 const x2Click = {
   name: "2X Clicks",
@@ -486,12 +497,23 @@ const x5Click = {
 // @ts-ignore
 shop.upgrades.push(x5Click);
 
+const x10Click = {
+  name: "10X Clicks",
+  emoji: "🖱",
+  price: 100000,
+  itemEffected: "click",
+  multiplier: 10,
+};
+// @ts-ignore
+shop.upgrades.push(x10Click);
+
 shop.addItemForSale(grandma);
 shop.addItemForSale(chef);
 shop.addItemForSale(kitchen);
 shop.addItemForSale(factory);
 shop.addItemForSale(bank);
 shop.addItemForSale(aiRobot);
+shop.addItemForSale(Alien);
 gameLoop.fetchSavedData();
 cookie.fetchStoredCookies();
 cookieButton.addEventListener("click", () => {
@@ -508,4 +530,5 @@ cookieButton.addEventListener("click", () => {
   gameLoop.getAmount("Factory");
   gameLoop.getAmount("Bank");
   gameLoop.getAmount("AI Robot");
+  gameLoop.getAmount("Alien");
 });
