@@ -5,7 +5,8 @@ github_username: Jupiterian
 github_repo: "student" 
 baseurl: "/student" 
 future: true
-remote_theme: jekyll/minima
+# remote_theme: jekyll/minima
+remote_theme: pages-themes/cayman@v0.2.0
 minima:
   skin: dark
   social_links:

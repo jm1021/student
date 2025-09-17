@@ -4,7 +4,7 @@ title: This is our team!
 hide: true
 ---
 
-### Me and Team
+### Team
 
 Hi!
 
