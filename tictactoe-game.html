@@ -5,6 +5,13 @@ title: Tic-tac-toe Game
 
 <link rel="stylesheet" href="{{ site.baseurl }}/assets/css/tictactoe.css">
 
+<div style="text-align:center; margin:10px">
+    <label for="mode-select">Game mode:</label>
+    <select id="mode-select">
+        <option value="ai">Play vs AI</option>
+        <option value="local">2-Player (Same PC)</option>
+    </select>
+</div>
 <div class="status"></div>
 <div class="game-board">
     <div class="cell" data-index="0"></div>
@@ -24,7 +31,17 @@ title: Tic-tac-toe Game
 <script src="{{ site.baseurl }}/assets/js/tictactoe.js"></script>
 <script>
 document.addEventListener('DOMContentLoaded', () => {
-    const game = new TicTacToe();
+    const modeSelect = document.getElementById('mode-select');
+    const game = new TicTacToe(modeSelect.value);
+    modeSelect.addEventListener('change', (e) => {
+        game.setMode(e.target.value);
+        // clear board UI
+        cells.forEach(cell => {
+            cell.textContent = '';
+            cell.classList.remove('x-mark', 'o-mark');
+        });
+        status.textContent = `${game.currentPlayer}'s turn`;
+    });
     const cells = document.querySelectorAll('.cell');
     const status = document.querySelector('.status');
     const resetButton = document.querySelector('.reset-button');
@@ -55,6 +72,16 @@ document.addEventListener('DOMContentLoaded', () => {
     cells.forEach(cell => {
         cell.addEventListener('click', () => {
             const index = parseInt(cell.dataset.index);
+            // If 2-player local: both players are human and make moves alternately
+            if (game.mode === 'local') {
+                if (game.makeMove(index)) {
+                    updateBoard();
+                    updateStatus();
+                }
+                return;
+            }
+
+            // AI mode: human plays as humanPlayer, AI plays automatically
             if (game.currentPlayer === game.humanPlayer && game.makeMove(index)) {
                 updateBoard();
                 updateStatus();
