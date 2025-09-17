@@ -1,19 +1,19 @@
 ---
 layout: base
-title: I'm Ishan Jha
+title: This is our team!
 hide: true
 ---
 
-### Me and Team
+### Team
 
-Hi! My name is Ishan.
+Hi!
 
 | Role         | Name     | Repo Location                       | Stream                | Repo Name |
 |--------------|----------|-------------------------------------|-----------------------|-----------|
-| Scrum Master | John     | github.com/jm1021/student           | upstream (OCS fork)   | student   |
-| Scrummer     | Ishan    | github.com/Jupiterian/student       | downstream (fork)     | student   |
-| Scrummer     | Siddarth | github.com/SidH011/student          | downstream (fork)     | student   |
-| Scrummer     | Dhruv    | github.com/dhruvA207/student        | downstream (fork)     | student   |
+| Scrum Master | Ishan    | github.com/Jupiterian/student           | upstream   (OCS fork)    | student   |
+| Scrummer     | Lance    | github.com/lanceo11/student       | downstream (fork)        | student   |
+| Scrummer     | Siddarth | github.com/SidH011/student          | downstream (fork)        | student   |
+| Scrummer     | Dhruv    | github.com/dhruvA207/student        | downstream (fork)        | student   |
 
 
 ## Links to Learning
@@ -25,15 +25,23 @@ Hi! My name is Ishan.
 <a href="https://github.com/Open-Coding-Society/student">
     <img src="https://img.shields.io/badge/GitHub-181717?logo=github&logoColor=white" alt="GitHub">
 </a>
+
+
 <a href="https://open-coding-society.github.io/student">
     <img src="https://img.shields.io/badge/GitHub%20Pages-327FC7?logo=github&logoColor=white" alt="GitHub Pages">
 </a>
+
+
 <a href="https://kasm.opencodingsociety.com/" class="button small" style="background-color: #6b4bd3ff">
     KASM
 </a>
+
+
 <a href="https://www.markdownguide.org/cheat-sheet/" class="button small" style="background-color: #F54927">
     Markdown Cheat Sheet
 </a>
+
+
 <a href="https://vscode.dev/" class="button small" style="background-color: #d38a4bff">
     <span style="color: #FFFFFF">VSCODE</span>
 </a>
@@ -42,20 +50,25 @@ Hi! My name is Ishan.
 
 ### Class Progress
 
-<a href="{{site.baseurl}}/snake" class="button small" style="background-color: #6b4bd3ff">
-    Snake Game
+<a href="{{site.baseurl}}/snake" class="button small" style="background-color: #fb56f3ff">
+    <span style="color: #043f58ff">Snake Game</span>
 </a>
+
 <a href="{{site.baseurl}}/turtle" class="button small" style="background-color: #2A7DB1">
     <span style="color: #000000">Turtle</span>
 </a>
 
+<a href="{{site.baseurl}}/calculator" class="button small" style="background-color: #0c0ca5ff">
+    <span style="color: #fffefeff">Calculator</span>
+</a>
+
+<a href="{{site.baseurl}}/background" class="button small" style="background-color: #08380cff">
+    <span style="color: #25a4d6ff">UFO Ship</span>
+</a>
+
 <br>
 
-### Personal Portfolio
 
-<a href="https://github.com/Jupiterian/ATP-Singles-Rankings-Data-Collection/" class="button small" style="background-color: #0Eb4">
-    ATP Rankings Data Visulization
-</a>
 
 <br>
 
