@@ -88,6 +88,10 @@ permalink: /snake
         min-width: 60px;
         user-select: none;
     }
+    /* soft glow for score */
+    #score_value {
+        text-shadow: 0 0 8px rgba(114, 211, 141, 0.8);
+    }
 
     /* Speed display: centered above the score */
     #speed_display {
@@ -109,6 +113,9 @@ permalink: /snake
     <div id="speed_display">Speed: --</div>
     <div id="score_container">
         <span id="score_value">0</span>
+    </div>
+    <div id="lives_container" style="display:flex;justify-content:center;margin-bottom:8px;">
+        <span id="lives_value" style="background:rgba(255,255,255,0.7);color:#2e6e4d;font-size:1.2rem;padding:4px 12px;border-radius:6px;">Lives: 3</span>
     </div>
     <div class="container bg-secondary" style="text-align:center;">
         <!-- Main Menu -->
@@ -144,6 +151,12 @@ permalink: /snake
                 <input id="walloff" type="radio" name="wall" value="0"/>
                 <label for="walloff">Off</label>
             </p>
+            <p>Difficulty:
+                <input id="diff_easy" type="radio" name="difficulty" value="easy" checked/>
+                <label for="diff_easy">Easy</label>
+                <input id="diff_hard" type="radio" name="difficulty" value="hard"/>
+                <label for="diff_hard">Hard</label>
+            </p>
         </div>
     </div>
 </div>
@@ -161,6 +174,7 @@ permalink: /snake
         const ele_speed = document.getElementById("speed_display");
         const ele_score = document.getElementById("score_value");
         const speed_setting = document.getElementsByName("speed");
+    const difficulty_setting = document.getElementsByName("difficulty");
         const wall_setting = document.getElementsByName("wall");
         // HTML Screen IDs (div)
         const SCREEN_MENU = -1, SCREEN_GAME_OVER=1, SCREEN_SETTING=2;
@@ -181,7 +195,12 @@ permalink: /snake
     let snake_next_dir;
     let snake_speed;
     let DEFAULT_SNAKE_SPEED;
-    let food = {x: 0, y: 0, special: false};
+    // change food into an array so multiple foods can be present
+    let foods = [];
+    // obstacles on the board
+    let obstacles = [];
+    // lives for the snake
+    let lives = 3;
         let score;
         let wall;
         /* Display Control */
@@ -243,6 +262,12 @@ permalink: /snake
                     }
                 });
             }
+            // difficulty
+            for(let i = 0; i < difficulty_setting.length; i++){
+                difficulty_setting[i].addEventListener("click", function(){
+                    // nothing immediate - newGame will read the current difficulty when starting
+                });
+            }
             // wall setting
             setWall(1);
             for(let i = 0; i < wall_setting.length; i++){
@@ -256,9 +281,17 @@ permalink: /snake
             }
             // activate window events
             window.addEventListener("keydown", function(evt) {
-                // spacebar detected
-                if(evt.code === "Space" && SCREEN !== SCREEN_SNAKE)
+                // spacebar detected to start
+                if(evt.code === "Space" && SCREEN !== SCREEN_SNAKE) {
                     newGame();
+                    return;
+                }
+                // allow WASD keys from anywhere to change direction during play
+                if (SCREEN === SCREEN_SNAKE) {
+                    // prefer 'key' where available
+                    const k = evt.key || evt.keyCode;
+                    changeDir(k);
+                }
             }, true);
         }
         /* Snake is on the Go (Driver Function)  */
@@ -277,13 +310,16 @@ permalink: /snake
             snake.pop(); // tail is removed
             snake.unshift({x: _x, y: _y}); // head is new in new position/orientation
             // Wall Checker
-            if(wall === 1){
-                // Wall on, Game over test
+            if(Number(wall) === 1){
+                // Wall on, hit wall -> lose a life (consistent with other collisions)
                 if (snake[0].x < 0 || snake[0].x === canvas.width / BLOCK || snake[0].y < 0 || snake[0].y === canvas.height / BLOCK){
-                    showScreen(SCREEN_GAME_OVER);
+                    lives -= 1;
+                    updateLivesUI();
+                    if (lives <= 0) { showScreen(SCREEN_GAME_OVER); return; }
+                    respawnAfterHit();
                     return;
                 }
-            }else{
+            } else {
                 // Wall Off, Circle around
                 for(let i = 0, x = snake.length; i < x; i++){
                     if(snake[i].x < 0){
@@ -304,49 +340,90 @@ permalink: /snake
             for(let i = 1; i < snake.length; i++){
                 // Game over test
                 if (snake[0].x === snake[i].x && snake[0].y === snake[i].y){
-                    showScreen(SCREEN_GAME_OVER);
+                    // collision with self: lose a life or end game
+                    lives -= 1;
+                    updateLivesUI();
+                    if (lives <= 0) { showScreen(SCREEN_GAME_OVER); return; }
+                    respawnAfterHit();
                     return;
                 }
             }
-            // Snake eats food checker
-            if(checkBlock(snake[0].x, snake[0].y, food.x, food.y)){
-                snake[snake.length] = {x: snake[0].x, y: snake[0].y};
-                // Award points: special food = +3, regular = +1
-                if (food.special) {
-                    score += 3;
-                } else {
-                    score += 1;
+            // Snake eats any food present
+            for (let fi = 0; fi < foods.length; fi++) {
+                const f = foods[fi];
+                if (checkBlock(snake[0].x, snake[0].y, f.x, f.y)) {
+                    // grow
+                    snake[snake.length] = {x: snake[0].x, y: snake[0].y};
+                    // Award points
+                    score += (f.special ? 3 : 1);
+                    altScore(score);
+                    // speed bonus every 5 points
+                    try {
+                        const MIN_SPEED = 20;
+                        const SPEED_DECREMENT = 10;
+                        if (score % 5 === 0) {
+                            const newSpeed = Math.max(MIN_SPEED, Number(snake_speed) - SPEED_DECREMENT);
+                            setSnakeSpeed(newSpeed);
+                        }
+                    } catch (e) { console.error('Speed bonus error:', e); }
+                    // remove eaten food
+                    foods.splice(fi, 1);
+                    // spawn another food to keep count
+                    addFood();
+                    break;
                 }
-                altScore(score);
-                // Bonus: speed up a little every 5 points
-                try {
-                    const MIN_SPEED = 20; // ms, fastest allowed
-                    const SPEED_DECREMENT = 10; // makes it faster every 5 points
-                    if (score % 5 === 0) {
-                        const newSpeed = Math.max(MIN_SPEED, Number(snake_speed) - SPEED_DECREMENT);
-                        setSnakeSpeed(newSpeed);
-                    }
-                } catch (e) {
-                    // if something unexpected happens, don't break the game
-                    console.error('Speed bonus error:', e);
+            }
+            // Snake hits obstacle
+            for (let oi = 0; oi < obstacles.length; oi++) {
+                const ob = obstacles[oi];
+                if (checkBlock(snake[0].x, snake[0].y, ob.x, ob.y)) {
+                    // hit obstacle: lose a life
+                    lives -= 1;
+                    updateLivesUI();
+                    if (lives <= 0) { showScreen(SCREEN_GAME_OVER); return; }
+                    respawnAfterHit();
+                    return;
                 }
-                // clear special flag after eating and place new food
-                food.special = false;
-                addFood();
-                activeDot(food.x, food.y);
             }
             // Repaint canvas
             ctx.beginPath();
             ctx.fillStyle = "#72d38d"; // Changed background color
             ctx.fillRect(0, 0, canvas.width, canvas.height);
-            // Paint snake
+            // Paint snake with a soft glow
+            ctx.save();
+            ctx.shadowColor = "rgba(255,255,255,0.6)";
+            ctx.shadowBlur = 8;
             for(let i = 0; i < snake.length; i++){
                 ctx.fillStyle = "#FFFFFF"; // White for snake
                 ctx.fillRect(snake[i].x * BLOCK, snake[i].y * BLOCK, BLOCK, BLOCK);
             }
-            // Paint apple in gold if special
-            ctx.fillStyle = food.special ? "#ffd700" : "#ff7272";
-            ctx.fillRect(food.x * BLOCK, food.y * BLOCK, BLOCK, BLOCK);
+            ctx.restore();
+            // Paint multiple foods
+            for (let fi = 0; fi < foods.length; fi++) {
+                const f = foods[fi];
+                ctx.save();
+                if (f.special) {
+                    ctx.shadowColor = "rgba(255,215,0,0.9)";
+                    ctx.shadowBlur = 12;
+                    ctx.fillStyle = "#ffd700";
+                } else {
+                    ctx.shadowColor = "rgba(255,114,114,0.6)";
+                    ctx.shadowBlur = 8;
+                    ctx.fillStyle = "#ff7272";
+                }
+                ctx.fillRect(f.x * BLOCK, f.y * BLOCK, BLOCK, BLOCK);
+                ctx.restore();
+            }
+            // Paint obstacles
+            for (let oi = 0; oi < obstacles.length; oi++) {
+                const ob = obstacles[oi];
+                ctx.save();
+                ctx.shadowColor = "rgba(0,0,0,0.4)";
+                ctx.shadowBlur = 6;
+                ctx.fillStyle = "#4b4b4b"; // dark grey
+                ctx.fillRect(ob.x * BLOCK, ob.y * BLOCK, BLOCK, BLOCK);
+                ctx.restore();
+            }
             // Debug
             //document.getElementById("debug").innerHTML = snake_dir + " " + snake_next_dir + " " + snake[0].x + " " + snake[0].y;
             // Recursive call after speed delay, déjà vu
@@ -361,6 +438,20 @@ permalink: /snake
             // game score to zero
             score = 0;
             altScore(score);
+            // determine difficulty and configure defaults
+            let difficulty = 'easy';
+            try {
+                for (let i = 0; i < difficulty_setting.length; i++) {
+                    if (difficulty_setting[i].checked) { difficulty = difficulty_setting[i].value; break; }
+                }
+            } catch (e) { /* default to easy */ }
+            if (difficulty === 'hard'){
+                lives = 3;
+            } else {
+                // easy mode: base game, single life
+                lives = 1;
+            }
+            updateLivesUI();
             // apply currently selected speed setting when a new game starts
             try {
                 for (let i = 0; i < speed_setting.length; i++) {
@@ -380,69 +471,122 @@ permalink: /snake
                 snake.push({ x: 0 - i, y: 15 });
             }
             snake_next_dir = 1;
-            // food on canvas
-            addFood();
+            // clear foods and obstacles and add based on difficulty
+            foods = [];
+            obstacles = [];
+            if (difficulty === 'hard'){
+                // multiple foods and obstacles on hard
+                for (let i = 0; i < 3; i++) addFood();
+                for (let i = 0; i < 4; i++) addObstacle();
+            } else {
+                // easy: single food, no obstacles
+                addFood();
+            }
             // activate canvas event
             canvas.onkeydown = function(evt) {
-                changeDir(evt.keyCode);
+                // allow both keyCode (numeric) and key (string like 'w')
+                changeDir(evt.key || evt.keyCode);
             }
             mainLoop();
         }
         /* Key Inputs and Actions */
         /////////////////////////////////////////////////////////////
         let changeDir = function(key){
-            // test key and switch direction
-            switch(key) {
-                case 37:    // left arrow
-                    if (snake_dir !== 1)    // not right
-                        snake_next_dir = 3; // then switch left
+            // accept both keyCode numbers and key strings (arrows and WASD)
+            const k = (typeof key === 'number') ? key : String(key).toLowerCase();
+            switch(k) {
+                case 37: // left arrow
+                case 'arrowleft':
+                case 'a':
+                    if (snake_dir !== 1) snake_next_dir = 3; // left
                     break;
-                case 38:    // up arrow
-                    if (snake_dir !== 2)    // not down
-                        snake_next_dir = 0; // then switch up
+                case 38: // up arrow
+                case 'arrowup':
+                case 'w':
+                    if (snake_dir !== 2) snake_next_dir = 0; // up
                     break;
-                case 39:    // right arrow
-                    if (snake_dir !== 3)    // not left
-                        snake_next_dir = 1; // then switch right
+                case 39: // right arrow
+                case 'arrowright':
+                case 'd':
+                    if (snake_dir !== 3) snake_next_dir = 1; // right
                     break;
-                case 40:    // down arrow
-                    if (snake_dir !== 0)    // not up
-                        snake_next_dir = 2; // then switch down
+                case 40: // down arrow
+                case 'arrowdown':
+                case 's':
+                    if (snake_dir !== 0) snake_next_dir = 2; // down
                     break;
             }
         }
         /* Dot for Food or Snake part */
         /////////////////////////////////////////////////////////////
         let activeDot = function(x, y){
-            // Draw apple (food) in red or gold if special, snake in white
-            if (x === food.x && y === food.y) {
-                ctx.fillStyle = food.special ? "#ffd700" : "#ff7272"; // Gold for special, red otherwise
-            } else {
-                ctx.fillStyle = "#FFFFFF"; // White for snake
-            }
+            // generic helper to draw a white snake block (kept for compatibility)
+            ctx.fillStyle = "#FFFFFF";
             ctx.fillRect(x * BLOCK, y * BLOCK, BLOCK, BLOCK);
         }
         /* Random food placement */
         /////////////////////////////////////////////////////////////
         let addFood = function(){
-            food.x = Math.floor(Math.random() * ((canvas.width / BLOCK) - 1));
-            food.y = Math.floor(Math.random() * ((canvas.height / BLOCK) - 1));
-            for(let i = 0; i < snake.length; i++){
-                if(checkBlock(food.x, food.y, snake[i].x, snake[i].y)){
-                    addFood();
-                }
+            // generate a food at a random free cell (not on snake, not on obstacles, not on other foods)
+            const maxX = canvas.width / BLOCK;
+            const maxY = canvas.height / BLOCK;
+            const tryPlace = function(){
+                const fx = Math.floor(Math.random() * (maxX - 1));
+                const fy = Math.floor(Math.random() * (maxY - 1));
+                // check conflicts
+                for(let i = 0; i < snake.length; i++) if(checkBlock(fx, fy, snake[i].x, snake[i].y)) return null;
+                for(let i = 0; i < foods.length; i++) if(checkBlock(fx, fy, foods[i].x, foods[i].y)) return null;
+                for(let i = 0; i < obstacles.length; i++) if(checkBlock(fx, fy, obstacles[i].x, obstacles[i].y)) return null;
+                return {x: fx, y: fy};
             }
-            // Special mode: make the food special (gold & worth 3 points) every 7 points
-            if (score > 0 && score % 7 === 0) {
-                food.special = true;
-            } else {
-                food.special = false;
+            let pos = tryPlace();
+            let attempts = 0;
+            while(!pos && attempts < 50){ pos = tryPlace(); attempts++; }
+            if(!pos) return; // give up if crowded
+            const special = (score > 0 && score % 7 === 0);
+            foods.push({x: pos.x, y: pos.y, special: special});
+        }
+
+        let addObstacle = function(){
+            const maxX = canvas.width / BLOCK;
+            const maxY = canvas.height / BLOCK;
+            const tryPlace = function(){
+                const ox = Math.floor(Math.random() * (maxX - 1));
+                const oy = Math.floor(Math.random() * (maxY - 1));
+                // check conflicts
+                for(let i = 0; i < snake.length; i++) if(checkBlock(ox, oy, snake[i].x, snake[i].y)) return null;
+                for(let i = 0; i < foods.length; i++) if(checkBlock(ox, oy, foods[i].x, foods[i].y)) return null;
+                for(let i = 0; i < obstacles.length; i++) if(checkBlock(ox, oy, obstacles[i].x, obstacles[i].y)) return null;
+                return {x: ox, y: oy};
             }
+            let pos = tryPlace();
+            let attempts = 0;
+            while(!pos && attempts < 50){ pos = tryPlace(); attempts++; }
+            if(!pos) return;
+            obstacles.push(pos);
         }
         /* Collision Detection */
         /////////////////////////////////////////////////////////////
         let checkBlock = function(x, y, _x, _y){
             return (x === _x && y === _y);
+        }
+        
+        let updateLivesUI = function(){
+            const el = document.getElementById('lives_value');
+            if (el) el.innerText = 'Lives: ' + String(lives);
+        }
+
+        let respawnAfterHit = function(){
+            // simple respawn: place snake back at starting position and reduce length
+            snake = [];
+            snake.push({x: 0, y: 15});
+            for (let i = 1; i <= 2; i++) { snake.push({ x: 0 - i, y: 15 }); }
+            snake_next_dir = 1;
+            // ensure there are at least 2 foods and some obstacles
+            while (foods.length < 2) addFood();
+            while (obstacles.length < 1) addObstacle();
+            // give player a brief pause before resuming
+            setTimeout(mainLoop, 400);
         }
         /* Update Score */
         /////////////////////////////////////////////////////////////
