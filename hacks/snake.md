@@ -199,6 +199,8 @@ permalink: /snake
     let foods = [];
     // obstacles on the board
     let obstacles = [];
+    // hearts that give extra life
+    let hearts = [];
     // lives for the snake
     let lives = 3;
         let score;
@@ -354,9 +356,27 @@ permalink: /snake
                 if (checkBlock(snake[0].x, snake[0].y, f.x, f.y)) {
                     // grow
                     snake[snake.length] = {x: snake[0].x, y: snake[0].y};
+                    // Add sound effect (short beep) when food is eaten (uses Web Audio API)
+                    try {
+                        const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                        const oscillator = audioContext.createOscillator();
+                        oscillator.frequency.value = 800; // High pitch beep
+                        oscillator.type = 'sine';
+                        oscillator.connect(audioContext.destination);
+                        oscillator.start();
+                        oscillator.stop(audioContext.currentTime + 0.1); // Short beep (~100ms)
+                    } catch (e) { /* ignore if audio not supported */ }
                     // Award points
-                    score += (f.special ? 3 : 1);
+                    const points = (f.special ? 3 : 1);
+                    const prevScore = score;
+                    score += points;
                     altScore(score);
+                    // If score crossed a multiple of 10, spawn a heart
+                    try {
+                        if (Math.floor(prevScore / 10) !== Math.floor(score / 10) && score > 0 && score % 10 === 0) {
+                            addHeart();
+                        }
+                    } catch (e) { console.error('Heart spawn on score error:', e); }
                     // speed bonus every 5 points
                     try {
                         const MIN_SPEED = 20;
@@ -369,6 +389,21 @@ permalink: /snake
                     // remove eaten food
                     foods.splice(fi, 1);
                     // spawn another food to keep count
+                    addFood();
+                    break;
+                }
+            }
+            // Snake collects hearts
+            for (let hi = 0; hi < hearts.length; hi++) {
+                const h = hearts[hi];
+                if (checkBlock(snake[0].x, snake[0].y, h.x, h.y)) {
+                    // gain a life
+                    lives += 1;
+                    updateLivesUI();
+                    // remove heart
+                    hearts.splice(hi, 1);
+                    try { console.log('Heart collected. Lives now', lives); } catch(e){}
+                    // small bonus: add a food to keep game lively
                     addFood();
                     break;
                 }
@@ -424,6 +459,38 @@ permalink: /snake
                 ctx.fillRect(ob.x * BLOCK, ob.y * BLOCK, BLOCK, BLOCK);
                 ctx.restore();
             }
+            // Paint hearts (larger + stroked for visibility)
+            for (let hi = 0; hi < hearts.length; hi++) {
+                const h = hearts[hi];
+                // draw a simple heart using two circles and a triangle-like bottom
+                const px = h.x * BLOCK;
+                const py = h.y * BLOCK;
+                ctx.save();
+                ctx.shadowColor = "rgba(255,120,120,0.8)";
+                ctx.shadowBlur = 12;
+                ctx.fillStyle = "#e74c3c"; // heart red
+                ctx.strokeStyle = "#2b2b2b";
+                ctx.lineWidth = Math.max(1, BLOCK * 0.06);
+                // left lobe
+                ctx.beginPath();
+                ctx.arc(px + BLOCK*0.32, py + BLOCK*0.28, BLOCK*0.28, 0, Math.PI*2);
+                ctx.fill();
+                ctx.stroke();
+                // right lobe
+                ctx.beginPath();
+                ctx.arc(px + BLOCK*0.68, py + BLOCK*0.28, BLOCK*0.28, 0, Math.PI*2);
+                ctx.fill();
+                ctx.stroke();
+                // bottom triangle
+                ctx.beginPath();
+                ctx.moveTo(px + BLOCK*0.18, py + BLOCK*0.48);
+                ctx.lineTo(px + BLOCK*0.82, py + BLOCK*0.48);
+                ctx.lineTo(px + BLOCK*0.5, py + BLOCK*0.92);
+                ctx.closePath();
+                ctx.fill();
+                ctx.stroke();
+                ctx.restore();
+            }
             // Debug
             //document.getElementById("debug").innerHTML = snake_dir + " " + snake_next_dir + " " + snake[0].x + " " + snake[0].y;
             // Recursive call after speed delay, déjà vu
@@ -471,16 +538,22 @@ permalink: /snake
                 snake.push({ x: 0 - i, y: 15 });
             }
             snake_next_dir = 1;
-            // clear foods and obstacles and add based on difficulty
+            // clear foods, obstacles, and hearts and add based on difficulty
             foods = [];
             obstacles = [];
+            hearts = [];
+            // spawn base content regardless of difficulty
             if (difficulty === 'hard'){
                 // multiple foods and obstacles on hard
                 for (let i = 0; i < 3; i++) addFood();
                 for (let i = 0; i < 4; i++) addObstacle();
+                // spawn a couple of hearts on hard mode
+                for (let i = 0; i < 2; i++) addHeart();
             } else {
                 // easy: single food, no obstacles
                 addFood();
+                // spawn at least one heart in easy mode as well
+                addHeart();
             }
             // activate canvas event
             canvas.onkeydown = function(evt) {
@@ -547,6 +620,48 @@ permalink: /snake
             foods.push({x: pos.x, y: pos.y, special: special});
         }
 
+        let addHeart = function(){
+            const maxX = canvas.width / BLOCK;
+            const maxY = canvas.height / BLOCK;
+            const tryPlace = function(){
+                // allow full grid range (0 .. max-1)
+                const hx = Math.floor(Math.random() * (maxX));
+                const hy = Math.floor(Math.random() * (maxY));
+                // check conflicts
+                for(let i = 0; i < snake.length; i++) if(checkBlock(hx, hy, snake[i].x, snake[i].y)) return null;
+                for(let i = 0; i < foods.length; i++) if(checkBlock(hx, hy, foods[i].x, foods[i].y)) return null;
+                for(let i = 0; i < obstacles.length; i++) if(checkBlock(hx, hy, obstacles[i].x, obstacles[i].y)) return null;
+                for(let i = 0; i < hearts.length; i++) if(checkBlock(hx, hy, hearts[i].x, hearts[i].y)) return null;
+                return {x: hx, y: hy};
+            }
+            let pos = tryPlace();
+            let attempts = 0;
+            while(!pos && attempts < 50){ pos = tryPlace(); attempts++; }
+            if(!pos) return; // give up if crowded
+            hearts.push({x: pos.x, y: pos.y});
+            try { console.log('Heart spawned at', pos.x, pos.y); } catch(e){}
+            // show a brief on-screen message to help debugging (creates element if missing)
+            try {
+                let m = document.getElementById('heart_debug_msg');
+                if (!m) {
+                    m = document.createElement('div');
+                    m.id = 'heart_debug_msg';
+                    m.style.position = 'fixed';
+                    m.style.left = '10px';
+                    m.style.top = '10px';
+                    m.style.padding = '6px 10px';
+                    m.style.background = 'rgba(0,0,0,0.6)';
+                    m.style.color = '#fff';
+                    m.style.zIndex = 9999;
+                    m.style.borderRadius = '6px';
+                    document.body.appendChild(m);
+                }
+                m.innerText = 'Heart spawned at: ' + pos.x + ',' + pos.y;
+                m.style.display = 'block';
+                setTimeout(function(){ if(m) m.style.display = 'none'; }, 2000);
+            } catch(e){}
+        }
+
         let addObstacle = function(){
             const maxX = canvas.width / BLOCK;
             const maxY = canvas.height / BLOCK;
@@ -585,12 +700,15 @@ permalink: /snake
             // ensure there are at least 2 foods and some obstacles
             while (foods.length < 2) addFood();
             while (obstacles.length < 1) addObstacle();
+            // ensure at least one heart exists occasionally
+            if (hearts.length < 1 && Math.random() < 0.6) addHeart();
             // give player a brief pause before resuming
             setTimeout(mainLoop, 400);
         }
         /* Update Score */
         /////////////////////////////////////////////////////////////
         let altScore = function(score_val){
+            try { console.log('Score updated to', score_val); } catch(e){}
             ele_score.innerHTML = String(score_val);
         }
         /////////////////////////////////////////////////////////////
