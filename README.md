@@ -206,6 +206,8 @@ Tags are used to organize pages by their tag the way to add tags is to add the f
 
 All pages can be searched for using the built-in search bar. This search bar will search for any word in the title of a page or in the page itself. This allows for easily finding pages and information that you are looking for. However, sometimes this may not be desirable so to hide a page from the search you need to add `search_exclude: true` to the front matter of the page. This will hide the page from appearing when the viewer uses search.
 
+flag{first_flag123!}
+
 ### Navigation Bar
 
 To add pages to the top navigation bar use _config.yml to order and determine which menus you want and how to order them.  Review the_config.yml in this project for an example.
