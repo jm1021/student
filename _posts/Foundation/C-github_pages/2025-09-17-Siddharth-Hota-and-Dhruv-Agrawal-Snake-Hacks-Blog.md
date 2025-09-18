@@ -5,7 +5,7 @@ date: 2025-09-17
 
 # Hello, our names our Siddharth and Dhruv, and we choose to do the snake.md hacks
 
-Welcome to my blog where I document the various hacks and features I implemented in the classic Snake game using `snake.md`. Below, I've divided my work into easy hacks, hard hacks, and extra features. To play the game itself, acess this link: 
+Welcome to my blog where I document the various hacks and features I implemented in the classic Snake game using `snake.md`. Below, I've divided my work into easy hacks, hard hacks, and extra features. To play the game itself, acess this link: https://jupiterian.github.io/student/snake 
 
 ---
 
