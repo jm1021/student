@@ -1,13 +1,7 @@
 ---
-title: JS Calculator
-comments: true
-hide: true
-layout: default
-description: A common way to become familiar with a language is to build a calculator.  This calculator shows off button with actions.
-permalink: /techtalk/home_style
-categories: [C7.0]
-courses: { csse: {week: 2}, csp: {week: 2, categories: [2.C]}, csa: {week: 2} }
-type: ccc
+title: Calculator
+layout: base
+permalink: /calculator
 ---
 
 <!-- 
@@ -30,24 +24,51 @@ HTML implementation of the calculator.
     Background is credited to Vanta JS and is implemented at bottom of this page
 -->
 <style>
-  .calculator-output {
-    /* calulator output 
-      top bar shows the results of the calculator;
-      result to take up the entirety of the first row;
-      span defines 4 columns and 1 row
-    */
-    grid-column: span 4;
-    grid-row: span 1;
+/* Existing calculator output styles */
+.calculator-output {
+  grid-column: span 4;
+  grid-row: span 1;
+  border-radius: 10px;
+  padding: 0.25em;
+  font-size: 20px;
+  border: 5px solid black;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end; /* Hack 0: Right justify result */
+}
+
+/* Rainbow animated background */
+#animation {
+  position: relative;
+  width: 100%;
+  height: 100vh; /* Full screen height */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+
+  /* Rainbow gradient colors */
+  background: linear-gradient(270deg, red, orange, yellow, green, blue, indigo, violet);
+  background-size: 1400% 1400%;
   
-    border-radius: 10px;
-    padding: 0.25em;
-    font-size: 20px;
-    border: 5px solid black;
-  
-    display: flex;
-    align-items: center;
-  }
+  /* Smooth animation of the background */
+  animation: rainbowMove 20s ease infinite;
+}
+
+/* Keyframes to animate the gradient */
+@keyframes rainbowMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Ensure the calculator is above the background */
+.calculator-container {
+  position: relative;
+  z-index: 2; /* Keep the calculator above the animated background */
+}
 </style>
+
 
 <!-- Add a container for the animation -->
 <div id="animation">
@@ -70,45 +91,45 @@ HTML implementation of the calculator.
       <div class="calculator-number">9</div>
       <div class="calculator-operation">*</div>
       <!--row 4-->
+      <div class="calculator-operation" id="sqrt">√</div> <!-- Hack 3: Square root -->
       <div class="calculator-clear">A/C</div>
       <div class="calculator-number">0</div>
       <div class="calculator-number">.</div>
+      <div class="calculator-operation">/</div> <!-- Hack 2: Division -->
       <div class="calculator-equals">=</div>
   </div>
 </div>
 
-<!-- JavaScript (JS) implementation of the calculator. -->
 <script>
-// initialize important variables to manage calculations
 var firstNumber = null;
 var operator = null;
 var nextReady = true;
-// build objects containing key elements
+
 const output = document.getElementById("output");
 const numbers = document.querySelectorAll(".calculator-number");
 const operations = document.querySelectorAll(".calculator-operation");
 const clear = document.querySelectorAll(".calculator-clear");
 const equals = document.querySelectorAll(".calculator-equals");
+const sqrtButton = document.getElementById("sqrt");
 
-// Number buttons listener
+// Number buttons
 numbers.forEach(button => {
   button.addEventListener("click", function() {
     number(button.textContent);
   });
 });
 
-// Number action
-function number (value) { // function to input numbers into the calculator
+function number(value) {
     if (value != ".") {
-        if (nextReady == true) { // nextReady is used to tell the computer when the user is going to input a completely new number
+        if (nextReady == true) {
             output.innerHTML = value;
-            if (value != "0") { // if statement to ensure that there are no multiple leading zeroes
+            if (value != "0") {
                 nextReady = false;
             }
         } else {
-            output.innerHTML = output.innerHTML + value; // concatenation is used to add the numbers to the end of the input
+            output.innerHTML = output.innerHTML + value;
         }
-    } else { // special case for adding a decimal; can't have two decimals
+    } else {
         if (output.innerHTML.indexOf(".") == -1) {
             output.innerHTML = output.innerHTML + value;
             nextReady = false;
@@ -116,79 +137,78 @@ function number (value) { // function to input numbers into the calculator
     }
 }
 
-// Operation buttons listener
+// Operation buttons
 operations.forEach(button => {
   button.addEventListener("click", function() {
-    operation(button.textContent);
+    if (button.textContent !== "√") { // √ handled separately
+      operation(button.textContent);
+    }
   });
 });
 
-// Operator action
-function operation (choice) { // function to input operations into the calculator
-    if (firstNumber == null) { // once the operation is chosen, the displayed number is stored into the variable firstNumber
-        firstNumber = parseInt(output.innerHTML);
+function operation(choice) {
+    if (firstNumber == null) {
+        firstNumber = parseFloat(output.innerHTML); // Hack 1 fix: allow decimals
         nextReady = true;
         operator = choice;
-        return; // exits function
+        return;
     }
-    // occurs if there is already a number stored in the calculator
-    firstNumber = calculate(firstNumber, parseFloat(output.innerHTML)); 
+    firstNumber = calculate(firstNumber, parseFloat(output.innerHTML));
     operator = choice;
     output.innerHTML = firstNumber.toString();
     nextReady = true;
 }
 
-// Calculator
-function calculate (first, second) { // function to calculate the result of the equation
+function calculate(first, second) {
     let result = 0;
     switch (operator) {
-        case "+":
-            result = first + second;
-            break;
-        case "-":
-            result = first - second;
-            break;
-        case "*":
-            result = first * second;
-            break;
-        case "/":
-            result = first / second;
-            break;
-        default: 
-            break;
+        case "+": result = first + second; break;
+        case "-": result = first - second; break;
+        case "*": result = first * second; break;
+        case "/": result = first / second; break; // Hack 2 added division
+        default: break;
     }
     return result;
 }
 
-// Equals button listener
+// Equals button
 equals.forEach(button => {
   button.addEventListener("click", function() {
     equal();
   });
 });
 
-// Equal action
-function equal () { // function used when the equals button is clicked; calculates equation and displays it
+function equal() {
     firstNumber = calculate(firstNumber, parseFloat(output.innerHTML));
     output.innerHTML = firstNumber.toString();
     nextReady = true;
 }
 
-// Clear button listener
+// Clear button
 clear.forEach(button => {
   button.addEventListener("click", function() {
     clearCalc();
   });
 });
 
-// A/C action
-function clearCalc () { // clears calculator
+function clearCalc() {
     firstNumber = null;
     output.innerHTML = "0";
     nextReady = true;
 }
-</script>
 
+// Hack 3: Square root implementation
+sqrtButton.addEventListener("click", function() {
+    let currentValue = parseFloat(output.innerHTML);
+    if (currentValue >= 0) {
+        output.innerHTML = Math.sqrt(currentValue).toString();
+        nextReady = true;
+    } else {
+        output.innerHTML = "Error";
+        nextReady = true;
+    }
+});
+</script>
 <!-- 
 Vanta animations just for fun, load JS onto the page
 -->
