@@ -3,7 +3,7 @@ layout: base
 title: Background with Object
 description: Use JavaScript to have an in motion background.
 sprite: /images/platformer/sprites/flying-ufo.png
-background: /images/platformer/backgrounds/alien_planet1.jpg
+background: /images/platformer/backgrounds/alien_planet2.jpg
 permalink: /background
 ---
 
@@ -20,15 +20,20 @@ permalink: /background
   let imagesLoaded = 0;
   backgroundImg.onload = function() {
     imagesLoaded++;
+    console.log("GameWorldLoaded");
     startGameWorld();
   };
   spriteImg.onload = function() {
     imagesLoaded++;
+    console.log("PlayerLoaded");
     startGameWorld();
   };
 
   function startGameWorld() {
-    if (imagesLoaded < 2) return;
+    if (imagesLoaded < 2) {
+      console.log("BothLoaded");
+      return;
+    }
 
     class GameObject {
       constructor(image, width, height, x = 0, y = 0, speedRatio = 0) {
@@ -91,7 +96,7 @@ permalink: /background
         this.canvas.style.position = 'fixed';
         this.canvas.style.left = `0px`;
         this.canvas.style.top = `0px`;
-        this.canvas.style.zIndex = '-1';
+        this.canvas.style.zIndex = '999';
 
         this.gameObjects = [
          new Background(backgroundImg, this),
@@ -99,6 +104,8 @@ permalink: /background
         ];
       }
       gameLoop() {
+        this.ctx.fillStyle = "red";
+        this.ctx.fillRect(0, 0, this.width, this.height);
         this.ctx.clearRect(0, 0, this.width, this.height);
         for (const obj of this.gameObjects) {
           obj.update();
