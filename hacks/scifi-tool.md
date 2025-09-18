@@ -39,16 +39,15 @@ Press **Enter** or **click** to open the full page.
       Rookie Tips
     </div>
   </div>
-<!-- Floating preview -->
+  
+  <!-- Floating preview (placed inside stage so positioning is relative to it) -->
+  <div id="preview" class="hidden">
+    <h3 id="preview-title"></h3>
+    <p id="preview-desc"></p>
+    <span class="hint">Press Enter to open</span>
   </div>
 
-    <!-- Floating preview (placed inside stage so positioning is relative to it) -->
-    <div id="preview" class="hidden">
-      <h3 id="preview-title"></h3>
-      <p id="preview-desc"></p>
-      <span class="hint">Press Enter to open</span>
-    </div>
-  </div>
+</div>
 
 <style>
   body {
@@ -151,7 +150,7 @@ Press **Enter** or **click** to open the full page.
 
   const stage = document.getElementById('stage');
   let sr = stage.getBoundingClientRect();
-  let center = { x: sr.width/2, y: sr.height/2 };
+  let center = { x: stage.clientWidth/2, y: stage.clientHeight/2 };
   let pos = { x: center.x, y: center.y };
   const speed = 250;
   const keys = { arrowup:0, arrowdown:0, arrowleft:0, arrowright:0, w:0, a:0, s:0, d:0 };
@@ -171,6 +170,12 @@ Press **Enter** or **click** to open the full page.
   });
 
   let currentHover = null;
+
+  // Debug info to help validate assets and sizing
+  console.log('scifi-tool init', {
+    spriteSrc: ufo.src,
+    stageSize: { width: stage.clientWidth, height: stage.clientHeight }
+  });
 
   function clamp(v, min, max){ return Math.max(min, Math.min(max, v)); }
 
@@ -246,8 +251,8 @@ Press **Enter** or **click** to open the full page.
   // handle resize: update stage rect and orbit center/radius
   window.addEventListener('resize', () => {
     sr = stage.getBoundingClientRect();
-    center = { x: sr.width/2, y: sr.height/2 };
-    orbit.radius = Math.min(sr.width, sr.height) * 0.25;
+    center = { x: stage.clientWidth/2, y: stage.clientHeight/2 };
+    orbit.radius = Math.min(stage.clientWidth, stage.clientHeight) * 0.25;
     // clamp pos to new stage
     pos.x = clamp(pos.x, 0, stage.clientWidth);
     pos.y = clamp(pos.y, 0, stage.clientHeight);
