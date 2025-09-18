@@ -145,7 +145,7 @@ I redesigned the settings and game over screens with a modern look, using improv
 }
 ---
 
-## Hard Hacks
+## Hard Hacks - To run hard hacks, go to settings, and click hard mode, and then new game
 
 ### 1. Add obstacles that the snake has to avoid
 I implemented randomly placed obstacles on the game board. The collision detection logic was updated so that hitting an obstacle results in losing a life or ending the game. Below is the code
