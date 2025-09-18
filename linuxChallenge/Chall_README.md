@@ -1,6 +1,6 @@
 # Linux Challenge — Flag Hunt
 
-Welcome to the Linux Challenge! Your goal: clone this repository and find 5 hidden flags. Each flag is hidden somewhere in the repository files (including subdirectories) and follows this exact format:
+Welcome to the Linux Challenge! Your goal: clone this repository and find 8 hidden flags. Each flag is hidden somewhere in the repository files (including subdirectories) and follows this exact format:
 
 ```
 flag{ABC123}
