@@ -1,5 +1,5 @@
 ---
-layout: opencs
+layout: base 
 title: Background with Object
 description: Use JavaScript to have an in motion background.
 sprite: /images/platformer/sprites/flying-ufo.png
@@ -14,21 +14,26 @@ permalink: /background
   const ctx = canvas.getContext('2d');
   const backgroundImg = new Image();
   const spriteImg = new Image();
-  backgroundImg.src = '{{page.background}}';
-  spriteImg.src = '{{page.sprite}}';
+  backgroundImg.src = '{{ site.baseurl }}{{ page.background }}';
+  spriteImg.src = '{{ site.baseurl }}{{ page.sprite }}';
 
   let imagesLoaded = 0;
   backgroundImg.onload = function() {
     imagesLoaded++;
+    console.log("GameWorldLoaded");
     startGameWorld();
   };
   spriteImg.onload = function() {
     imagesLoaded++;
+    console.log("PlayerLoaded");
     startGameWorld();
   };
 
   function startGameWorld() {
-    if (imagesLoaded < 2) return;
+    if (imagesLoaded < 2) {
+      console.log("BothLoaded");
+      return;
+    }
 
     class GameObject {
       constructor(image, width, height, x = 0, y = 0, speedRatio = 0) {
@@ -87,9 +92,11 @@ permalink: /background
         this.canvas.height = this.height;
         this.canvas.style.width = `${this.width}px`;
         this.canvas.style.height = `${this.height}px`;
-        this.canvas.style.position = 'absolute';
+        // Make the canvas fixed so it fills the viewport behind content
+        this.canvas.style.position = 'fixed';
         this.canvas.style.left = `0px`;
-        this.canvas.style.top = `${(window.innerHeight - this.height) / 2}px`;
+        this.canvas.style.top = `0px`;
+        this.canvas.style.zIndex = '999';
 
         this.gameObjects = [
          new Background(backgroundImg, this),
@@ -97,6 +104,8 @@ permalink: /background
         ];
       }
       gameLoop() {
+        this.ctx.fillStyle = "red";
+        this.ctx.fillRect(0, 0, this.width, this.height);
         this.ctx.clearRect(0, 0, this.width, this.height);
         for (const obj of this.gameObjects) {
           obj.update();
@@ -111,4 +120,15 @@ permalink: /background
 
     const world = new GameWorld(backgroundImg, spriteImg);
     world.start();
+    // Update canvas size on resize
+    window.addEventListener('resize', () => {
+      world.width = window.innerWidth;
+      world.height = window.innerHeight;
+      world.canvas.width = world.width;
+      world.canvas.height = world.height;
+      world.canvas.style.width = `${world.width}px`;
+      world.canvas.style.height = `${world.height}px`;
+    });
   }
+
+</script>
