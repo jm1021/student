@@ -54,8 +54,8 @@ Hi!
     <span style="color: #043f58ff">Snake Game</span>
 </a>
 
-<a href="{{site.baseurl}}/turtle" class="button small" style="background-color: #2A7DB1">
-    <span style="color: #000000">Turtle</span>
+<a href="{{site.baseurl}}/cookie-clicker-game/" class="button small" style="background-color: #2A7DB1">
+    <span style="color: #000000">Cookie Clicker</span>
 </a>
 
 <a href="{{site.baseurl}}/calculator" class="button small" style="background-color: #0c0ca5ff">
@@ -63,7 +63,7 @@ Hi!
 </a>
 
 <a href="{{site.baseurl}}/background" class="button small" style="background-color: #08380cff">
-    <span style="color: #25a4d6ff">UFO Ship</span>
+    <span style="color: #25a4d6ff">UFO Ship (Background)</span>
 </a>
 
 <br>
