@@ -54,7 +54,6 @@ Press **Enter** or **click** to open the full page.
   body {
     margin: 0;
     font-family: system-ui, sans-serif;
-    background: url('{{ page.background | relative_url }}') center/cover no-repeat fixed;
     color: #fff;
     min-height: 100vh;
   }
@@ -69,6 +68,11 @@ Press **Enter** or **click** to open the full page.
     border-radius: 12px;
     overflow: hidden;
     background: rgba(0,0,0,0.35);
+    /* stage-specific background image */
+    background-image: url('{{ page.background | relative_url }}');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
     box-shadow: 0 8px 20px rgba(0,0,0,0.6);
   }
 
@@ -104,6 +108,7 @@ Press **Enter** or **click** to open the full page.
     font-weight: bold;
     cursor: pointer;
     transition: transform 0.2s ease;
+    position: relative;
   }
 
   .hub-box:hover {
@@ -145,14 +150,17 @@ Press **Enter** or **click** to open the full page.
   const descEl = document.getElementById('preview-desc');
 
   const stage = document.getElementById('stage');
-  const sr = stage.getBoundingClientRect();
-  let pos = { x: sr.width/2, y: sr.height/2 };
+  let sr = stage.getBoundingClientRect();
+  let center = { x: sr.width/2, y: sr.height/2 };
+  let pos = { x: center.x, y: center.y };
   const speed = 250;
   const keys = { arrowup:0, arrowdown:0, arrowleft:0, arrowright:0, w:0, a:0, s:0, d:0 };
+  let idle = true;
+  let orbit = { angle: 0, radius: Math.min(sr.width, sr.height) * 0.25, speed: 0.01 };
 
   window.addEventListener('keydown', e => {
     const k = e.key.toLowerCase();
-    if (k in keys) keys[k] = 1;
+    if (k in keys) { keys[k] = 1; idle = false; }
     if (k === 'enter' && currentHover) {
       window.location.href = currentHover.dataset.link;
     }
@@ -180,18 +188,27 @@ Press **Enter** or **click** to open the full page.
   function frame(t){
     const dt = 1/60;
     let vx = 0, vy = 0;
-  if (keys.arrowleft || keys.a) vx -= 1;
-  if (keys.arrowright || keys.d) vx += 1;
-  if (keys.arrowup || keys.w) vy -= 1;
-  if (keys.arrowdown || keys.s) vy += 1;
+    if (keys.arrowleft || keys.a) vx -= 1;
+    if (keys.arrowright || keys.d) vx += 1;
+    if (keys.arrowup || keys.w) vy -= 1;
+    if (keys.arrowdown || keys.s) vy += 1;
 
-    if (vx && vy) { vx *= 0.707; vy *= 0.707; }
+    if (vx || vy) {
+      // keyboard control overrides idle orbit
+      idle = false;
+      if (vx && vy) { vx *= 0.707; vy *= 0.707; }
+      pos.x += vx * speed * dt;
+      pos.y += vy * speed * dt;
+    } else {
+      // idle orbit movement
+      idle = true;
+      orbit.angle += orbit.speed;
+      pos.x = center.x + Math.cos(orbit.angle) * orbit.radius;
+      pos.y = center.y + Math.sin(orbit.angle) * orbit.radius;
+    }
 
-    pos.x += vx * speed * dt;
-    pos.y += vy * speed * dt;
-
-    pos.x = clamp(pos.x, 0, stage.clientWidth);
-    pos.y = clamp(pos.y, 0, stage.clientHeight);
+  pos.x = clamp(pos.x, 0, stage.clientWidth);
+  pos.y = clamp(pos.y, 0, stage.clientHeight);
 
   // position ufo by updating left/top so bounding rect matches stage coordinates
   ufo.style.left = `${pos.x}px`;
@@ -207,8 +224,9 @@ Press **Enter** or **click** to open the full page.
         currentHover = box;
         titleEl.textContent = box.dataset.title;
         descEl.textContent = box.dataset.desc;
+        // Position preview relative to stage
         preview.style.left = `${(r.left + r.right)/2}px`;
-        preview.style.top = `${r.top}px`;
+        preview.style.top = `${r.top - 10}px`;
         preview.classList.remove('hidden');
         break;
       }
@@ -224,6 +242,15 @@ Press **Enter** or **click** to open the full page.
     box.addEventListener('click', () => {
       window.location.href = box.dataset.link;
     });
+  });
+  // handle resize: update stage rect and orbit center/radius
+  window.addEventListener('resize', () => {
+    sr = stage.getBoundingClientRect();
+    center = { x: sr.width/2, y: sr.height/2 };
+    orbit.radius = Math.min(sr.width, sr.height) * 0.25;
+    // clamp pos to new stage
+    pos.x = clamp(pos.x, 0, stage.clientWidth);
+    pos.y = clamp(pos.y, 0, stage.clientHeight);
   });
 
 })();
