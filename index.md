@@ -48,7 +48,7 @@ Hi!
 
 <br>
 
-### Class Progress
+### Games and Hacks
 
 <a href="{{site.baseurl}}/snake" class="button small" style="background-color: #fb56f3ff">
     <span style="color: #043f58ff">Snake Game</span>
