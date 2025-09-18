@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# flag{v3nvR0ck$!}
 # Show the tools versions
 python --version
 bundle --version
