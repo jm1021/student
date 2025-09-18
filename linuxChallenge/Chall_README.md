@@ -50,6 +50,6 @@ Hints (if you get stuck)
 Submission
 - Collect the 5 flags and send them via email to ishanjha100@gmail.com
 
-Good luck and have fun!
+Good luck!
 
 Here is a link to a linux command cheatsheet: https://www.geeksforgeeks.org/linux-unix/linux-commands-cheat-sheet/ 
