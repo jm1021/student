@@ -35,7 +35,7 @@ Press **Enter** or **click** to open the full page.
     </div>
     <div class="hub-box" data-title="Linux Introduction Challenge"
          data-desc="Linux challenge to level up your skills."
-         data-link="{{ '/scifi-boxes/rookie-tips/' | relative_url }}">
+         data-link="{{ '/scifi-boxes/linux-intro-challenge' | relative_url }}">
       Linux Introduction Challenge
     </div>
   </div>

@@ -183,14 +183,14 @@ permalink: /scifi-boxes/linux-intro-challenge/
         <h3>2. Search for Flags</h3>
         <div class="command-block">
             <p class="comment">Simple grep search</p>
-            <p class="command">grep <filename> "flag{"</p>
+            <p class="command">cat "filename" | grep "flag{"</p>
             
             <p class="comment">Grep Recursive Search</p>
             <p class="command">grep -R "flag{"</p>
 
             <p class="comment">Get Contents of a file</p>
-            <p class="command">cat <filename></p>
-        </div>
+            <p class="command">cat "filename" </p>
+        
 
         <div class="hints">
             <h3>💡 Hints</h3>
@@ -203,6 +203,6 @@ permalink: /scifi-boxes/linux-intro-challenge/
         </div>
 
         <h2>🏆 Submission</h2>
-        <p>Found all 8 flags? Congratulations! Send them to ishanjha100@gmail.com or just call the instructor over.</p>
+        <p>Fou>nd all 8 flags? Congratulations! Send them to ishanjha100@gmail.com or just call the instructor over.</p>
 
         <p class="success">Good luck and happy hunting! 🎉</p>
