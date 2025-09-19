@@ -34,9 +34,9 @@ Press **Enter** or **click** to open the full page.
       Games You Can Do
     </div>
     <div class="hub-box" data-title="Linux Introduction Challenge"
-         data-desc="Quick coding tips to level up your skills."
+         data-desc="Linux challenge to level up your skills."
          data-link="{{ '/scifi-boxes/rookie-tips/' | relative_url }}">
-      Rookie Tips
+      Linux Introduction Challenge
     </div>
   </div>
   

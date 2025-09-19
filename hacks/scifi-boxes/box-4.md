@@ -1,7 +1,7 @@
 ---
 layout: base
 title: Rookie Tips
-permalink: /scifi-boxes/rookie-tips/
+permalink: /scifi-boxes/linux-intro-challenge/
 ---
 
 <html lang="en">
