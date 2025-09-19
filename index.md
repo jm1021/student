@@ -48,22 +48,10 @@ Hi!
 
 <br>
 
-### Games and Hacks
+### Scifi-Tool!
 
-<a href="{{site.baseurl}}/snake" class="button small" style="background-color: #fb56f3ff">
-    <span style="color: #043f58ff">Snake Game</span>
-</a>
-
-<a href="{{site.baseurl}}/cookie-clicker-game/" class="button small" style="background-color: #2A7DB1">
-    <span style="color: #000000">Cookie Clicker</span>
-</a>
-
-<a href="{{site.baseurl}}/calculator" class="button small" style="background-color: #0c0ca5ff">
-    <span style="color: #fffefeff">Calculator</span>
-</a>
-
-<a href="{{site.baseurl}}/background" class="button small" style="background-color: #08380cff">
-    <span style="color: #25a4d6ff">UFO Ship (Background)</span>
+<a href="{{site.baseurl}}/scifi-tool" class="button small" style="background-color: #0c0ca5ff">
+    <span style="color: #fffefeff">Scifi Tool</span>
 </a>
 
 <br>
@@ -74,7 +62,7 @@ Hi!
 <!-- Contact Section -->
 ### Get in Touch
 
-> Feel free to reach out if you'd like to collaborate or learn more about my work.
+> Feel free to reach out if you'd like to collaborate or learn more about our work.
 
 <p style="color: #2A7DB1;">Ishan Jha: <a href="https://github.com/Jupiterian" style="color: #2A7DB1; text-decoration: underline;">GitHub</a></p>
 <p style="color: #2A7DB1;">Ishan Jha: <a href="https://open.spotify.com/user/31spiranssqszaomtf3pyo3j6zbm" style="color: #2A7DB1; text-decoration: underline">Spotify</a></p>

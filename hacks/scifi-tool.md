@@ -33,10 +33,10 @@ Press **Enter** or **click** to open the full page.
          data-link="{{ '/scifi-boxes/games-you-can-do/' | relative_url }}">
       Games You Can Do
     </div>
-    <div class="hub-box" data-title="Tips & Tricks"
-         data-desc="Quick coding tips to level up your skills."
-         data-link="{{ '/scifi-boxes/rookie-tips/' | relative_url }}">
-      Rookie Tips
+    <div class="hub-box" data-title="Linux Introduction Challenge"
+         data-desc="Linux challenge to level up your skills."
+         data-link="{{ '/scifi-boxes/linux-intro-challenge' | relative_url }}">
+      Linux Introduction Challenge
     </div>
   </div>
   
@@ -99,20 +99,21 @@ Press **Enter** or **click** to open the full page.
 
   .hub-box {
     pointer-events: auto;
-    background: rgba(255,255,255,0.1);
-    border: 1px solid rgba(255,255,255,0.2);
+    background: #000; /* solid black to match canvas */
+    color: #fff; /* white text for contrast */
+    border: 2px solid #444; /* slightly lighter border for definition */
     border-radius: 12px;
     padding: 16px;
     text-align: center;
     font-weight: bold;
     cursor: pointer;
-    transition: transform 0.2s ease;
+    transition: transform 0.2s ease, background 0.2s ease;
     position: relative;
   }
 
   .hub-box:hover {
     transform: scale(1.05);
-    background: rgba(255,255,255,0.15);
+    background: #222; /* slightly lighter on hover */
   }
 
   /* Floating preview */
@@ -149,17 +150,15 @@ Press **Enter** or **click** to open the full page.
   const descEl = document.getElementById('preview-desc');
 
   const stage = document.getElementById('stage');
-  let sr = stage.getBoundingClientRect();
-  let center = { x: stage.clientWidth/2, y: stage.clientHeight/2 };
-  let pos = { x: center.x, y: center.y };
+  let pos = { x: stage.clientWidth/2, y: stage.clientHeight/2 };
   const speed = 250;
   const keys = { arrowup:0, arrowdown:0, arrowleft:0, arrowright:0, w:0, a:0, s:0, d:0 };
-  let idle = true;
-  let orbit = { angle: 0, radius: Math.min(sr.width, sr.height) * 0.25, speed: 0.01 };
+
+  let currentHover = null;
 
   window.addEventListener('keydown', e => {
     const k = e.key.toLowerCase();
-    if (k in keys) { keys[k] = 1; idle = false; }
+    if (k in keys) keys[k] = 1;
     if (k === 'enter' && currentHover) {
       window.location.href = currentHover.dataset.link;
     }
@@ -167,14 +166,6 @@ Press **Enter** or **click** to open the full page.
   window.addEventListener('keyup', e => {
     const k = e.key.toLowerCase();
     if (k in keys) keys[k] = 0;
-  });
-
-  let currentHover = null;
-
-  // Debug info to help validate assets and sizing
-  console.log('scifi-tool init', {
-    spriteSrc: ufo.src,
-    stageSize: { width: stage.clientWidth, height: stage.clientHeight }
   });
 
   function clamp(v, min, max){ return Math.max(min, Math.min(max, v)); }
@@ -190,7 +181,7 @@ Press **Enter** or **click** to open the full page.
     };
   }
 
-  function frame(t){
+  function frame(){
     const dt = 1/60;
     let vx = 0, vy = 0;
     if (keys.arrowleft || keys.a) vx -= 1;
@@ -198,27 +189,16 @@ Press **Enter** or **click** to open the full page.
     if (keys.arrowup || keys.w) vy -= 1;
     if (keys.arrowdown || keys.s) vy += 1;
 
-    if (vx || vy) {
-      // keyboard control overrides idle orbit
-      idle = false;
-      if (vx && vy) { vx *= 0.707; vy *= 0.707; }
-      pos.x += vx * speed * dt;
-      pos.y += vy * speed * dt;
-    } else {
-      // idle orbit movement
-      idle = true;
-      orbit.angle += orbit.speed;
-      pos.x = center.x + Math.cos(orbit.angle) * orbit.radius;
-      pos.y = center.y + Math.sin(orbit.angle) * orbit.radius;
-    }
+    if (vx && vy) { vx *= 0.707; vy *= 0.707; } // normalize diagonal speed
+    pos.x += vx * speed * dt;
+    pos.y += vy * speed * dt;
 
-  pos.x = clamp(pos.x, 0, stage.clientWidth);
-  pos.y = clamp(pos.y, 0, stage.clientHeight);
+    pos.x = clamp(pos.x, 0, stage.clientWidth);
+    pos.y = clamp(pos.y, 0, stage.clientHeight);
 
-  // position ufo by updating left/top so bounding rect matches stage coordinates
-  ufo.style.left = `${pos.x}px`;
-  ufo.style.top = `${pos.y}px`;
-  ufo.style.transform = `translate(-50%, -50%)`;
+    ufo.style.left = `${pos.x}px`;
+    ufo.style.top = `${pos.y}px`;
+    ufo.style.transform = `translate(-50%, -50%)`;
 
     // detect hover
     currentHover = null;
@@ -229,7 +209,6 @@ Press **Enter** or **click** to open the full page.
         currentHover = box;
         titleEl.textContent = box.dataset.title;
         descEl.textContent = box.dataset.desc;
-        // Position preview relative to stage
         preview.style.left = `${(r.left + r.right)/2}px`;
         preview.style.top = `${r.top - 10}px`;
         preview.classList.remove('hidden');
@@ -248,15 +227,13 @@ Press **Enter** or **click** to open the full page.
       window.location.href = box.dataset.link;
     });
   });
-  // handle resize: update stage rect and orbit center/radius
+
+  // handle resize
   window.addEventListener('resize', () => {
-    sr = stage.getBoundingClientRect();
-    center = { x: stage.clientWidth/2, y: stage.clientHeight/2 };
-    orbit.radius = Math.min(stage.clientWidth, stage.clientHeight) * 0.25;
-    // clamp pos to new stage
     pos.x = clamp(pos.x, 0, stage.clientWidth);
     pos.y = clamp(pos.y, 0, stage.clientHeight);
   });
 
 })();
 </script>
+
