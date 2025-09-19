@@ -10,10 +10,11 @@ Hi!
 
 | Role         | Name     | Repo Location                       | Stream                | Repo Name |
 |--------------|----------|-------------------------------------|-----------------------|-----------|
-| Scrum Master | Ishan    | github.com/Jupiterian/student           | upstream   (OCS fork)    | student   |
-| Scrummer     | Lance    | github.com/lanceo11/student       | downstream (fork)        | student   |
+| Scrum Master | Ishan    | github.com/Jupiterian/student       | upstream   (OCS fork)    | student   |
+| Scrummer     | Lance    | github.com/lanceo11/student         | downstream (fork)        | student   |
 | Scrummer     | Siddarth | github.com/SidH011/student          | downstream (fork)        | student   |
 | Scrummer     | Dhruv    | github.com/dhruvA207/student        | downstream (fork)        | student   |
+| Scrummer     | Angie    | github.com/angielina736/student     | downstream (fork)        | student   |
 
 
 ## Links to Learning
