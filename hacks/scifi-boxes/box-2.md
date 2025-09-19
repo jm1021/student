@@ -8,6 +8,74 @@ permalink: /scifi-boxes/getting-started/
 
 Add guides for getting started with development, tools, and workflows.
 
+## Quick guide: Setup WSL on Windows and use VS Code inside WSL
+
+If you're on Windows and want a native Linux development workflow, WSL (Windows Subsystem for Linux) + VS Code is a great option. This guide shows how to enable WSL, install Ubuntu (or another distro), and use VS Code with the WSL extension.
+
+Prerequisites: Windows 10 (2004+) or Windows 11 with access to an Administrator account.
+
+1) Enable WSL and install a Linux distribution (Ubuntu example)
+
+```powershell
+# Run PowerShell as Administrator
+wsl --install -d ubuntu
+# If `wsl --install` is not available on older Windows builds, run:
+# dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
+# dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
+# Then reboot and install Ubuntu from the Microsoft Store.
+```
+
+2) Initialize your distro
+
+After installation, launch Ubuntu from the Start menu and create a user account and password when prompted. Then update packages:
+
+```bash
+sudo apt update && sudo apt upgrade -y
+```
+
+3) Install essential developer tools inside WSL
+
+```bash
+sudo apt install -y build-essential git curl wget python3 python3-venv
+```
+
+4) Install Visual Studio Code on Windows (if not already installed)
+
+- Download and install from: https://code.visualstudio.com/
+
+5) Install the Remote - WSL extension in VS Code
+
+ - Open VS Code on Windows, go to the Extensions view (Ctrl+Shift+X), and install "Remote - WSL" by Microsoft.
+
+6) Open your WSL project in VS Code
+
+ - In your WSL terminal (Ubuntu), navigate to your project folder, for example:
+
+```bash
+cd /home/yourusername/student
+code .
+```
+
+ - The `code .` command opens VS Code connected to your WSL environment (you'll see "WSL: Ubuntu" in the bottom-left). This lets VS Code use the Linux toolchain, extensions, and terminal.
+
+7) Optional: Install VS Code server components inside WSL (automatic)
+
+ - The first time you connect, VS Code will install its server components inside the WSL distro automatically. Accept any prompts and wait for the install to finish.
+
+8) Using the WSL terminal inside VS Code
+
+ - Use the integrated terminal (Ctrl+`) which will default to your WSL shell. All commands you run there execute inside Linux.
+
+Notes on file locations:
+ - Your WSL home directory is under Linux path `/home/<user>`.
+ - If you want to edit files stored in Windows from WSL, access them under `/mnt/c/` (e.g. `/mnt/c/Users/<user>/Projects`). Prefer keeping project files in the Linux filesystem for performance.
+
+Troubleshooting:
+ - If `code` is not found in WSL, run `which code` in your WSL shell; if missing, open VS Code on Windows and run the "Remote-WSL: New Window" command, which usually sets up the CLI.
+ - If you hit permission issues, check your Windows antivirus or policies that may block WSL.
+
+That's it — you're now set up to develop inside WSL using the full Linux toolchain while using the familiar VS Code UI on Windows.
+
 
 
 
