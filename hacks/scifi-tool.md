@@ -33,7 +33,7 @@ Press **Enter** or **click** to open the full page.
          data-link="{{ '/scifi-boxes/games-you-can-do/' | relative_url }}">
       Games You Can Do
     </div>
-    <div class="hub-box" data-title="Tips & Tricks"
+    <div class="hub-box" data-title="Linux Introduction Challenge"
          data-desc="Quick coding tips to level up your skills."
          data-link="{{ '/scifi-boxes/rookie-tips/' | relative_url }}">
       Rookie Tips
