@@ -2,7 +2,7 @@
 layout: base
 title: Starship Rookie Hub
 sprite: /images/platformer/sprites/flying-ufo.png
-background: /images/platformer/backgrounds/alien_planet2.jpg
+background: /images/platformer/backgrounds/planet.jpg
 permalink: /scifi-tool
 ---
 
