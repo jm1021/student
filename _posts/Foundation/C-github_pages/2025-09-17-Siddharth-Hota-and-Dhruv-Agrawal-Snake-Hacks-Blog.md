@@ -14,31 +14,42 @@ Welcome to my blog where I document the various hacks and features I implemented
 ### 1. Change the background color, snake color, and food color
 I modified the game's CSS and JavaScript to allow dynamic changes to the background, snake, and food colors. This was achieved by exposing color pickers in the settings menu and updating the rendering logic to use the selected colors. Below is the code references
 
-Background - background-color: #72d38d; and ctx.fillStyle = "#72d38d";
+Background 
+```bash
+background-color: #72d38d; and ctx.fillStyle = "#72d38d";
+```
 
+```bash
 Snake - ctx.fillStyle = "#FFFFFF";
+```
 
+```bash
 Food -
 if (f.special) {
       ctx.fillStyle = "#ffd700"; // Gold for special food
   } else {
       ctx.fillStyle = "#ff7272"; // Red for regular food
   }
-
+```
 ### 2. Add or change settings to change the speed of the snake
 I introduced a slider in the settings screen that lets users adjust the snake's speed. The game loop interval is updated in real-time based on the chosen speed, making the game more customizable. Below are the code references
 
+```bash
 setSnakeSpeed(Change to desired number) and setTimeout(mainLoop, snake_speed);
+```
 
 ### 3. Increase the amount of length the snake gets from the food
 I added a setting that lets players choose how much the snake grows when it eats food. This involved modifying the logic that handles food consumption and snake growth. Below are the code references
 
+```bash
 if (checkBlock(snake[0].x, snake[0].y, f.x, f.y)) {
     snake[snake.length] = {x: snake[0].x, y: snake[0].y}; // Single growth
+```
 
 ### 4. Add new keybinds to the snake (e.g., give it WASD controls)
 I updated the input handling code to support both arrow keys and WASD controls, making the game more accessible and comfortable for different players. I did this with the changeDir() function and via the code below
 
+```bash
 let changeDir = function(key){
     // accept both keyCode numbers and key strings (arrows and WASD)
     const k = (typeof key === 'number') ? key : String(key).toLowerCase();
@@ -65,10 +76,12 @@ let changeDir = function(key){
             break;
     }
 }
+```
 
 ### 5. Add a glowing effect to any part of the game
 Using CSS box-shadow and animation, I added a glowing effect to the snake, food, obstacles, and score, making them stand out visually and enhancing the game's aesthetics. Here is the code
 
+```bash
 // Paint snake with a soft glow
 ctx.save();
 ctx.shadowColor = "rgba(255,255,255,0.6)";  // ← White glow
@@ -111,10 +124,12 @@ for (let oi = 0; oi < obstacles.length; oi++) {
 #score_value {
     text-shadow: 0 0 8px rgba(114, 211, 141, 0.8);  /* ← Score text glow */
 }
+```
 
 ### 6. Overhaul the UI (interface) of the setting screens/game over screen
 I redesigned the settings and game over screens with a modern look, using improved layouts, colors, and transitions for a better user experience.
 
+```bash
 /* Center and style the score */
 #score_container {
     display: flex;
@@ -144,12 +159,13 @@ I redesigned the settings and game over screens with a modern look, using improv
     margin-right: 10px;
 }
 ---
-
+```
 ## Hard Hacks - To run hard hacks, go to settings, and click hard mode, and then new game
 
 ### 1. Add obstacles that the snake has to avoid
 I implemented randomly placed obstacles on the game board. The collision detection logic was updated so that hitting an obstacle results in losing a life or ending the game. Below is the code
 
+```bash
 // Snake hits obstacle
 for (let oi = 0; oi < obstacles.length; oi++) {
     const ob = obstacles[oi];
@@ -162,7 +178,8 @@ for (let oi = 0; oi < obstacles.length; oi++) {
         return;
     }
 }
-
+```
+```bash
 let addObstacle = function(){
     const maxX = canvas.width / BLOCK;
     const maxY = canvas.height / BLOCK;
@@ -181,11 +198,12 @@ let addObstacle = function(){
     if(!pos) return;
     obstacles.push(pos);
 }
-
+```
 
 ### 2. Give snake multiple lives
 I introduced a lives system, displaying the remaining lives on the UI. When the snake collides with itself or an obstacle, it loses a life and respawns, unless all lives are lost. Below is the code
 
+```bash
 let lives = 3;
 
 let updateLivesUI = function(){
@@ -225,10 +243,11 @@ if (snake[0].x === snake[i].x && snake[0].y === snake[i].y){
     respawnAfterHit();
     return;
 }
-
+```
 ### 3. Make multiple foods available to the snake
 I modified the food spawning logic to allow multiple food items to appear on the board at once. This feature would only be accesible in hard mode, to help balance the extra challenges.
 
+```bash
 let foods = [];
 
 // Snake eats any food present
@@ -257,11 +276,12 @@ if (difficulty === 'hard'){
     for (let i = 0; i < 4; i++) addObstacle();
 }
 ---
-
+```
 ## Extra Features
 
 I also added a sound effect upon eating the food. Here is the code:
 
+```bash
 // Add sound effect on food eat
 try {
     const audioContext = new (window.AudioContext || window.webkitAudioContext)();
@@ -313,3 +333,4 @@ for (let i = 0; i < 2; i++) addHeart();
                 // spawn at least one heart in easy mode as well
                 addHeart();
             }
+```
