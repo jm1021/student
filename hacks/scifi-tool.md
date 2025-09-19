@@ -99,20 +99,21 @@ Press **Enter** or **click** to open the full page.
 
   .hub-box {
     pointer-events: auto;
-    background: rgba(255,255,255,0.1);
-    border: 1px solid rgba(255,255,255,0.2);
+    background: #000; /* solid black to match canvas */
+    color: #fff; /* white text for contrast */
+    border: 2px solid #444; /* slightly lighter border for definition */
     border-radius: 12px;
     padding: 16px;
     text-align: center;
     font-weight: bold;
     cursor: pointer;
-    transition: transform 0.2s ease;
+    transition: transform 0.2s ease, background 0.2s ease;
     position: relative;
   }
 
   .hub-box:hover {
     transform: scale(1.05);
-    background: rgba(255,255,255,0.15);
+    background: #222; /* slightly lighter on hover */
   }
 
   /* Floating preview */
