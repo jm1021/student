@@ -22,4 +22,7 @@ permalink: /scifi-boxes/games-you-can-do/
     <span style="color: #25a4d6ff">UFO Ship (Background)</span>
 </a>
 
+<a href="{{site.baseurl}}/tictactoe-game.html" class="button small" style="background-color: #08380cff">
+    <span style="color: #25a4d6ff">Tic Tac Toe</span>
+
 <br>
