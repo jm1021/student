@@ -1,7 +1,7 @@
 ---
 layout: base
 title: Cookie Clicker Guide
-permalink: /cookie-clicker-guide/
+permalink: /cookie-guide/
 ---
 
 # Cookie Clicker Guide
