@@ -238,6 +238,7 @@ const gameLoop = {
       this.upgrades = JSON.parse(upgradeData);
       cookie.cookieMulti += this.upgrades["2X Clicks"];
       cookie.cookieMulti += this.upgrades["5X Clicks"];
+      cookie.cookieMulti += this.upgrades["6.7X Clicks"];
       cookie.cookieMulti += this.upgrades["10X Clicks"];
     }
   },
@@ -467,6 +468,22 @@ const Alien = {
   priceIncrementer: 1.3,
   cookiesPerSecond: 500,
 };
+
+const SixSevenCookie = {
+  name: "67 Cookie",
+  emoji: "🤩",
+  price: 67000,
+  priceIncrementer: 1.5,
+  cookiesPerSecond: 670,
+};
+
+const DookieCookie = {
+  name: "Dookie Cookie",
+  emoji: "💩",
+  price: 100000,
+  priceIncrementer: 1.7,
+  cookiesPerSecond: 1000,
+};
 const shopItems = [];
 
 shopItems.push(grandma);
@@ -476,6 +493,8 @@ shopItems.push(factory);
 shopItems.push(bank);
 shopItems.push(aiRobot);
 shopItems.push(Alien);
+shopItems.push(SixSevenCookie);
+shopItems.push(DookieCookie);
 
 const x2Click = {
   name: "2X Clicks",
@@ -497,6 +516,7 @@ const x5Click = {
 // @ts-ignore
 shop.upgrades.push(x5Click);
 
+
 const x10Click = {
   name: "10X Clicks",
   emoji: "🖱",
@@ -507,6 +527,26 @@ const x10Click = {
 // @ts-ignore
 shop.upgrades.push(x10Click);
 
+const x67Click = {
+  name: "67X Clicks",
+  emoji: "🖱",
+  price: 6700000,
+  itemEffected: "click",
+  multiplier: 67,
+};
+// @ts-ignore
+shop.upgrades.push(x67Click);
+
+const x100Click = {
+  name: "100X Clicks",
+  emoji: "🖱",
+  price: 1000000,
+  itemEffected: "click",
+  multiplier: 100,
+};
+// @ts-ignore
+shop.upgrades.push(x100Click);
+
 shop.addItemForSale(grandma);
 shop.addItemForSale(chef);
 shop.addItemForSale(kitchen);
@@ -514,6 +554,8 @@ shop.addItemForSale(factory);
 shop.addItemForSale(bank);
 shop.addItemForSale(aiRobot);
 shop.addItemForSale(Alien);
+shop.addItemForSale(SixSevenCookie);
+shop.addItemForSale(DookieCookie);
 gameLoop.fetchSavedData();
 cookie.fetchStoredCookies();
 cookieButton.addEventListener("click", () => {
@@ -531,4 +573,6 @@ cookieButton.addEventListener("click", () => {
   gameLoop.getAmount("Bank");
   gameLoop.getAmount("AI Robot");
   gameLoop.getAmount("Alien");
+  gameLoop.getAmount("67 Cookie");
+  gameLoop.getAmount("Dookie Cookie");
 });
