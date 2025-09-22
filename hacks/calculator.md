@@ -31,11 +31,10 @@ Additional Upgrades: Scientific functions (sin, cos, tan, x^y), Keyboard support
   transition: background-color 0.4s, color 0.4s;
 }
 
-/* Rainbow cool background */
+/* Rainbow cool background - full viewport */
 #animation {
-  position: relative;
-  width: 100%;
-  height: 100vh;
+  position: fixed;
+  inset: 0; /* top:0; right:0; bottom:0; left:0; */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -43,6 +42,7 @@ Additional Upgrades: Scientific functions (sin, cos, tan, x^y), Keyboard support
   background: linear-gradient(270deg, red, orange, yellow, green, blue, indigo, violet);
   background-size: 1400% 1400%;
   animation: rainbowMove 20s ease infinite;
+  z-index: 0;
 }
 @keyframes rainbowMove {
   0% { background-position: 0% 50%; }
@@ -53,7 +53,7 @@ Additional Upgrades: Scientific functions (sin, cos, tan, x^y), Keyboard support
 /* Calculator Container*/
 .calculator-container {
   position: relative;
-  z-index: 2;
+  z-index: 2; /* keep above the animated background */
   display: grid;
   grid-template-columns: repeat(4, 80px);
   grid-gap: 10px;
@@ -61,6 +61,26 @@ Additional Upgrades: Scientific functions (sin, cos, tan, x^y), Keyboard support
   border-radius: 15px;
   background: rgba(0, 0, 0, 0.85);
   box-shadow: 0 0 20px rgba(0,0,0,0.4);
+}
+
+/* Guide link */
+.calculator-guide-link {
+  position: absolute;
+  right: -140px;
+  top: 10px;
+  width: 120px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.08);
+  color: #fff;
+  padding: 8px 10px;
+  border-radius: 8px;
+  text-align: center;
+  font-size: 14px;
+  z-index: 3;
+}
+
+@media (max-width: 700px) {
+  .calculator-guide-link { display: none; }
 }
 
 /* buttons */
@@ -92,6 +112,7 @@ Additional Upgrades: Scientific functions (sin, cos, tan, x^y), Keyboard support
 
 <div id="animation">
   <div class="calculator-container">
+  <a class="calculator-guide-link" href="{{ '/calculator-guide/' | relative_url }}">Calculator Guide</a>
     <!-- Calculator Display -->
     <div class="calculator-output" id="output">0</div>
 
