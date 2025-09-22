@@ -163,9 +163,10 @@ permalink: /snake
 
 <script>
     (function(){
-        /* Attributes of Game */
-        /////////////////////////////////////////////////////////////
-        // Canvas & Context
+    /* Attributes of Game */
+    /////////////////////////////////////////////////////////////
+
+    // Canvas & Context
         const canvas = document.getElementById("snake");
         const ctx = canvas.getContext("2d");
         // HTML Game IDs
@@ -730,3 +731,8 @@ permalink: /snake
         }
     })();
 </script>
+
+<!-- Link to a full guide on all the changes -->
+For a full guide on all the changes, go here: https://jupiterian.github.io/student/2025/09/17/Siddharth-Hota-and-Dhruv-Agrawal-Snake-Hacks-Blog.html
+
+
