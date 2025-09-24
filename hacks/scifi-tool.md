@@ -61,7 +61,8 @@ Press **Enter** or **click** to open the full page.
   #ufo {
     position: absolute;
     width: 64px;
-    height: 64px;
+    height: auto; /* keep original aspect ratio to avoid squishing */
+    max-width: 8vh;
     transform: translate(-50%, -50%);
     pointer-events: none;
     z-index: 50;
@@ -130,7 +131,7 @@ Press **Enter** or **click** to open the full page.
 
   const stage = document.getElementById('stage');
   let pos = { x: stage.clientWidth/2, y: stage.clientHeight/2 };
-  const speed = 250;
+  const speed = 400;
   const keys = { arrowup:0, arrowdown:0, arrowleft:0, arrowright:0, w:0, a:0, s:0, d:0 };
 
   // randomize star positions and sizes on each load
@@ -190,7 +191,8 @@ Press **Enter** or **click** to open the full page.
     };
   }
 
-  function frame(){
+  function frame(time){
+    const t = (time || performance.now()) * 0.001;
     const dt = 1/60;
     let vx = 0, vy = 0;
     if (keys.arrowleft || keys.a) vx -= 1;
@@ -205,9 +207,13 @@ Press **Enter** or **click** to open the full page.
     pos.x = clamp(pos.x, 0, stage.clientWidth);
     pos.y = clamp(pos.y, 0, stage.clientHeight);
 
-    ufo.style.left = `${pos.x}px`;
-    ufo.style.top = `${pos.y}px`;
-    ufo.style.transform = `translate(-50%, -50%)`;
+  // idle bob when not moving
+  const isMoving = (vx !== 0 || vy !== 0);
+  const bob = isMoving ? 0 : Math.sin(t * 3.2) * 6; // frequency, amplitude in px
+
+  ufo.style.left = `${pos.x}px`;
+  ufo.style.top = `${pos.y + bob}px`;
+  ufo.style.transform = `translate(-50%, -50%)`;
 
     // detect hover using UFO position or mouse hover
     currentHover = null;
