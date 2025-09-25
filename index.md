@@ -49,10 +49,10 @@ Hi!
 
 <br>
 
-### Scifi-Tool!
+### Click to see awesomeness
 
-<a href="{{site.baseurl}}/scifi-tool" class="button small" style="background-color: #0c0ca5ff">
-    <span style="color: #fffefeff">Scifi Tool</span>
+<a href="{{site.baseurl}}/scifi-game" class="button small" style="background-color: #0c0ca5ff">
+    <span style="color: #fffefeff">Scifi Game</span>
 </a>
 
 <br>
